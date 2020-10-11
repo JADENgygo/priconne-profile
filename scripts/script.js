@@ -24,15 +24,35 @@ document.addEventListener('DOMContentLoaded', () => {
 				backgroundImageNames: ['landsol_guild_race_0.png', 'happy_change_angels_0_horizontal.png', 'happy_change_angels_1_horizontal.png'],
 				postscriptShowed: true,
 				rankingShowed: true,
+				inputFont: 'ＭＳ ゴシック',
 				inputFontColor: '#000000',
+				clanNameFont: 'メイリオ',
 				clanNameFillColor: '#3264FF',
 				clanNameStrokeColor: '#000000',
+				labelFont: 'ＭＳ ゴシック',
 				labelFontColor: '#FFFFFF',
 				labelBackgroundColor: '#6464FF',
 				frameColor: '#000000',
 				paneColor: '#FFFFFF',
 				paneTransparency: '0.6',
-				layout: 0
+				layout: 0,
+				fonts: [
+					"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Arial", "Arial Black",
+					"Arimo", "Bahnschrift", "Bahnschrift Condensed", "Bahnschrift Light", "Bahnschrift Light Condensed", "Bahnschrift Light SemiCondensed", "Bahnschrift SemiBold", "Bahnschrift SemiBold Condensed",
+					"Bahnschrift SemiBold SemiConden", "Bahnschrift SemiCondensed", "Bahnschrift SemiLight", "Bahnschrift SemiLight Condensed", "Bahnschrift SemiLight SemiConde", "BIZ UDPゴシック", "BIZ UDP明朝 Medium",
+					"BIZ UDゴシック", "BIZ UD明朝 Medium", "Calibri", "Calibri Light", "Cambria", "Cambria Math", "Candara", "Candara Light", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Corbel Light", "Courier New",
+					"DejaVu Sans", "DejaVu Sans Condensed", "DejaVu Sans Light", "DejaVu Sans Mono", "DejaVu Serif", "DejaVu Serif Condensed", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Gentium Basic",
+					"Gentium Book Basic", "Georgia", "HoloLens MDL2 Assets", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Leelawadee UI Semilight", "Lucida Bright", "Lucida Console", "Lucida Sans",
+					"Lucida Sans Typewriter", "Lucida Sans Unicode", "Malgun Gothic", "Malgun Gothic Semilight", "Marlett", "Meiryo UI", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei Light",
+					"Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei Light",
+					"Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Mongolian Baiti", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI",
+					"Nirmala UI Semilight", "Noto Sans CJK JP Medium", "NSimSun", "OpenSymbol", "Palatino Linotype", "PMingLiU-ExtB", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Black",
+					"Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Light", "Segoe UI Semibold", "Segoe UI Semilight", "Segoe UI Symbol", "SimSun", "SimSun-ExtB", "Sitka Banner", "Sitka Display", "Sitka Heading",
+					"Sitka Small", "Sitka Subheading", "Sitka Text", "Sylfaen", "Symbol", "Tahoma", "Tera Special", "Times New Roman", "Trebuchet MS", "UD デジタル 教科書体 N-B", "UD デジタル 教科書体 N-R",
+					"UD デジタル 教科書体 NK-B", "UD デジタル 教科書体 NK-R", "UD デジタル 教科書体 NP-B", "UD デジタル 教科書体 NP-R", "Verdana", "Webdings", "Wingdings", "Yu Gothic UI", "Yu Gothic UI Light",
+					"Yu Gothic UI Semibold", "Yu Gothic UI Semilight", "メイリオ", "游ゴシック", "游ゴシック Light", "游ゴシック Medium", "游明朝", "游明朝 Demibold", "游明朝 Light", "ＭＳ ゴシック", "ＭＳ 明朝",
+					"ＭＳ Ｐゴシック", "ＭＳ Ｐ明朝"
+				]
 			};
 		},
 		computed: {
@@ -85,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			},
 			drawClanName: function(canvas, context, xPos, yPos) {
 				const fontSize = 100;
-				context.font = 'bold ' + fontSize + "px 'ＭＳ ゴシック'";
+				context.font = 'bold ' + fontSize + `px '${this.clanNameFont}'`;
 				context.textAlign = 'center';
 				context.lineWidth = 10;
 				context.strokeStyle = this.clanNameStrokeColor;
@@ -106,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let x = xPos + 30;
 				let y = yPos + 15;
 				let fontSize = 40;
-				context.font = 'bold ' + fontSize + "px 'ＭＳ ゴシック'";
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('平均プレイヤーLv').width + 23.0, fontSize * 1.3);
@@ -114,34 +134,40 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.textAlign = 'start';
 				context.fillText('平均プレイヤーLv', x, y);
 
-				x = xPos + 390;
+				x = xPos + 30 + context.measureText('平均プレイヤーLv').width + 40;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('averageLevel').value, x, y);
 
 				x = xPos + 700;
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('メンバー数').width + 23.0, fontSize * 1.3);
 				context.fillStyle = this.labelFontColor;
 				context.fillText('メンバー数', x, y);
 
-				x = xPos + 940;
+				x = xPos + 700 + context.measureText('メンバー数').width + 40;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('memberCount').value, x, y);
 
 				x = xPos + 30;
 				y = yPos + 90;
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('活動方針').width + 23.0, fontSize * 1.3);
 				context.fillStyle = this.labelFontColor;
 				context.fillText('活動方針', x, y);
 
-				x = xPos + 225;
+				x = xPos + 30 + context.measureText('活動方針').width + 40;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('policy').value, x, y);
 
 				x = xPos + 700;
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('加入条件').width + 23.0, fontSize * 1.3);
@@ -165,12 +191,14 @@ document.addEventListener('DOMContentLoaded', () => {
 							break;
 					}
 				});
-				x = xPos + 900;
+				x = xPos + 700 + context.measureText('加入条件').width + 40;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(condition, x, y);
 
 				x = xPos + 30;
 				y = yPos + 165;
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('募集要項').width + 23.0, fontSize * 1.3);
@@ -178,13 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('募集要項', x, y);
 
 				const guideline = document.getElementById('guideline').value;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				x = xPos + 25;
 				let row = 1;
 				let splitPosition = 0;
 				for (let i = 1; i <= guideline.length; ++i) {
 					const w = context.measureText(guideline.substr(splitPosition, i - splitPosition)).width;
-					if (rectWidth * 0.95 <= w) {
+					if (rectWidth * 0.93 <= w || guideline[i - 1] === '\n') {
 						y = (yPos + 230) + (row - 1) * 50.0;
 						const s = guideline.substr(splitPosition, i - splitPosition);
 						context.fillText(s, x, y);
@@ -211,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let x = xPos + 30;
 				let y = yPos + 15;
 				let fontSize = 40;
-				context.font = 'bold ' + fontSize + "px 'ＭＳ ゴシック'";
+				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('追加情報').width + 23.0, fontSize * 1.3);
@@ -220,13 +249,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('追加情報', x, y);
 
 				const postscript = document.getElementById('postscript').value;
+				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				x = xPos + 20;
 				let row = 1;
 				let splitPosition = 0;
 				for (let i = 1; i <= postscript.length; ++i) {
 					const w = context.measureText(postscript.substr(splitPosition, i - splitPosition)).width;
-					if (rectWidth * 0.90 <= w) {
+					if (rectWidth * 0.88 <= w || postscript[i - 1] === '\n') {
 						y = (yPos + 80) + (row - 1) * 50.0;
 						const s = postscript.substr(splitPosition, i - splitPosition);
 						context.fillText(s, x, y);
@@ -250,12 +280,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.strokeRect(xPos, yPos - 50, canvas.width * 1.60 / 5.0, canvas.height * 1.17 / 5.0);
 
 				const fontSize = 40;
-				context.font = 'bold ' + fontSize + "px 'ＭＳ ゴシック'";
 				for (let i = 0; i < 3; ++i) {
 					let x = xPos + 30;
 					let y = yPos + 15 + 75 * i;
 					const rankingMonth = document.getElementById('rankingMonth' + i ).value
-				context.fillStyle = this.labelBackgroundColor;
+					context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+					context.fillStyle = this.labelBackgroundColor;
 					context.beginPath();
 					context.fillRect(x - 10.0, y - fontSize, context.measureText(rankingMonth + 'のクラバト順位').width + 23.0, fontSize * 1.3);
 					context.textAlign = 'start';
@@ -263,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					context.fillText(rankingMonth + 'のクラバト順位', x, y);
 
 					x = xPos + 595;
+					context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
 					context.textAlign = 'end';
 					context.fillStyle = this.inputFontColor;
 					if (document.getElementById('rankingChecked' + i).checked) {
@@ -281,9 +312,17 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.rankingShowed = showed;
 				this.previewCard();
 			},
-			changeLayout: function(layout) {
+			setLayout: function(layout) {
 				this.layout = layout;
 				this.previewCard();
+			},
+			setInputFont: function(font) {
+				this.inputFont = font;
+				this.previewCard();
+			},
+			resetInputFont: function(font) {
+				document.getElementById('inputFont').value = font;
+				this.setInputFont(font);
 			},
 			setInputFontColor: function(color) {
 				this.inputFontColor = color;
@@ -292,6 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			resetInputFontColor: function(color) {
 				document.getElementById('inputFontColor').value = color;
 				this.setInputFontColor(color);
+			},
+			setClanNameFont: function(font) {
+				this.clanNameFont = font;
+				this.previewCard();
+			},
+			resetClanNameFont: function(font) {
+				document.getElementById('clanNameFont').value = font;
+				this.setClanNameFont(font);
 			},
 			setClanNameFillColor: function(color) {
 				this.clanNameFillColor = color;
@@ -308,6 +355,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			resetClanNameStrokeColor: function(color) {
 				document.getElementById('clanNameStrokeColor').value = color;
 				this.setClanNameStrokeColor(color);
+			},
+			setLabelFont: function(font) {
+				this.labelFont = font;
+				this.previewCard();
+			},
+			resetLabelFont: function(font) {
+				document.getElementById('labelFont').value = font;
+				this.setLabelFont(font);
 			},
 			setLabelFontColor: function(color) {
 				this.labelFontColor = color;
@@ -394,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		template: `
 			<div class="uk-container">
-				<div class="uk-text-lead uk-text-center uk-margin-top title">クランプロフカードジェネレーター</div>
+				<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカードジェネレーター</div>
 				<ul uk-accordion>
 					<li>
 						<a class="uk-accordion-title" href="#">背景画像一覧</a>
@@ -469,20 +524,35 @@ document.addEventListener('DOMContentLoaded', () => {
 							<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-medium" uk-grid>
 								<div v-for="i in 5">
 									<label>
-										<input v-bind:id="'layout' + (i - 1)" class="uk-radio uk-text-center" type="radio" name="layout" v-on:change="changeLayout(i - 1)" v-bind:checked="i === 1">
+										<input v-bind:id="'layout' + (i - 1)" class="uk-radio uk-text-center" type="radio" name="layout" v-on:change="setLayout(i - 1)" v-bind:checked="i === 1">
 										<img v-bind:src="'img/layout' + (i - 1) + '.png'">
 									</label>
 								</div>
 							</div>
-							<div class="uk-margin-top"><label for="inputFontColor">入力の文字色</label></div>
+							<div class="uk-margin-top"><label for="inputFont">入力値のフォント (クラン名を除く)</label></div>
+							<select id="inputFont" class="uk-select uk-form-small uk-form-width-large" v-on:change="setInputFont($event.target.value)">
+								<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
+							</select>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetInputFont('ＭＳ ゴシック')">リセット</button>
+							<div class="uk-margin-top"><label for="inputFontColor">入力値の文字色 (クラン名を除く)</label></div>
 							<input id="inputFontColor" type="color" value="#000000" class="uk-margin-right" v-on:input="setInputFontColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetInputFontColor('#000000')">リセット</button>
+							<div class="uk-margin-top"><label for="clanNameFont">クラン名のフォント</label></div>
+							<select id="clanNameFont" class="uk-select uk-form-small uk-form-width-large" v-on:change="setClanNameFont($event.target.value)">
+								<option v-for="e in fonts" v-bind:selected="e === 'メイリオ'">{{ e }}</option>
+							</select>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameFont('メイリオ')">リセット</button>
 							<div class="uk-margin-top"><label for="clanNameStrokeColor">クラン名の輪郭色</label></div>
 							<input id="clanNameStrokeColor" type="color" value="#000000" class="uk-margin-right" v-on:input="setClanNameStrokeColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameStrokeColor('#000000')">リセット</button>
 							<div class="uk-margin-top"><label for="clanNameFillColor">クラン名の塗り潰し色</label></div>
 							<input id="clanNameFillColor" type="color" value="#3264FF" class="uk-margin-right" v-on:input="setClanNameFillColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameFillColor('#3264FF')">リセット</button>
+							<div class="uk-margin-top"><label for="labelFont">ラベルのフォント</label></div>
+							<select id="labelFont" class="uk-select uk-form-small uk-form-width-large" v-on:change="setLabelFont($event.target.value)">
+								<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
+							</select>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetLabelFont('ＭＳ ゴシック')">リセット</button>
 							<div class="uk-margin-top"><label for="labelFontColor">ラベルの文字色</label></div>
 							<input id="labelFontColor" type="color" value="#FFFFFF" class="uk-margin-right" v-on:input="setLabelFontColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetLabelFontColor('#FFFFFF')">リセット</button>
