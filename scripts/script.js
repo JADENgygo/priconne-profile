@@ -25,11 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				postscriptShowed: true,
 				rankingShowed: true,
 				inputFont: 'ＭＳ ゴシック',
+				inputFontStyles: ['bold'],
 				inputFontColor: '#000000',
 				clanNameFont: 'メイリオ',
+				clanNameFontStyles: ['bold'],
 				clanNameFillColor: '#3264FF',
 				clanNameStrokeColor: '#000000',
 				labelFont: 'ＭＳ ゴシック',
+				labelFontStyles: ['bold'],
 				labelFontColor: '#FFFFFF',
 				labelBackgroundColor: '#6464FF',
 				frameColor: '#000000',
@@ -74,6 +77,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				else {
 					return this.paneTransparency;
 				}
+			},
+			inputFontStyle: function() {
+				return this.inputFontStyles.join(' ');
+			},
+			clanNameFontStyle: function() {
+				return this.clanNameFontStyles.join(' ');
+			},
+			labelFontStyle: function() {
+				return this.labelFontStyles.join(' ');
 			}
 		},
 		methods: {
@@ -105,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			},
 			drawClanName: function(canvas, context, xPos, yPos) {
 				const fontSize = 100;
-				context.font = 'bold ' + fontSize + `px '${this.clanNameFont}'`;
+				context.font = this.clanNameFontStyle + ' ' + fontSize + `px '${this.clanNameFont}'`;
 				context.textAlign = 'center';
 				context.lineWidth = 10;
 				context.strokeStyle = this.clanNameStrokeColor;
@@ -126,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let x = xPos + 30;
 				let y = yPos + 15;
 				let fontSize = 40;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('平均プレイヤーLv').width + 23.0, fontSize * 1.3);
@@ -135,12 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('平均プレイヤーLv', x, y);
 
 				x = xPos + 30 + context.measureText('平均プレイヤーLv').width + 40;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('averageLevel').value, x, y);
 
 				x = xPos + 700;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('メンバー数').width + 23.0, fontSize * 1.3);
@@ -148,13 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('メンバー数', x, y);
 
 				x = xPos + 700 + context.measureText('メンバー数').width + 40;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('memberCount').value, x, y);
 
 				x = xPos + 30;
 				y = yPos + 90;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('活動方針').width + 23.0, fontSize * 1.3);
@@ -162,12 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('活動方針', x, y);
 
 				x = xPos + 30 + context.measureText('活動方針').width + 40;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(document.getElementById('policy').value, x, y);
 
 				x = xPos + 700;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('加入条件').width + 23.0, fontSize * 1.3);
@@ -192,13 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 				x = xPos + 700 + context.measureText('加入条件').width + 40;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				context.fillText(condition, x, y);
 
 				x = xPos + 30;
 				y = yPos + 165;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('募集要項').width + 23.0, fontSize * 1.3);
@@ -206,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('募集要項', x, y);
 
 				const guideline = document.getElementById('guideline').value;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				x = xPos + 25;
 				let row = 1;
@@ -240,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				let x = xPos + 30;
 				let y = yPos + 15;
 				let fontSize = 40;
-				context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				context.fillStyle = this.labelBackgroundColor;
 				context.beginPath();
 				context.fillRect(x - 10.0, y - fontSize, context.measureText('追加情報').width + 23.0, fontSize * 1.3);
@@ -249,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillText('追加情報', x, y);
 
 				const postscript = document.getElementById('postscript').value;
-				context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
 				x = xPos + 20;
 				let row = 1;
@@ -284,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					let x = xPos + 30;
 					let y = yPos + 15 + 75 * i;
 					const rankingMonth = document.getElementById('rankingMonth' + i ).value
-					context.font = 'bold ' + fontSize + `px '${this.labelFont}'`;
+					context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 					context.fillStyle = this.labelBackgroundColor;
 					context.beginPath();
 					context.fillRect(x - 10.0, y - fontSize, context.measureText(rankingMonth + 'のクラバト順位').width + 23.0, fontSize * 1.3);
@@ -293,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					context.fillText(rankingMonth + 'のクラバト順位', x, y);
 
 					x = xPos + 595;
-					context.font = 'bold ' + fontSize + `px '${this.inputFont}'`;
+					context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 					context.textAlign = 'end';
 					context.fillStyle = this.inputFontColor;
 					if (document.getElementById('rankingChecked' + i).checked) {
@@ -324,6 +336,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				document.getElementById('inputFont').value = font;
 				this.setInputFont(font);
 			},
+			setInputFontStyle: function(style, checked) {
+				if (checked) {
+					this.inputFontStyles.push(style);
+				}
+				else {
+					this.inputFontStyles.splice(this.inputFontStyles.indexOf(style), 1);
+				}
+				this.previewCard();
+			},
+			resetInputFontStyle: function(style) {
+				Array.from(document.getElementsByName('inputFontStyle')).forEach(e => e.checked = false);
+				document.getElementById(style + 'InputFontStyle').checked = true;
+				this.inputFontStyles = [];
+				this.setInputFontStyle(style, true);
+			},
 			setInputFontColor: function(color) {
 				this.inputFontColor = color;
 				this.previewCard();
@@ -339,6 +366,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			resetClanNameFont: function(font) {
 				document.getElementById('clanNameFont').value = font;
 				this.setClanNameFont(font);
+			},
+			setClanNameFontStyle: function(style, checked) {
+				if (checked) {
+					this.clanNameFontStyles.push(style);
+				}
+				else {
+					this.clanNameFontStyles.splice(this.clanNameFontStyles.indexOf(style), 1);
+				}
+				this.previewCard();
+			},
+			resetClanNameFontStyle: function(style) {
+				Array.from(document.getElementsByName('clanNameFontStyle')).forEach(e => e.checked = false);
+				document.getElementById(style + 'ClanNameFontStyle').checked = true;
+				this.clanNameFontStyles = [];
+				this.setClanNameFontStyle(style, true);
 			},
 			setClanNameFillColor: function(color) {
 				this.clanNameFillColor = color;
@@ -363,6 +405,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			resetLabelFont: function(font) {
 				document.getElementById('labelFont').value = font;
 				this.setLabelFont(font);
+			},
+			setLabelFontStyle: function(style, checked) {
+				if (checked) {
+					this.labelFontStyles.push(style);
+				}
+				else {
+					this.labelFontStyles.splice(this.labelFontStyles.indexOf(style), 1);
+				}
+				this.previewCard();
+			},
+			resetLabelFontStyle: function(style) {
+				Array.from(document.getElementsByName('labelFontStyle')).forEach(e => e.checked = false);
+				document.getElementById(style + 'LabelFontStyle').checked = true;
+				this.labelFontStyles = [];
+				this.setLabelFontStyle(style, true);
 			},
 			setLabelFontColor: function(color) {
 				this.labelFontColor = color;
@@ -524,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-medium" uk-grid>
 								<div v-for="i in 5">
 									<label>
-										<input v-bind:id="'layout' + (i - 1)" class="uk-radio uk-text-center" type="radio" name="layout" v-on:change="setLayout(i - 1)" v-bind:checked="i === 1">
+										<input v-bind:id="'layout' + (i - 1)" class="uk-radio" type="radio" name="layout" v-on:change="setLayout(i - 1)" v-bind:checked="i === 1">
 										<img v-bind:src="'img/layout' + (i - 1) + '.png'">
 									</label>
 								</div>
@@ -534,6 +591,12 @@ document.addEventListener('DOMContentLoaded', () => {
 								<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
 							</select>
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetInputFont('ＭＳ ゴシック')">リセット</button>
+							<div class="uk-margin-top">入力値のフォントスタイル (クラン名を除く)</div>
+							<input id="boldInputFontStyle" class="uk-checkbox" type="checkbox" name="inputFontStyle" v-on:change="setInputFontStyle('bold', $event.target.checked)" checked>
+							<label for="boldInputFontStyle" class="uk-margin-small-right">太字</label>
+							<input id="italicInputFontStyle" class="uk-checkbox" type="checkbox" name="inputFontStyle" v-on:change="setInputFontStyle('italic', $event.target.checked)">
+							<label for="italicInputFontStyle" class="uk-margin-right">斜体</label>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetInputFontStyle('bold')">リセット</button>
 							<div class="uk-margin-top"><label for="inputFontColor">入力値の文字色 (クラン名を除く)</label></div>
 							<input id="inputFontColor" type="color" value="#000000" class="uk-margin-right" v-on:input="setInputFontColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetInputFontColor('#000000')">リセット</button>
@@ -542,6 +605,12 @@ document.addEventListener('DOMContentLoaded', () => {
 								<option v-for="e in fonts" v-bind:selected="e === 'メイリオ'">{{ e }}</option>
 							</select>
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameFont('メイリオ')">リセット</button>
+							<div class="uk-margin-top">クラン名のフォントスタイル</div>
+							<input id="boldClanNameFontStyle" class="uk-checkbox" type="checkbox" name="clanNameFontStyle" v-on:change="setClanNameFontStyle('bold', $event.target.checked)" checked>
+							<label for="boldClanNameFontStyle" class="uk-margin-small-right">太字</label>
+							<input id="italicClanNameFontStyle" class="uk-checkbox" type="checkbox" name="clanNameFontStyle" v-on:change="setClanNameFontStyle('italic', $event.target.checked)">
+							<label for="italicClanNameFontStyle" class="uk-margin-right">斜体</label>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameFontStyle('bold')">リセット</button>
 							<div class="uk-margin-top"><label for="clanNameStrokeColor">クラン名の輪郭色</label></div>
 							<input id="clanNameStrokeColor" type="color" value="#000000" class="uk-margin-right" v-on:input="setClanNameStrokeColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetClanNameStrokeColor('#000000')">リセット</button>
@@ -553,6 +622,12 @@ document.addEventListener('DOMContentLoaded', () => {
 								<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
 							</select>
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetLabelFont('ＭＳ ゴシック')">リセット</button>
+							<div class="uk-margin-top">ラベルのフォントスタイル</div>
+							<input id="boldLabelFontStyle" class="uk-checkbox" type="checkbox" name="labelFontStyle" v-on:change="setLabelFontStyle('bold', $event.target.checked)" checked>
+							<label for="boldLabelFontStyle" class="uk-margin-small-right">太字</label>
+							<input id="italicLabelFontStyle" class="uk-checkbox" type="checkbox" name="labelFontStyle" v-on:change="setLabelFontStyle('italic', $event.target.checked)">
+							<label for="italicLabelFontStyle" class="uk-margin-right">斜体</label>
+							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetLabelFontStyle('bold')">リセット</button>
 							<div class="uk-margin-top"><label for="labelFontColor">ラベルの文字色</label></div>
 							<input id="labelFontColor" type="color" value="#FFFFFF" class="uk-margin-right" v-on:input="setLabelFontColor($event.target.value)">
 							<button class="uk-button uk-button-default uk-button-small" v-on:click="resetLabelFontColor('#FFFFFF')">リセット</button>
