@@ -1,39 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const component = {
 		mounted: function() {
-			//debug
-			//this.clanName = 'グルメパレス';
-			//document.getElementById('clanName').value = "グルメパレス";
-			/*
-			document.getElementById('ranking0').value = 300;
-			document.getElementById('ranking1').value = 3000;
-			document.getElementById('ranking2').value = 30000;
-			document.getElementById('averageLevel').value = 175;
-			document.getElementById('memberCount').value = 30;
-			document.getElementById('policy').value = 'わいわいプレイ';
-			document.getElementById('guideline').value = 'プリコネを楽しんでいける仲間を募集しています！今は７５００位を目指しています！毎日３凸ってくれる人を募集しています！!(^^)!理由なく最終ログインが３日になる人は申し訳ございませんが、除名させていただきます。'
-			+ 'プリコネを楽しんでいける仲間を募集しています！今は７５００位を目指しています！毎日３凸ってくれる人を募集しています！!(^^)!理由なく最終ログインが３日になる人は申し訳ございませんが、除名させていただきます。'
-			+ 'プリコネを楽しんでいける仲間を募集しています！今は７５００位を目指しています！'
-			+ 'プリコネを楽しんでいける仲間を募集しています！今は７５００位を目指しています！';
-			document.getElementById('postscript').value = 'プリコネを楽しんでいける仲間を募集しています！今は７５００位を目指しています！毎日３凸ってくれる人を募集しています！!(^^)!理由なく最終ログインが３日になる人は申し訳ございませんが、除名させていただきます。';
-			*/
-			
 			document.getElementById('background-image').addEventListener('load', () => {
 				this.previewCard();
 			});
 		},
 		data: function() {
 			return {
-				backgroundImageNames: ['landsol_guild_race_0.png', 'happy_change_angels_0_horizontal.png', 'happy_change_angels_1_horizontal.png'],
-				backgroundImagePath: 'img/landsol_guild_race_0.png',
-				clanName: '美食殿',
+				backgroundImageNames: [
+					'hatsunes_present_strategy0.png', 'hatsunes_present_strategy1.png', 'hatsunes_present_strategy2.png', 'little_lyrical_adventure0.png', 'little_lyrical_adventure1.png', 'little_lyrical_adventure2.png',
+					'vampire_hunter_with_ilya0.png', 'dangerous_vacance_beach_gourmet_princess0.png', 'dangerous_vacance_beach_gourmet_princess1.png', 'dangerous_vacance_beach_gourmet_princess2.png',
+					'tamaki_and_mihuyu_uninhabited_island_zero_rupi_life0.png', 'black_iron_nightmare0.png', 'black_iron_nightmare1.png', 'black_iron_nightmare2.png', 'trick_or_pudding_unity_halloween_party0.png',
+					'trick_or_pudding_unity_halloween_party1.png', 'twilight_breakers0.png', 'twilight_breakers1.png', 'carol_oblivion0.png', 'carol_oblivion1.png', 'carol_oblivion2.png', 'carol_oblivion3.png',
+					'new_year_twinkle_crisis0.png', 'new_year_twinkle_crisis1.png', 'new_year_twinkle_crisis2.png', 'battle_of_valentine0.png', 'battle_of_valentine1.png', 'battle_of_valentine2.png', 'royal_capital_detective0.png',
+					'royal_capital_detective1.png', 'royal_capital_detective2.png', 'twin_flowers_bloomed_in_asturm0.png', 'shogun_travelogue0.png', 'shogun_travelogue1.png', 'shogun_travelogue2.png', 'shogun_travelogue3.png',
+					'shogun_travelogue4.png', 'shogun_travelogue5.png', 'shogun_travelogue6.png', 'shogun_travelogue7.png', 'shogun_travelogue8.png', 'shogun_travelogue9.png', 'suzunas_rainbow_stage0.png',
+					'suzunas_rainbow_stage1.png', 'suzunas_rainbow_stage2.png', 'summer_mahomaho_kingdom0.png', 'summer_mahomaho_kingdom1.png', 'summer_mahomaho_kingdom2.png', 'summer_mahomaho_kingdom3.png',
+					'forest_coward_and_holy_schools_lyceenne0.png', 'forest_coward_and_holy_schools_lyceenne1.png', 'forest_coward_and_holy_schools_lyceenne2.png', 'little_brave_halloween_night0.png',
+					'little_brave_halloween_night1.png', 'little_brave_halloween_night2.png', 'dragons_explorers0.png', 'dragons_explorers1.png', 'dragons_explorers2.png', 'dragons_explorers3.png', 'present_panic0.png',
+					'present_panic1.png', 'present_panic2.png', 'landsol_guild_race0.png', 'landsol_guild_race1.png', 'landsol_guild_race2.png', 'landsol_guild_race3.png', 'magical_girl0.png', 'magical_girl1.png',
+					'angel_and_holy_schools_lyceenne0.png', 'angel_and_holy_schools_lyceenne1.png', 'angel_and_holy_schools_lyceenne2.png', 'ranch_four_farmers0.png', 'ranch_four_farmers1.png', 'rino_in_wonderland0.png',
+					'rino_in_wonderland1.png', 'tanabata_story0.png', 'tanabata_story1.png', 'tanabata_story2.png', 'misatos_summer_yell0.png', 'misatos_summer_yell1.png', 'misatos_summer_yell2.png', 'misatos_summer_yell3.png',
+					'misatos_summer_yell4.png', 'happy_change_angels0.png', 'happy_change_angels1.png', 'happy_change_angels2.png'
+				],
+				backgroundImagePath: 'img/hatsunes_present_strategy0.png',
+				clanName: 'おひるねくらぶ',
 				averageLevel: 175,
 				memberCount: 30,
 				policy: 'わいわいプレイ',
 				condition: '誰でも加入',
-				guideline: 'おいっすー☆',
+				guideline: '',
 				postscriptDisplayed: 'true',
-				postscript: 'やばいですね☆',
+				postscript: '',
 				rankingDisplayed: 'true',
 				rankingsAvailable: [true, true, true],
 				rankingMonths: [
@@ -61,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				labelBackgroundColor: '#6464FF',
 				paneFrameDisplayed: 'true',
 				paneFrameColor: '#000000',
+				paneFrameWidth: '3',
 				paneColor: '#FFFFFF',
 				paneTransparency: '0.6',
 				previewFixed: false,
@@ -161,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
 				if (this.paneFrameDisplayed === 'true') {
 					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = 3;
+					context.lineWidth = this.paneFrameWidth;
 					context.strokeRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
 				}
 
@@ -270,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
 				if (this.paneFrameDisplayed === 'true') {
 					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = 3;
+					context.lineWidth = this.paneFrameWidth;
 					context.strokeRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
 				}
 
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillRect(xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
 				if (this.paneFrameDisplayed === 'true') {
 					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = 3;
+					context.lineWidth = this.paneFrameWidth;
 					context.strokeRect(xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
 				}
 
@@ -374,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			resetPaneSetting: function() {
 				this.paneFrameDisplayed = 'true';
 				this.paneFrameColor = '#000000'
+				this.paneFrameWidth = '3';
 				this.paneColor = '#FFFFFF';
 				this.paneTransparency = '0.6';
 				this.previewCard();
@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		template: `
 			<div class="uk-container" id="container">
 				<div class="uk-text-muted uk-margin-top uk-text-right">サイト作成者: <a class="uk-text-muted" href="https://twitter.com/JADENgygo">@JADENgygo</a></div>
-				<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカードジェネレーター</div>
+				<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカード<span class="title-break">ジェネレーター</span></div>
 				<ul uk-accordion>
 					<li>
 						<a class="uk-accordion-title" href="#">背景画像一覧</a>
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				</form>
 
 				<ul uk-accordion>
-					<li class="uk-open">
+					<li>
 						<a class="uk-accordion-title" href="#">詳細設定</a>
 						<div class="uk-accordion-content">
 							<div class="uk-form-label">レイアウト</div>
@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div class="uk-form-controls"><input id="input-font-color" type="color" value="#000000" v-model="inputFontColor" v-on:input="previewCard()"></div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetInputSetting()">リセット</button>
 
-								<hr class="uk-margin-top">
+								<hr>
 								<legend class="uk-legend">クラン名</legend>
 								<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント</label>
 								<div class="uk-form-controls">
@@ -579,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								</div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetClanNameSetting()">リセット</button>
 
-								<hr class="uk-margin-top">
+								<hr>
 								<legend class="uk-legend">ラベル</legend>
 								<label for="label-font" class="uk-margin-top uk-form-label">フォント</label>
 								<div class="uk-form-controls">
@@ -603,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div class="uk-form-controls"><input id="label-background-color" type="color" value="#6464FF" v-model="labelBackgroundColor" v-on:input="previewCard()"></div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetLabelSetting()">リセット</button>
 
-								<hr class="uk-margin-top">
+								<hr>
 								<legend class="uk-legend">ペイン</legend>
 								<div class="uk-margin-top uk-form-label">フレームの有無</div>
 								<div class="uk-form-controls">
@@ -612,6 +612,11 @@ document.addEventListener('DOMContentLoaded', () => {
 								</div>
 								<label for="pane-frame-color" class="uk-margin-top uk-form-label">フレーム色</label>
 								<div class="uk-form-controls"><input id="pane-frame-color" type="color" value="#000000" v-model="paneFrameColor" v-on:input="previewCard()"></div>
+								<label for="pane-frame-width" class="uk-margin-top uk-form-label">フレームの太さ</label>
+								<div class="uk-form-controls">
+									<input id="pane-frame-width" type="range" min="1" max="10" step="1" value="3" class="uk-range uk-form-small uk-form-width-small" v-model="paneFrameWidth" v-on:input="previewCard()">
+									<label for="pane-frame-width">{{ paneFrameWidth }}</label>
+								</div>
 								<label for="pane-color" class="uk-margin-top uk-form-label">背景色</label>
 								<div class="uk-form-controls"><input id="pane-color" type="color" value="#FFFFFF" v-model="paneColor" v-on:input="previewCard()"></div>
 								<label for="pane-transparency" class="uk-margin-top uk-form-label">透明度</label>
@@ -620,15 +625,16 @@ document.addEventListener('DOMContentLoaded', () => {
 									<label for="pane-transparency">{{ formattedPaneTransparency }}</label>
 								</div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetPaneSetting()">リセット</button>
+								<hr>
 							</form>
 						</div>
 					</li>
 				</ul>
-				<div id="spacer"></div>
+				<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button><div>
+				<div id="spacer" class="uk-margin-top"></div>
 				<div id="footer">
-					<div>プレビュー<label class="uk-margin-left"><input type="checkbox" class="uk-checkbox" v-model="previewFixed" v-on:change="changePreviewFixing()"> プレビューを固定</label></div>
+					<div>プレビュー<label class="uk-margin-left"><input type="checkbox" class="uk-checkbox" v-model="previewFixed" v-on:change="changePreviewFixing()"> 画面内に常に表示</label></div>
 					<canvas id="preview" width="1920" height="1080"></canvas>
-					<div class="uk-margin-top save-button"><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button><div>
 				</div>
 			</div>
 		`

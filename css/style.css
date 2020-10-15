@@ -1,14 +1,13 @@
-#spacer {
-	//height: 700px;
+@media screen and (max-width: 420px) {
+	.title-break::before {
+		content: '\A';
+		white-space: pre;
+	}
 }
 
 #footer {
-	//position: fixed;
-	//bottom: 0px;
-}
-
-.save-button {
-	padding: 0 0 20px 0;
+	background-color: white;
+	padding: 0 0 10px 0;
 }
 
 @media screen and (max-width: 340px) {
