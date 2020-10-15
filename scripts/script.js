@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 							<form class="uk-form-stacked">
 								<hr class="uk-margin-top">
-								<legend class="uk-legend">入力値</legend>
+								<legend class="uk-legend">入力値 (クラン名以外)</legend>
 								<label for="input-font" class="uk-form-label uk-margin-top">フォント</label>
 								<div class="uk-form-controls">
 									<select id="input-font" class="uk-select uk-form-small uk-form-width-large" v-model="inputFont" v-on:change="previewCard()">
