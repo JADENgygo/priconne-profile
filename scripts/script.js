@@ -151,198 +151,84 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.clanNameFillColorTransparency})`;
 				context.fillText(this.clanName, xPos, yPos);
 			},
-			drawBasicInfo: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-				const rectWidth = canvasWidth * 3.0 / 5.0;
+			drawPane: function(context, x, y, width, height) {
 				const rgb = this.convertHexToRgb(this.paneColor);
-				context.textBaseline = 'alphabetic';
-				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
 				context.beginPath();
-				context.fillRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
+				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
+				context.fillRect(x, y, width, height);
 				if (this.paneFrameDisplayed === 'true') {
 					context.strokeStyle = this.paneFrameColor;
 					context.lineWidth = this.paneFrameWidth;
-					context.strokeRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
+					context.strokeRect(x, y, width, height);
 				}
-
-				let x = xPos + 30;
-				let y = yPos + 15;
-				let fontSize = 40;
+			},
+			drawLabel: function(context, x, y, text, fontSize) {
 				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
 				if (this.labelBackgroundDisplayed === 'true') {
 					context.fillStyle = this.labelBackgroundColor;
 					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('平均プレイヤーLv').width + 23.0, fontSize * 1.3);
+					context.fillRect(x - 10.0, y - fontSize, context.measureText(text).width + 23.0, fontSize * 1.3);
 				}
 				context.fillStyle = this.labelFontColor;
 				context.textAlign = 'start';
-				context.fillText('平均プレイヤーLv', x, y);
-
-				x = xPos + 30 + context.measureText('平均プレイヤーLv').width + 40;
+				context.textBaseline = 'alphabetic';
+				context.fillText(text, x, y);
+			},
+			drawInput: function(context, x, y, text, fontSize, textAlign) {
+				context.textAlign = textAlign;
+				context.textBaseline = 'alphabetic';
 				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
-				context.fillText(this.averageLevel, x, y);
-
-				x = xPos + 700;
-				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-				if (this.labelBackgroundDisplayed === 'true') {
-					context.fillStyle = this.labelBackgroundColor;
-					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('メンバー数').width + 23.0, fontSize * 1.3);
-				}
-				context.fillStyle = this.labelFontColor;
-				context.fillText('メンバー数', x, y);
-
-				x = xPos + 700 + context.measureText('メンバー数').width + 40;
+				context.fillText(text, x, y);
+			},
+			drawSentence: function(context, x, y, text, fontSize, rectWidth, breakRatio) {
+				context.textAlign = 'start';
+				context.textBaseline = 'alphabetic';
 				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
 				context.fillStyle = this.inputFontColor;
-				context.fillText(this.memberCount, x, y);
-
-				x = xPos + 30;
-				y = yPos + 90;
-				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-				if (this.labelBackgroundDisplayed === 'true') {
-					context.fillStyle = this.labelBackgroundColor;
-					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('活動方針').width + 23.0, fontSize * 1.3);
-				}
-				context.fillStyle = this.labelFontColor;
-				context.fillText('活動方針', x, y);
-
-				x = xPos + 30 + context.measureText('活動方針').width + 40;
-				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-				context.fillStyle = this.inputFontColor;
-				context.fillText(this.policy, x, y);
-
-				x = xPos + 700;
-				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-				if (this.labelBackgroundDisplayed === 'true') {
-					context.fillStyle = this.labelBackgroundColor;
-					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('加入条件').width + 23.0, fontSize * 1.3);
-				}
-				context.fillStyle = this.labelFontColor;
-				context.fillText('加入条件', x, y);
-
-				x = xPos + 700 + context.measureText('加入条件').width + 40;
-				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-				context.fillStyle = this.inputFontColor;
-				context.fillText(this.condition, x, y);
-
-				x = xPos + 30;
-				y = yPos + 165;
-				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-				if (this.labelBackgroundDisplayed === 'true') {
-					context.fillStyle = this.labelBackgroundColor;
-					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('募集要項').width + 23.0, fontSize * 1.3);
-				}
-				context.fillStyle = this.labelFontColor;
-				context.fillText('募集要項', x, y);
-
-				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-				context.fillStyle = this.inputFontColor;
-				x = xPos + 25;
 				let row = 1;
 				let splitPosition = 0;
-				for (let i = 1; i <= this.guideline.length; ++i) {
-					const w = context.measureText(this.guideline.substr(splitPosition, i - splitPosition)).width;
-					if (rectWidth * 0.93 <= w || this.guideline[i - 1] === '\n') {
-						y = (yPos + 230) + (row - 1) * 50.0;
-						const s = this.guideline.substr(splitPosition, i - splitPosition);
-						context.fillText(s, x, y);
+				for (let i = 1; i <= text.length; ++i) {
+					const w = context.measureText(text.substr(splitPosition, i - splitPosition)).width;
+					if (rectWidth * breakRatio <= w || text[i - 1] === '\n') {
+						y_ = y + (row - 1) * 50.0;
+						const s = text.substr(splitPosition, i - splitPosition);
+						context.fillText(s, x, y_);
 						row++;
 						splitPosition = i;
 					}
-					if (i === this.guideline.length) {
-						y = (yPos + 230) + (row - 1) * 50.0;
-						const s = this.guideline.substr(splitPosition, i - splitPosition);
-						context.fillText(s, x, y);
+					if (i === text.length) {
+						y_ = y + (row - 1) * 50.0;
+						const s = text.substr(splitPosition, i - splitPosition);
+						context.fillText(s, x, y_);
 					}
 				}
+			},
+			drawBasicInfo: function(context, xPos, yPos, canvasWidth, canvasHeight) {
+				const rectWidth = canvasWidth * 3.0 / 5.0;
+				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
+				this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
+				this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel, 40, 'start');
+				this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
+				this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberCount, 40, 'start');
+				this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
+				this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
+				this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
+				this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
+				this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
+				this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
 			},
 			drawPostscript: function(context, xPos, yPos, canvasWidth, canvasHeight) {
 				const rectWidth = canvasWidth * 1.60 / 5.0;
-				const rgb = this.convertHexToRgb(this.paneColor);
-				context.textBaseline = 'alphabetic';
-				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
-				context.beginPath();
-				context.fillRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
-				if (this.paneFrameDisplayed === 'true') {
-					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = this.paneFrameWidth;
-					context.strokeRect(xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
-				}
-
-				let x = xPos + 30;
-				let y = yPos + 15;
-				let fontSize = 40;
-				context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-				if (this.labelBackgroundDisplayed === 'true') {
-					context.fillStyle = this.labelBackgroundColor;
-					context.beginPath();
-					context.fillRect(x - 10.0, y - fontSize, context.measureText('追加情報').width + 23.0, fontSize * 1.3);
-				}
-				context.fillStyle = this.labelFontColor;
-				context.textAlign = 'start';
-				context.fillText('追加情報', x, y);
-
-				context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-				context.fillStyle = this.inputFontColor;
-				x = xPos + 20;
-				let row = 1;
-				let splitPosition = 0;
-				for (let i = 1; i <= this.postscript.length; ++i) {
-					const w = context.measureText(this.postscript.substr(splitPosition, i - splitPosition)).width;
-					if (rectWidth * 0.88 <= w || this.postscript[i - 1] === '\n') {
-						y = (yPos + 80) + (row - 1) * 50.0;
-						const s = this.postscript.substr(splitPosition, i - splitPosition);
-						context.fillText(s, x, y);
-						row++;
-						splitPosition = i;
-					}
-					if (i === this.postscript.length) {
-						y = (yPos + 80) + (row - 1) * 50.0;
-						const s = this.postscript.substr(splitPosition, i - splitPosition);
-						context.fillText(s, x, y);
-					}
-				}
+				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
+				this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
+				this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
 			},
 			drawRanking: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-				const rgb = this.convertHexToRgb(this.paneColor);
-				context.textBaseline = 'alphabetic';
-				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
-				context.beginPath();
-				context.fillRect(xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
-				if (this.paneFrameDisplayed === 'true') {
-					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = this.paneFrameWidth;
-					context.strokeRect(xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
-				}
-
+				this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
 				for (let i = 0; i < 3; ++i) {
-					const fontSize = 40;
-					let x = xPos + 30;
-					let y = yPos + 15 + 75 * i;
-					context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-					if (this.labelBackgroundDisplayed === 'true') {
-						context.fillStyle = this.labelBackgroundColor;
-						context.beginPath();
-						context.fillRect(x - 10.0, y - fontSize, context.measureText(this.rankingMonths[i] + 'のクラバト順位').width + 23.0, fontSize * 1.3);
-					}
-					context.textAlign = 'start';
-					context.fillStyle = this.labelFontColor;
-					context.fillText(this.rankingMonths[i] + 'のクラバト順位', x, y);
-
-					x = xPos + 595;
-					context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-					context.textAlign = 'end';
-					context.fillStyle = this.inputFontColor;
-					if (this.rankingsAvailable[i]) {
-						context.fillText(this.rankings[i] + '位', x, y);
-					}
-					else {
-						context.fillText('- 位', x, y);
-					}
+					this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
+					this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
 				}
 			},
 			resetInputSetting: function() {
@@ -433,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const canvas = document.getElementById('preview');
 				const a = document.createElement('a');
 				a.href = canvas.toDataURL('image/png');
-				a.download = 'clan_profile_card.png';
+				a.download = 'クランプロフカード.png';
 				a.click();
 			}
 		},
@@ -524,23 +410,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 							<form class="uk-form-stacked">
 								<hr class="uk-margin-top">
-								<legend class="uk-legend">入力値 (クラン名以外)</legend>
-								<label for="input-font" class="uk-form-label uk-margin-top">フォント</label>
-								<div class="uk-form-controls">
-									<select id="input-font" class="uk-select uk-form-small uk-form-width-large" v-model="inputFont" v-on:change="previewCard()">
-										<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
-									</select>
-								</div>
-								<div class="uk-margin-top uk-form-label">フォントスタイル</div>
-								<div class="uk-form-controls">
-									<label class="uk-margin-small-right"><input class="uk-checkbox" type="checkbox" value="bold" v-model="inputFontStyles" v-on:change="previewCard()" checked> 太字</label>
-									<label><input class="uk-checkbox" type="checkbox" value="italic" v-model="inputFontStyles" v-on:change="previewCard()"> 斜体</label>
-								</div>
-								<label for="input-font-color" class="uk-margin-top uk-form-label">文字色</label>
-								<div class="uk-form-controls"><input id="input-font-color" type="color" value="#000000" v-model="inputFontColor" v-on:input="previewCard()"></div>
-								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetInputSetting()">リセット</button>
-
-								<hr>
 								<legend class="uk-legend">クラン名</legend>
 								<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント</label>
 								<div class="uk-form-controls">
@@ -602,6 +471,23 @@ document.addEventListener('DOMContentLoaded', () => {
 								<label for="label-background-color" class="uk-margin-top uk-form-label">背景色</label>
 								<div class="uk-form-controls"><input id="label-background-color" type="color" value="#6464FF" v-model="labelBackgroundColor" v-on:input="previewCard()"></div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetLabelSetting()">リセット</button>
+
+								<hr>
+								<legend class="uk-legend">入力値 (クラン名以外)</legend>
+								<label for="input-font" class="uk-form-label uk-margin-top">フォント</label>
+								<div class="uk-form-controls">
+									<select id="input-font" class="uk-select uk-form-small uk-form-width-large" v-model="inputFont" v-on:change="previewCard()">
+										<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
+									</select>
+								</div>
+								<div class="uk-margin-top uk-form-label">フォントスタイル</div>
+								<div class="uk-form-controls">
+									<label class="uk-margin-small-right"><input class="uk-checkbox" type="checkbox" value="bold" v-model="inputFontStyles" v-on:change="previewCard()" checked> 太字</label>
+									<label><input class="uk-checkbox" type="checkbox" value="italic" v-model="inputFontStyles" v-on:change="previewCard()"> 斜体</label>
+								</div>
+								<label for="input-font-color" class="uk-margin-top uk-form-label">文字色</label>
+								<div class="uk-form-controls"><input id="input-font-color" type="color" value="#000000" v-model="inputFontColor" v-on:input="previewCard()"></div>
+								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetInputSetting()">リセット</button>
 
 								<hr>
 								<legend class="uk-legend">ペイン</legend>
