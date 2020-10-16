@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					'rino_in_wonderland1', 'tanabata_story0', 'tanabata_story1', 'tanabata_story2', 'misatos_summer_yell0', 'misatos_summer_yell1', 'misatos_summer_yell2', 'misatos_summer_yell3',
 					'misatos_summer_yell4', 'happy_change_angels0', 'happy_change_angels1', 'happy_change_angels2', 'halloween_ghost_festival0', 'halloween_ghost_festival1', 'halloween_ghost_festival2'
 				],
-				backgroundImagePath: 'img/hatsunes_present_strategy0.png',
+				backgroundImagePath: 'img/thumbnails/hatsunes_present_strategy0.jpg',
 				clanName: 'おひるねくらぶ',
 				averageLevel: 175,
 				memberCount: 30,
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="(e, i) in backgroundImageNames">
 									<form class="uk-form-stacked">
 										<div class="uk-form-controls">
-											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e + '.png'" v-bind:checked="i === 0">
+											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/thumbnails/' + e + '.jpg'" v-bind:checked="i === 0">
 										</div>
 										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/thumbnails/' + e + '.jpg'"></label>
 									</form>
