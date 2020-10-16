@@ -8,20 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		data: function() {
 			return {
 				backgroundImageNames: [
-					'hatsunes_present_strategy0.png', 'hatsunes_present_strategy1.png', 'hatsunes_present_strategy2.png', 'little_lyrical_adventure0.png', 'little_lyrical_adventure1.png', 'little_lyrical_adventure2.png',
-					'vampire_hunter_with_ilya0.png', 'dangerous_vacance_beach_gourmet_princess0.png', 'dangerous_vacance_beach_gourmet_princess1.png', 'dangerous_vacance_beach_gourmet_princess2.png',
-					'tamaki_and_mihuyu_uninhabited_island_zero_rupi_life0.png', 'black_iron_nightmare0.png', 'black_iron_nightmare1.png', 'black_iron_nightmare2.png', 'trick_or_pudding_unity_halloween_party0.png',
-					'trick_or_pudding_unity_halloween_party1.png', 'twilight_breakers0.png', 'twilight_breakers1.png', 'carol_oblivion0.png', 'carol_oblivion1.png', 'carol_oblivion2.png', 'carol_oblivion3.png',
-					'new_year_twinkle_crisis0.png', 'new_year_twinkle_crisis1.png', 'new_year_twinkle_crisis2.png', 'battle_of_valentine0.png', 'battle_of_valentine1.png', 'battle_of_valentine2.png', 'royal_capital_detective0.png',
-					'royal_capital_detective1.png', 'royal_capital_detective2.png', 'twin_flowers_bloomed_in_asturm0.png', 'shogun_travelogue0.png', 'shogun_travelogue1.png', 'shogun_travelogue2.png', 'shogun_travelogue3.png',
-					'shogun_travelogue4.png', 'shogun_travelogue5.png', 'shogun_travelogue6.png', 'shogun_travelogue7.png', 'shogun_travelogue8.png', 'shogun_travelogue9.png', 'suzunas_rainbow_stage0.png',
-					'suzunas_rainbow_stage1.png', 'suzunas_rainbow_stage2.png', 'summer_mahomaho_kingdom0.png', 'summer_mahomaho_kingdom1.png', 'summer_mahomaho_kingdom2.png', 'summer_mahomaho_kingdom3.png',
-					'forest_coward_and_holy_schools_lyceenne0.png', 'forest_coward_and_holy_schools_lyceenne1.png', 'forest_coward_and_holy_schools_lyceenne2.png', 'little_brave_halloween_night0.png',
-					'little_brave_halloween_night1.png', 'little_brave_halloween_night2.png', 'dragons_explorers0.png', 'dragons_explorers1.png', 'dragons_explorers2.png', 'dragons_explorers3.png', 'present_panic0.png',
-					'present_panic1.png', 'present_panic2.png', 'landsol_guild_race0.png', 'landsol_guild_race1.png', 'landsol_guild_race2.png', 'landsol_guild_race3.png', 'magical_girl0.png', 'magical_girl1.png',
-					'angel_and_holy_schools_lyceenne0.png', 'angel_and_holy_schools_lyceenne1.png', 'angel_and_holy_schools_lyceenne2.png', 'ranch_four_farmers0.png', 'ranch_four_farmers1.png', 'rino_in_wonderland0.png',
-					'rino_in_wonderland1.png', 'tanabata_story0.png', 'tanabata_story1.png', 'tanabata_story2.png', 'misatos_summer_yell0.png', 'misatos_summer_yell1.png', 'misatos_summer_yell2.png', 'misatos_summer_yell3.png',
-					'misatos_summer_yell4.png', 'happy_change_angels0.png', 'happy_change_angels1.png', 'happy_change_angels2.png'
+					'hatsunes_present_strategy0', 'hatsunes_present_strategy1', 'hatsunes_present_strategy2', 'little_lyrical_adventure0', 'little_lyrical_adventure1', 'little_lyrical_adventure2',
+					'vampire_hunter_with_ilya0', 'dangerous_vacance_beach_gourmet_princess0', 'dangerous_vacance_beach_gourmet_princess1', 'dangerous_vacance_beach_gourmet_princess2',
+					'tamaki_and_mihuyu_uninhabited_island_zero_rupi_life0', 'black_iron_nightmare0', 'black_iron_nightmare1', 'black_iron_nightmare2', 'trick_or_pudding_unity_halloween_party0',
+					'trick_or_pudding_unity_halloween_party1', 'twilight_breakers0', 'twilight_breakers1', 'carol_oblivion0', 'carol_oblivion1', 'carol_oblivion2', 'carol_oblivion3',
+					'new_year_twinkle_crisis0', 'new_year_twinkle_crisis1', 'new_year_twinkle_crisis2', 'battle_of_valentine0', 'battle_of_valentine1', 'battle_of_valentine2', 'royal_capital_detective0',
+					'royal_capital_detective1', 'royal_capital_detective2', 'twin_flowers_bloomed_in_asturm0', 'shogun_travelogue0', 'shogun_travelogue1', 'shogun_travelogue2', 'shogun_travelogue3',
+					'shogun_travelogue4', 'shogun_travelogue5', 'shogun_travelogue6', 'shogun_travelogue7', 'shogun_travelogue8', 'shogun_travelogue9', 'suzunas_rainbow_stage0',
+					'suzunas_rainbow_stage1', 'suzunas_rainbow_stage2', 'summer_mahomaho_kingdom0', 'summer_mahomaho_kingdom1', 'summer_mahomaho_kingdom2', 'summer_mahomaho_kingdom3',
+					'forest_coward_and_holy_schools_lyceenne0', 'forest_coward_and_holy_schools_lyceenne1', 'forest_coward_and_holy_schools_lyceenne2', 'little_brave_halloween_night0',
+					'little_brave_halloween_night1', 'little_brave_halloween_night2', 'dragons_explorers0', 'dragons_explorers1', 'dragons_explorers2', 'dragons_explorers3', 'present_panic0',
+					'present_panic1', 'present_panic2', 'landsol_guild_race0', 'landsol_guild_race1', 'landsol_guild_race2', 'landsol_guild_race3', 'magical_girl0', 'magical_girl1',
+					'angel_and_holy_schools_lyceenne0', 'angel_and_holy_schools_lyceenne1', 'angel_and_holy_schools_lyceenne2', 'ranch_four_farmers0', 'ranch_four_farmers1', 'rino_in_wonderland0',
+					'rino_in_wonderland1', 'tanabata_story0', 'tanabata_story1', 'tanabata_story2', 'misatos_summer_yell0', 'misatos_summer_yell1', 'misatos_summer_yell2', 'misatos_summer_yell3',
+					'misatos_summer_yell4', 'happy_change_angels0', 'happy_change_angels1', 'happy_change_angels2', 'halloween_ghost_festival0', 'halloween_ghost_festival1', 'halloween_ghost_festival2'
 				],
 				backgroundImagePath: 'img/hatsunes_present_strategy0.png',
 				clanName: 'おひるねくらぶ',
@@ -449,9 +449,9 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="(e, i) in backgroundImageNames">
 									<form class="uk-form-stacked">
 										<div class="uk-form-controls">
-											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e" v-bind:checked="i === 0">
+											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e + '.png'" v-bind:checked="i === 0">
 										</div>
-										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/' + e"></label>
+										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/thumbnails/' + e + '.jpg'"></label>
 									</form>
 								</div>
 							</div>
@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="i in 5">
 									<label>
 										<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()" v-bind:checked="i === 1">
-										<img v-bind:src="'img/layout' + (i - 1) + '.png'">
+										<img v-bind:src="'img/thumbnails/layout' + (i - 1) + '.jpg'">
 									</label>
 								</div>
 							</div>
