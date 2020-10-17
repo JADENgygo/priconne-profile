@@ -1,5 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const component = {
+		created: function() {
+			this.backgroundImagePath = localStorage.getItem('backgroundImagePath') === null ? this.backgroundImagePath : localStorage.getItem('backgroundImagePath');
+			this.clanName = localStorage.getItem('clanName') === null ? this.clanName : localStorage.getItem('clanName');
+			this.averageLevel = localStorage.getItem('averageLevel') === null ? this.averageLevel : parseInt(localStorage.getItem('averageLevel'));
+			this.memberCount = localStorage.getItem('memberCount') === null ? this.memberCount : parseInt(localStorage.getItem('memberCount'));
+			this.policy = localStorage.getItem('policy') === null ? this.policy : localStorage.getItem('policy');
+			this.condition = localStorage.getItem('condition') === null ? this.condition : localStorage.getItem('condition');
+			this.guideline = localStorage.getItem('guideline') === null ? this.guideline : localStorage.getItem('guideline');
+			this.postscriptDisplayed = localStorage.getItem('postscriptDisplayed') === null ? this.postscriptDisplayed : localStorage.getItem('postscriptDisplayed');
+			this.postscript = localStorage.getItem('postscript') === null ? this.postscript : localStorage.getItem('postscript');
+			this.rankingDisplayed = localStorage.getItem('rankingDisplayed') === null ? this.rankingDisplayed : localStorage.getItem('rankingDisplayed');
+			for (let i = 0; i < 3; ++i) {
+				this.rankingsAvailable[i] = localStorage.getItem('rankingsAvailable' + i) === null ? this.rankingsAvailable[i] : localStorage.getItem('rankingsAvailable' + i) === 'true';
+				this.rankingMonths[i] = localStorage.getItem('rankingMonths' + i) === null ? this.rankingMonths[i] : localStorage.getItem('rankingMonths' + i);
+				this.rankings[i] = localStorage.getItem('rankings' + i) === null ? this.rankings[i] : parseInt(localStorage.getItem('rankings' + i));
+			}
+			this.layout = localStorage.getItem('layout') === null ? this.layout : parseInt(localStorage.getItem('layout'));
+			this.clanNameFont = localStorage.getItem('clanNameFont') === null ? this.clanNameFont : localStorage.getItem('clanNameFont');
+			this.clanNameFontSize = localStorage.getItem('clanNameFontSize') === null ? this.clanNameFontSize : parseInt(localStorage.getItem('clanNameFontSize'));
+			if (localStorage.getItem('clanNameFontStyles') !== null) {
+				this.clanNameFontStyles = [];
+				for (let i = 0; i < localStorage.getItem('clanNameFontStyles').split(',').filter(e => e !== '').length; ++i) {
+					this.clanNameFontStyles.push(localStorage.getItem('clanNameFontStyles').split(',')[i]);
+				}
+			}
+			this.clanNameOutlineDisplayed = localStorage.getItem('clanNameOutlineDisplayed') === null ? this.clanNameOutlineDisplayed : localStorage.getItem('clanNameOutlineDisplayed');
+			this.clanNameStrokeColor = localStorage.getItem('clanNameStrokeColor') === null ? this.clanNameStrokeColor : localStorage.getItem('clanNameStrokeColor');
+			this.clanNameOutlineWidth = localStorage.getItem('clanNameOutlineWidth') === null ? this.clanNameOutlineWidth : localStorage.getItem('clanNameOutlineWidth');
+			this.clanNameFillColor = localStorage.getItem('clanNameFillColor') === null ? this.clanNameFillColor : localStorage.getItem('clanNameFillColor');
+			this.clanNameFillColorTransparency = localStorage.getItem('clanNameFillColorTransparency') === null ? this.clanNameFillColorTransparency : localStorage.getItem('clanNameFillColorTransparency');
+			this.labelFont = localStorage.getItem('labelFont') === null ? this.labelFont : localStorage.getItem('labelFont');
+			if (localStorage.getItem('labelFontStyles') !== null) {
+				this.labelFontStyles = [];
+				for (let i = 0; i < localStorage.getItem('labelFontStyles').split(',').filter(e => e !== '').length; ++i) {
+					this.labelFontStyles.push(localStorage.getItem('labelFontStyles').split(',')[i]);
+				}
+			}
+			this.labelFontColor = localStorage.getItem('labelFontColor') === null ? this.labelFontColor : localStorage.getItem('labelFontColor');
+			this.labelBackgroundDisplayed = localStorage.getItem('labelBackgroundDisplayed') === null ? this.labelBackgroundDisplayed : localStorage.getItem('labelBackgroundDisplayed');
+			this.labelBackgroundColor = localStorage.getItem('labelBackgroundColor') === null ? this.labelBackgroundColor : localStorage.getItem('labelBackgroundColor');
+			this.inputFont = localStorage.getItem('inputFont') === null ? this.inputFont : localStorage.getItem('inputFont');
+			if (localStorage.getItem('inputFontStyles') !== null) {
+				this.inputFontStyles = [];
+				for (let i = 0; i < localStorage.getItem('inputFontStyles').split(',').filter(e => e !== '').length; ++i) {
+					this.inputFontStyles.push(localStorage.getItem('inputFontStyles').split(',')[i]);
+				}
+			}
+			this.inputFontColor = localStorage.getItem('inputFontColor') === null ? this.inputFontColor : localStorage.getItem('inputFontColor');
+			this.paneFrameDisplayed = localStorage.getItem('paneFrameDisplayed') === null ? this.paneFrameDisplayed : localStorage.getItem('paneFrameDisplayed');
+			this.paneFrameColor = localStorage.getItem('paneFrameColor') === null ? this.paneFrameColor : localStorage.getItem('paneFrameColor');
+			this.paneFrameWidth = localStorage.getItem('paneFrameWidth') === null ? this.paneFrameWidth : localStorage.getItem('paneFrameWidth');
+			this.paneColor = localStorage.getItem('paneColor') === null ? this.paneColor : localStorage.getItem('paneColor');
+			this.paneTransparency = localStorage.getItem('paneTransparency') === null ? this.paneTransparency : localStorage.getItem('paneTransparency');
+		},
 		mounted: function() {
 			document.getElementById('background-image').addEventListener('load', () => {
 				this.previewCard();
@@ -41,9 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				],
 				rankings: [1, 1, 1],
 				layout: 0,
-				inputFont: 'ＭＳ ゴシック',
-				inputFontStyles: ['bold'],
-				inputFontColor: '#000000',
 				clanNameFont: 'メイリオ',
 				clanNameFontSize: 100,
 				clanNameFontStyles: ['bold'],
@@ -57,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				labelFontColor: '#FFFFFF',
 				labelBackgroundDisplayed: 'true',
 				labelBackgroundColor: '#6464FF',
+				inputFont: 'ＭＳ ゴシック',
+				inputFontStyles: ['bold'],
+				inputFontColor: '#000000',
 				paneFrameDisplayed: 'true',
 				paneFrameColor: '#000000',
 				paneFrameWidth: '3',
@@ -117,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		methods: {
 			previewCard: function() {
+				this.saveParameters();
 				const canvas = document.getElementById('preview');
 				const context = canvas.getContext('2d');
 				const image = document.getElementById('background-image');
@@ -138,6 +193,45 @@ document.addEventListener('DOMContentLoaded', () => {
 					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
 				}
 			},
+			saveParameters: function() {
+				localStorage.setItem('backgroundImagePath', this.backgroundImagePath);
+				localStorage.setItem('clanName', this.clanName);
+				localStorage.setItem('averageLevel', this.averageLevel);
+				localStorage.setItem('memberCount', this.memberCount);
+				localStorage.setItem('policy', this.policy);
+				localStorage.setItem('condition', this.condition);
+				localStorage.setItem('guideline', this.guideline);
+				localStorage.setItem('postscriptDisplayed', this.postscriptDisplayed);
+				localStorage.setItem('postscript', this.postscript);
+				localStorage.setItem('rankingDisplayed', this.rankingDisplayed);
+				for (let i = 0; i < 3; ++i) {
+					localStorage.setItem('rankingsAvailable' + i, this.rankingsAvailable[i]);
+					localStorage.setItem('rankingMonths' + i, this.rankingMonths[i]);
+					localStorage.setItem('rankings' + i, this.rankings[i]);
+				}
+				localStorage.setItem('layout', this.layout);
+				localStorage.setItem('clanNameFont', this.clanNameFont);
+				localStorage.setItem('clanNameFontSize', this.clanNameFontSize);
+				localStorage.setItem('clanNameFontStyles', this.clanNameFontStyles);
+				localStorage.setItem('clanNameOutlineDisplayed', this.clanNameOutlineDisplayed);
+				localStorage.setItem('clanNameStrokeColor', this.clanNameStrokeColor);
+				localStorage.setItem('clanNameOutlineWidth', this.clanNameOutlineWidth);
+				localStorage.setItem('clanNameFillColor', this.clanNameFillColor);
+				localStorage.setItem('clanNameFillColorTransparency', this.clanNameFillColorTransparency);
+				localStorage.setItem('labelFont', this.labelFont);
+				localStorage.setItem('labelFontStyles', this.labelFontStyles);
+				localStorage.setItem('labelFontColor', this.labelFontColor);
+				localStorage.setItem('labelBackgroundDisplayed', this.labelBackgroundDisplayed);
+				localStorage.setItem('labelBackgroundColor', this.labelBackgroundColor);
+				localStorage.setItem('inputFont', this.inputFont);
+				localStorage.setItem('inputFontStyles', this.inputFontStyles);
+				localStorage.setItem('inputFontColor', this.inputFontColor);
+				localStorage.setItem('paneFrameDisplayed', this.paneFrameDisplayed);
+				localStorage.setItem('paneFrameColor', this.paneFrameColor);
+				localStorage.setItem('paneFrameWidth', this.paneFrameWidth);
+				localStorage.setItem('paneColor', this.paneColor);
+				localStorage.setItem('paneTransparency', this.paneTransparency);
+			},
 			drawClanName: function(context, xPos, yPos) {
 				context.font = this.clanNameFontStyle + ' ' + this.clanNameFontSize + `px '${this.clanNameFont}'`;
 				context.textBaseline = 'middle';
@@ -151,15 +245,31 @@ document.addEventListener('DOMContentLoaded', () => {
 				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.clanNameFillColorTransparency})`;
 				context.fillText(this.clanName, xPos, yPos);
 			},
-			drawPane: function(context, x, y, width, height) {
-				const rgb = this.convertHexToRgb(this.paneColor);
-				context.beginPath();
-				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
-				context.fillRect(x, y, width, height);
-				if (this.paneFrameDisplayed === 'true') {
-					context.strokeStyle = this.paneFrameColor;
-					context.lineWidth = this.paneFrameWidth;
-					context.strokeRect(x, y, width, height);
+			drawBasicInfo: function(context, xPos, yPos, canvasWidth, canvasHeight) {
+				const rectWidth = canvasWidth * 3.0 / 5.0;
+				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
+				this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
+				this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel, 40, 'start');
+				this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
+				this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberCount, 40, 'start');
+				this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
+				this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
+				this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
+				this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
+				this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
+				this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
+			},
+			drawPostscript: function(context, xPos, yPos, canvasWidth, canvasHeight) {
+				const rectWidth = canvasWidth * 1.60 / 5.0;
+				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
+				this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
+				this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
+			},
+			drawRanking: function(context, xPos, yPos, canvasWidth, canvasHeight) {
+				this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
+				for (let i = 0; i < 3; ++i) {
+					this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
+					this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
 				}
 			},
 			drawLabel: function(context, x, y, text, fontSize) {
@@ -204,38 +314,16 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				}
 			},
-			drawBasicInfo: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-				const rectWidth = canvasWidth * 3.0 / 5.0;
-				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
-				this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
-				this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel, 40, 'start');
-				this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
-				this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberCount, 40, 'start');
-				this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
-				this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
-				this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
-				this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
-				this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
-				this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
-			},
-			drawPostscript: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-				const rectWidth = canvasWidth * 1.60 / 5.0;
-				this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
-				this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
-				this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
-			},
-			drawRanking: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-				this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
-				for (let i = 0; i < 3; ++i) {
-					this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
-					this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
+			drawPane: function(context, x, y, width, height) {
+				const rgb = this.convertHexToRgb(this.paneColor);
+				context.beginPath();
+				context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
+				context.fillRect(x, y, width, height);
+				if (this.paneFrameDisplayed === 'true') {
+					context.strokeStyle = this.paneFrameColor;
+					context.lineWidth = this.paneFrameWidth;
+					context.strokeRect(x, y, width, height);
 				}
-			},
-			resetInputSetting: function() {
-				this.inputFont = 'ＭＳ ゴシック';
-				this.inputFontStyles = ['bold'];
-				this.inputFontColor = '#000000';
-				this.previewCard();
 			},
 			resetClanNameSetting: function() {
 				this.clanNameFont = 'メイリオ';
@@ -254,6 +342,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.labelFontColor = '#FFFFFF';
 				this.labelBackgroundDisplayed = 'true';
 				this.labelBackgroundColor = '#6464FF';
+				this.previewCard();
+			},
+			resetInputSetting: function() {
+				this.inputFont = 'ＭＳ ゴシック';
+				this.inputFontStyles = ['bold'];
+				this.inputFontColor = '#000000';
 				this.previewCard();
 			},
 			resetPaneSetting: function() {
