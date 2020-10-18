@@ -71,7 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		created: function() {
 			this.backgroundImagePath = localStorage.getItem('backgroundImagePath') === null ? this.backgroundImagePath : localStorage.getItem('backgroundImagePath');
 			this.clanName = localStorage.getItem('clanName') === null ? this.clanName : localStorage.getItem('clanName');
-			this.averageLevel = localStorage.getItem('averageLevel') === null ? this.averageLevel : parseInt(localStorage.getItem('averageLevel'));
+			if (localStorage.getItem('averageLevel') !== null) {
+				if (localStorage.getItem('averageLevel') === '') {
+					this.averageLevel = '';
+				}
+				else {
+					this.averageLevel = parseInt(localStorage.getItem('averageLevel'));
+				}
+			}
 			this.memberCount = localStorage.getItem('memberCount') === null ? this.memberCount : parseInt(localStorage.getItem('memberCount'));
 			this.policy = localStorage.getItem('policy') === null ? this.policy : localStorage.getItem('policy');
 			this.condition = localStorage.getItem('condition') === null ? this.condition : localStorage.getItem('condition');
@@ -82,7 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
 			for (let i = 0; i < 3; ++i) {
 				this.rankingsAvailable[i] = localStorage.getItem('rankingsAvailable' + i) === null ? this.rankingsAvailable[i] : localStorage.getItem('rankingsAvailable' + i) === 'true';
 				this.rankingMonths[i] = localStorage.getItem('rankingMonths' + i) === null ? this.rankingMonths[i] : localStorage.getItem('rankingMonths' + i);
-				this.rankings[i] = localStorage.getItem('rankings' + i) === null ? this.rankings[i] : parseInt(localStorage.getItem('rankings' + i));
+				if (localStorage.getItem('rankings' + i) !== null) {
+					if (localStorage.getItem('rankings' + i) === '') {
+						this.rankings[i] = '';
+					}
+					else {
+						this.rankings[i] = parseInt(localStorage.getItem('rankings' + i));
+					}
+				}
 			}
 			this.layout = localStorage.getItem('layout') === null ? this.layout : parseInt(localStorage.getItem('layout'));
 			this.clanNameFont = localStorage.getItem('clanNameFont') === null ? this.clanNameFont : localStorage.getItem('clanNameFont');
@@ -151,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				backgroundImagePath: 'img/hatsunes_present_strategy0.webp',
 				clanName: 'おひるねくらぶ',
 				averageLevel: 175,
-				memberCount: 30,
+				memberCount: 25,
 				policy: 'わいわいプレイ',
 				condition: '誰でも加入',
 				guideline: '',
@@ -383,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.backgroundImagePath = 'img/hatsunes_present_strategy0.webp';
 				this.clanName = 'おひるねくらぶ';
 				this.averageLevel = 175;
-				this.memberCount = 30;
+				this.memberCount = 25;
 				this.policy = 'わいわいプレイ';
 				this.condition = '誰でも加入';
 				this.guideline = '';
