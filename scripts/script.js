@@ -393,6 +393,27 @@ document.addEventListener('DOMContentLoaded', () => {
 					context.strokeRect(x, y, width, height);
 				}
 			},
+			resetBasicSetting: function() {
+				this.backgroundImagePath = 'img/thumbnails/hatsunes_present_strategy0.jpg';
+				this.clanName = 'おひるねくらぶ';
+				this.averageLevel = 175;
+				this.memberCount = 30;
+				this.policy = 'わいわいプレイ';
+				this.condition = '誰でも加入';
+				this.guideline = '';
+				this.postscriptDisplayed = 'true';
+				this.postscript = '';
+				this.rankingDisplayed = 'true';
+				this.rankingsAvailable =  [true, true, true];
+				this.rankingMonths = [
+					new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
+					new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
+					new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
+				];
+				this.rankings = [1, 1, 1];
+				this.layout = 0;
+				this.previewCard();
+			},
 			resetClanNameSetting: function() {
 				this.clanNameFont = 'メイリオ';
 				this.clanNameFontSize = 100;
@@ -425,6 +446,18 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.paneColor = '#FFFFFF';
 				this.paneTransparency = '0.6';
 				this.previewCard();
+			},
+			resetAllSettings: function() {
+				this.resetBasicSetting();
+				this.resetClanNameSetting();
+				this.resetLabelSetting();
+				this.resetInputSetting();
+				this.resetPaneSetting();
+				UIkit.notification({
+					message: '全設定をリセットしました',
+					pos: 'top-center',
+					timeout: 3000
+				});
 			},
 			convertHexToRgb: function(hex) {
 				const c = [hex.substr(1, 2), hex.substr(3, 2), hex.substr(5, 2)];
@@ -674,6 +707,16 @@ document.addEventListener('DOMContentLoaded', () => {
 								</div>
 								<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetPaneSetting()">リセット</button>
 								<hr>
+								<div class="uk-text-right"><button type="button" class="uk-button uk-button-default uk-button-small" uk-toggle="target: #all-settings-reset">全設定リセット</button></div>
+								<div id="all-settings-reset" uk-modal>
+									<div class="uk-modal-dialog uk-modal-body">
+										<div class="uk-margin-bottom">全設定をリセットしますか</div>
+										<div class="uk-text-right">
+											<button class="uk-modal-close uk-button uk-button-default uk-button-small uk-margin-right" type="button">キャンセル</button>
+											<button class="uk-modal-close uk-button uk-button-danger uk-button-small" type="button" v-on:click="resetAllSettings()">リセット</button>
+										</div>
+									</div>
+								</div>
 							</form>
 						</div>
 					</li>
