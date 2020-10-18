@@ -1,4 +1,72 @@
 document.addEventListener('DOMContentLoaded', () => {
+	class FontDetector {
+		constructor(testAlphabet, testJapanese) {
+			this.baseFonts = ['monospace', 'sans-serif', 'serif'];
+			this.testStrings = [testAlphabet, testJapanese];
+			this.defaultWidth = [{}, {}];
+			this.defaultHeight = [{}, {}];
+			const body = document.getElementsByTagName("body")[0];
+			const span = document.createElement("span");
+			span.style.visible = 'hidden';
+			span.style.fontSize = '72px';
+			for (let i = 0; i < 2; ++i) {
+				span.textContent = this.testStrings[i];
+				for (let e of this.baseFonts) {
+					span.style.fontFamily = e;
+					body.appendChild(span);
+					this.defaultWidth[i][e] = span.offsetWidth;
+					this.defaultHeight[i][e] = span.offsetHeight;
+					body.removeChild(span);
+				}
+			}
+		}
+		detect(font) {
+			let detected = false;
+			const body = document.getElementsByTagName("body")[0];
+			const span = document.createElement("span");
+			span.style.display = 'hidden';
+			span.style.fontSize = '72px';
+			outerFor:
+			for (let i = 0; i < 2; ++i) {
+				span.textContent = this.testStrings[i];
+				for (let e of this.baseFonts) {
+					span.style.fontFamily = font + ',' + e;
+					body.appendChild(span);
+					detected = (span.offsetWidth != this.defaultWidth[i][e]) || (span.offsetHeight != this.defaultHeight[i][e]);
+					body.removeChild(span);
+					if (detected) {
+						break outerFor;
+					}
+				}
+			}
+			return detected;
+		}
+	}
+	const fontDetector = new FontDetector('mmmmmmmmmmlli', 'あ１－＾｜＿！＜％＄ｚ');
+	const fonts = [
+		"a",
+		"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Arial", "Arial Black",
+		"Arimo", "Bahnschrift", "Bahnschrift Condensed", "Bahnschrift Light", "Bahnschrift Light Condensed", "Bahnschrift Light SemiCondensed", "Bahnschrift SemiBold", "Bahnschrift SemiBold Condensed",
+		"Bahnschrift SemiBold SemiConden", "Bahnschrift SemiCondensed", "Bahnschrift SemiLight", "Bahnschrift SemiLight Condensed", "Bahnschrift SemiLight SemiConde", "BIZ UDPゴシック", "BIZ UDP明朝 Medium",
+		"BIZ UDゴシック", "BIZ UD明朝 Medium", "Calibri", "Calibri Light", "Cambria", "Cambria Math", "Candara", "Candara Light", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Corbel Light", "Courier New",
+		"DejaVu Sans", "DejaVu Sans Condensed", "DejaVu Sans Light", "DejaVu Sans Mono", "DejaVu Serif", "DejaVu Serif Condensed", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Gentium Basic",
+		"Gentium Book Basic", "Georgia", "HoloLens MDL2 Assets", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Leelawadee UI Semilight", "Lucida Bright", "Lucida Console", "Lucida Sans",
+		"Lucida Sans Typewriter", "Lucida Sans Unicode", "Malgun Gothic", "Malgun Gothic Semilight", "Marlett", "Meiryo UI", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei Light",
+		"Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei Light",
+		"Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Mongolian Baiti", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI",
+		"Nirmala UI Semilight", "Noto Sans CJK JP Medium", "NSimSun", "OpenSymbol", "Palatino Linotype", "PMingLiU-ExtB", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Black",
+		"Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Light", "Segoe UI Semibold", "Segoe UI Semilight", "Segoe UI Symbol", "SimSun", "SimSun-ExtB", "Sitka Banner", "Sitka Display", "Sitka Heading",
+		"Sitka Small", "Sitka Subheading", "Sitka Text", "Sylfaen", "Symbol", "Tahoma", "Tera Special", "Times New Roman", "Trebuchet MS", "UD デジタル 教科書体 N-B", "UD デジタル 教科書体 N-R",
+		"UD デジタル 教科書体 NK-B", "UD デジタル 教科書体 NK-R", "UD デジタル 教科書体 NP-B", "UD デジタル 教科書体 NP-R", "Verdana", "Webdings", "Wingdings", "Yu Gothic UI", "Yu Gothic UI Light",
+		"Yu Gothic UI Semibold", "Yu Gothic UI Semilight", "メイリオ", "游ゴシック", "游ゴシック Light", "游ゴシック Medium", "游明朝", "游明朝 Demibold", "游明朝 Light", "ＭＳ ゴシック", "ＭＳ 明朝",
+		"ＭＳ Ｐゴシック", "ＭＳ Ｐ明朝"
+	];
+	for (let e of fonts) {
+		if (!fontDetector.detect(e)) {
+			console.log(e + ' ' + fontDetector.detect(e));
+		}
+	}
+
 	const component = {
 		created: function() {
 			this.backgroundImagePath = localStorage.getItem('backgroundImagePath') === null ? this.backgroundImagePath : localStorage.getItem('backgroundImagePath');
