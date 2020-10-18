@@ -127,6 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			});
 		},
+		props: {
+			fonts: Array
+		},
 		data: function() {
 			return {
 				backgroundImageNames: [
@@ -145,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					'rino_in_wonderland1', 'tanabata_story0', 'tanabata_story1', 'tanabata_story2', 'misatos_summer_yell0', 'misatos_summer_yell1', 'misatos_summer_yell2', 'misatos_summer_yell3',
 					'misatos_summer_yell4', 'happy_change_angels0', 'happy_change_angels1', 'happy_change_angels2', 'halloween_ghost_festival0', 'halloween_ghost_festival1', 'halloween_ghost_festival2'
 				],
-				backgroundImagePath: 'img/thumbnails/hatsunes_present_strategy0.jpg',
+				backgroundImagePath: 'img/hatsunes_present_strategy0.webp',
 				clanName: 'おひるねくらぶ',
 				averageLevel: 175,
 				memberCount: 30,
@@ -184,24 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				paneFrameWidth: '3',
 				paneColor: '#FFFFFF',
 				paneTransparency: '0.6',
-				previewFixed: false,
-				fonts: [
-					"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Arial", "Arial Black",
-					"Arimo", "Bahnschrift", "Bahnschrift Condensed", "Bahnschrift Light", "Bahnschrift Light Condensed", "Bahnschrift Light SemiCondensed", "Bahnschrift SemiBold", "Bahnschrift SemiBold Condensed",
-					"Bahnschrift SemiBold SemiConden", "Bahnschrift SemiCondensed", "Bahnschrift SemiLight", "Bahnschrift SemiLight Condensed", "Bahnschrift SemiLight SemiConde", "BIZ UDPゴシック", "BIZ UDP明朝 Medium",
-					"BIZ UDゴシック", "BIZ UD明朝 Medium", "Calibri", "Calibri Light", "Cambria", "Cambria Math", "Candara", "Candara Light", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Corbel Light", "Courier New",
-					"DejaVu Sans", "DejaVu Sans Condensed", "DejaVu Sans Light", "DejaVu Sans Mono", "DejaVu Serif", "DejaVu Serif Condensed", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Gentium Basic",
-					"Gentium Book Basic", "Georgia", "HoloLens MDL2 Assets", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Leelawadee UI Semilight", "Lucida Bright", "Lucida Console", "Lucida Sans",
-					"Lucida Sans Typewriter", "Lucida Sans Unicode", "Malgun Gothic", "Malgun Gothic Semilight", "Marlett", "Meiryo UI", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei Light",
-					"Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei Light",
-					"Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Mongolian Baiti", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI",
-					"Nirmala UI Semilight", "Noto Sans CJK JP Medium", "NSimSun", "OpenSymbol", "Palatino Linotype", "PMingLiU-ExtB", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Black",
-					"Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Light", "Segoe UI Semibold", "Segoe UI Semilight", "Segoe UI Symbol", "SimSun", "SimSun-ExtB", "Sitka Banner", "Sitka Display", "Sitka Heading",
-					"Sitka Small", "Sitka Subheading", "Sitka Text", "Sylfaen", "Symbol", "Tahoma", "Tera Special", "Times New Roman", "Trebuchet MS", "UD デジタル 教科書体 N-B", "UD デジタル 教科書体 N-R",
-					"UD デジタル 教科書体 NK-B", "UD デジタル 教科書体 NK-R", "UD デジタル 教科書体 NP-B", "UD デジタル 教科書体 NP-R", "Verdana", "Webdings", "Wingdings", "Yu Gothic UI", "Yu Gothic UI Light",
-					"Yu Gothic UI Semibold", "Yu Gothic UI Semilight", "メイリオ", "游ゴシック", "游ゴシック Light", "游ゴシック Medium", "游明朝", "游明朝 Demibold", "游明朝 Light", "ＭＳ ゴシック", "ＭＳ 明朝",
-					"ＭＳ Ｐゴシック", "ＭＳ Ｐ明朝"
-				]
+				previewFixed: false
 			};
 		},
 		computed: {
@@ -394,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			},
 			resetBasicSetting: function() {
-				this.backgroundImagePath = 'img/thumbnails/hatsunes_present_strategy0.jpg';
+				this.backgroundImagePath = 'img/hatsunes_present_strategy0.webp';
 				this.clanName = 'おひるねくらぶ';
 				this.averageLevel = 175;
 				this.memberCount = 30;
@@ -530,9 +516,9 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="(e, i) in backgroundImageNames">
 									<form class="uk-form-stacked">
 										<div class="uk-form-controls">
-											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/thumbnails/' + e + '.jpg'" v-bind:checked="i === 0">
+											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e + '.webp'" v-bind:checked="i === 0">
 										</div>
-										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/thumbnails/' + e + '.jpg'"></label>
+										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/' + e + '.webp'"></label>
 									</form>
 								</div>
 							</div>
@@ -598,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="i in 5">
 									<label>
 										<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()" v-bind:checked="i === 1">
-										<img v-bind:src="'img/thumbnails/layout' + (i - 1) + '.jpg'">
+										<img v-bind:src="'img/layout' + (i - 1) + '.webp'">
 									</label>
 								</div>
 							</div>
@@ -735,8 +721,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		components: {
 			component
 		},
+		data: function() {
+			return {
+				fonts: fonts.filter(e => fontDetector.detect(e))
+			};
+		},
 		template: `
-			<component></component>
+			<component v-bind:fonts="fonts"></component>
 		`
 	});
 });
