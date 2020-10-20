@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			this.defaultHeight = [{}, {}];
 			const body = document.getElementsByTagName("body")[0];
 			const span = document.createElement("span");
-			span.style.visible = 'hidden';
+			span.style.visibility = 'hidden';
 			span.style.fontSize = '72px';
 			for (let i = 0; i < 2; ++i) {
 				span.textContent = this.testStrings[i];
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let detected = false;
 			const body = document.getElementsByTagName("body")[0];
 			const span = document.createElement("span");
-			span.style.display = 'hidden';
+			span.style.visibility = 'hidden';
 			span.style.fontSize = '72px';
 			outerFor:
 			for (let i = 0; i < 2; ++i) {
@@ -42,9 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			return detected;
 		}
 	}
-	const fontDetector = new FontDetector('mmmmmmmmmmlli', 'あ１－＾｜＿！＜％＄ｚ');
+	const fontDetector = new FontDetector('mmmmmmmmmmlli12-', 'あぱプ字１－＾｜＿！＜％＄ｚＡ');
 	const fonts = [
-		"a",
 		"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Arial", "Arial Black",
 		"Arimo", "Bahnschrift", "Bahnschrift Condensed", "Bahnschrift Light", "Bahnschrift Light Condensed", "Bahnschrift Light SemiCondensed", "Bahnschrift SemiBold", "Bahnschrift SemiBold Condensed",
 		"Bahnschrift SemiBold SemiConden", "Bahnschrift SemiCondensed", "Bahnschrift SemiLight", "Bahnschrift SemiLight Condensed", "Bahnschrift SemiLight SemiConde", "BIZ UDPゴシック", "BIZ UDP明朝 Medium",
@@ -53,20 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		"Gentium Book Basic", "Georgia", "HoloLens MDL2 Assets", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Leelawadee UI Semilight", "Lucida Bright", "Lucida Console", "Lucida Sans",
 		"Lucida Sans Typewriter", "Lucida Sans Unicode", "Malgun Gothic", "Malgun Gothic Semilight", "Marlett", "Meiryo UI", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei Light",
 		"Microsoft JhengHei UI", "Microsoft JhengHei UI Light", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei Light",
-		"Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Mongolian Baiti", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI",
-		"Nirmala UI Semilight", "Noto Sans CJK JP Medium", "NSimSun", "OpenSymbol", "Palatino Linotype", "PMingLiU-ExtB", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Black",
+		"Microsoft YaHei UI", "Microsoft YaHei UI Light", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Mongolian Baiti", 'monospace', "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI",
+		"Nirmala UI Semilight", "Noto Sans CJK JP Medium", "NSimSun", "OpenSymbol", "Palatino Linotype", "PMingLiU-ExtB", 'sans-serif', 'serif', "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Black",
 		"Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Light", "Segoe UI Semibold", "Segoe UI Semilight", "Segoe UI Symbol", "SimSun", "SimSun-ExtB", "Sitka Banner", "Sitka Display", "Sitka Heading",
 		"Sitka Small", "Sitka Subheading", "Sitka Text", "Sylfaen", "Symbol", "Tahoma", "Tera Special", "Times New Roman", "Trebuchet MS", "UD デジタル 教科書体 N-B", "UD デジタル 教科書体 N-R",
 		"UD デジタル 教科書体 NK-B", "UD デジタル 教科書体 NK-R", "UD デジタル 教科書体 NP-B", "UD デジタル 教科書体 NP-R", "Verdana", "Webdings", "Wingdings", "Yu Gothic UI", "Yu Gothic UI Light",
 		"Yu Gothic UI Semibold", "Yu Gothic UI Semilight", "メイリオ", "游ゴシック", "游ゴシック Light", "游ゴシック Medium", "游明朝", "游明朝 Demibold", "游明朝 Light", "ＭＳ ゴシック", "ＭＳ 明朝",
 		"ＭＳ Ｐゴシック", "ＭＳ Ｐ明朝"
 	];
-	for (let e of fonts) {
-		if (!fontDetector.detect(e)) {
-			console.log(e + ' ' + fontDetector.detect(e));
-		}
-	}
-
 	const component = {
 		created: function() {
 			this.backgroundImagePath = localStorage.getItem('backgroundImagePath') === null ? this.backgroundImagePath : localStorage.getItem('backgroundImagePath');
@@ -139,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		mounted: function() {
 			document.getElementById('background-image').addEventListener('load', () => {
 				this.previewCard();
+				// ブラウザの進み戻りを行ったときにプレビュー固定のチェックが入っているのにプレビュー固定されない挙動の対処
+				this.previewFixed = document.getElementById('preview-fixing').checked;
+				this.changePreviewFixing();
 			});
 		},
 		props: {
@@ -180,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				],
 				rankings: [1, 1, 1],
 				layout: 0,
-				clanNameFont: 'メイリオ',
+				clanNameFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
 				clanNameFontSize: 100,
 				clanNameFontStyles: ['bold'],
 				clanNameOutlineDisplayed: 'true',
@@ -188,12 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				clanNameOutlineWidth: '10',
 				clanNameFillColor: '#3264FF',
 				clanNameFillColorTransparency: '1.0',
-				labelFont: 'ＭＳ ゴシック',
+				labelFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
 				labelFontStyles: ['bold'],
 				labelFontColor: '#FFFFFF',
 				labelBackgroundDisplayed: 'true',
 				labelBackgroundColor: '#6464FF',
-				inputFont: 'ＭＳ ゴシック',
+				inputFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
 				inputFontStyles: ['bold'],
 				inputFontColor: '#000000',
 				paneFrameDisplayed: 'true',
@@ -415,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetClanNameSetting: function() {
-				this.clanNameFont = 'メイリオ';
+				this.clanNameFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
 				this.clanNameFontSize = 100;
 				this.clanNameFontStyles = ['bold'];
 				this.clanNameOutlineDisplayed = 'true';
@@ -426,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetLabelSetting: function() {
-				this.labelFont = 'ＭＳ ゴシック';
+				this.labelFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
 				this.labelFontStyles = ['bold'];
 				this.labelFontColor = '#FFFFFF';
 				this.labelBackgroundDisplayed = 'true';
@@ -434,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetInputSetting: function() {
-				this.inputFont = 'ＭＳ ゴシック';
+				this.inputFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
 				this.inputFontStyles = ['bold'];
 				this.inputFontColor = '#000000';
 				this.previewCard();
@@ -530,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
 								<div v-for="(e, i) in backgroundImageNames">
 									<form class="uk-form-stacked">
 										<div class="uk-form-controls">
-											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e + '.webp'" v-bind:checked="i === 0">
+											<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImagePath" v-bind:value="'img/' + e + '.webp'">
 										</div>
 										<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="'img/' + e + '.webp'"></label>
 									</form>
@@ -582,7 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						<div v-for="i in 3" class="uk-margin-small-bottom">
 							<input class="uk-checkbox" type="checkbox" v-model="rankingsAvailable[i - 1]" v-on:change="previewCard()" checked>
 							<select class="uk-select uk-form-small uk-form-width-xsmall" v-model="rankingMonths[i - 1]" v-on:change="previewCard()">
-								<option v-for="e in 12" v-bind:selected="e + '月'=== rankingMonths[i - 1]">{{ e + '月' }}</option>
+								<option v-for="e in 12">{{ e + '月' }}</option>
 							</select>
 							<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="rankings[i - 1]" v-on:input="previewCard()"> 位
 						</div>
@@ -597,7 +593,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
 								<div v-for="i in 5">
 									<label>
-										<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()" v-bind:checked="i === 1">
+										<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()">
 										<img v-bind:src="'img/layout' + (i - 1) + '.webp'">
 									</label>
 								</div>
@@ -606,10 +602,10 @@ document.addEventListener('DOMContentLoaded', () => {
 							<form class="uk-form-stacked">
 								<hr class="uk-margin-top">
 								<legend class="uk-legend">クラン名</legend>
-								<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント</label>
+								<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント (使用可能フォントは端末に依存)</label>
 								<div class="uk-form-controls">
 									<select id="clan-name-font" class="uk-select uk-form-small uk-form-width-large" v-model="clanNameFont" v-on:change="previewCard()">
-										<option v-for="e in fonts" v-bind:selected="e === 'メイリオ'">{{ e }}</option>
+										<option v-for="e in fonts">{{ e }}</option>
 									</select>
 								</div>
 								<label for="clan-name-font-size" class="uk-margin-top uk-form-label">フォントサイズ</label>
@@ -645,10 +641,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 								<hr>
 								<legend class="uk-legend">ラベル</legend>
-								<label for="label-font" class="uk-margin-top uk-form-label">フォント</label>
+								<label for="label-font" class="uk-margin-top uk-form-label">フォント (使用可能フォントは端末に依存)</label>
 								<div class="uk-form-controls">
 									<select id="label-font" class="uk-select uk-form-small uk-form-width-large" v-model="labelFont" v-on:change="previewCard()">
-										<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
+										<option v-for="e in fonts">{{ e }}</option>
 									</select>
 								</div>
 								<div class="uk-margin-top uk-form-label">フォントスタイル</div>
@@ -669,10 +665,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 								<hr>
 								<legend class="uk-legend">入力値 (クラン名以外)</legend>
-								<label for="input-font" class="uk-form-label uk-margin-top">フォント</label>
+								<label for="input-font" class="uk-form-label uk-margin-top">フォント (使用可能フォントは端末に依存)</label>
 								<div class="uk-form-controls">
 									<select id="input-font" class="uk-select uk-form-small uk-form-width-large" v-model="inputFont" v-on:change="previewCard()">
-										<option v-for="e in fonts" v-bind:selected="e === 'ＭＳ ゴシック'">{{ e }}</option>
+										<option v-for="e in fonts">{{ e }}</option>
 									</select>
 								</div>
 								<div class="uk-margin-top uk-form-label">フォントスタイル</div>
@@ -724,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button><div>
 				<div id="spacer" class="uk-margin-top"></div>
 				<div id="footer">
-					<div>プレビュー<label class="uk-margin-left"><input type="checkbox" class="uk-checkbox" v-model="previewFixed" v-on:change="changePreviewFixing()"> 画面内に常に表示</label></div>
+					<div>プレビュー<label class="uk-margin-left"><input id="preview-fixing" type="checkbox" class="uk-checkbox" v-model="previewFixed" v-on:change="changePreviewFixing()"> 画面内に常に表示</label></div>
 					<canvas id="preview" width="1920" height="1080"></canvas>
 				</div>
 			</div>
