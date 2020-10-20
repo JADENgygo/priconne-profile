@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				],
 				rankings: [1, 1, 1],
 				layout: 0,
-				clanNameFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
+				clanNameFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0],
 				clanNameFontSize: 100,
 				clanNameFontStyles: ['bold'],
 				clanNameOutlineDisplayed: 'true',
@@ -184,12 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				clanNameOutlineWidth: '10',
 				clanNameFillColor: '#3264FF',
 				clanNameFillColorTransparency: '1.0',
-				labelFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
+				labelFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0],
 				labelFontStyles: ['bold'],
 				labelFontColor: '#FFFFFF',
 				labelBackgroundDisplayed: 'true',
 				labelBackgroundColor: '#6464FF',
-				inputFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0],
+				inputFont: this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0],
 				inputFontStyles: ['bold'],
 				inputFontColor: '#000000',
 				paneFrameDisplayed: 'true',
@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetClanNameSetting: function() {
-				this.clanNameFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
+				this.clanNameFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0];
 				this.clanNameFontSize = 100;
 				this.clanNameFontStyles = ['bold'];
 				this.clanNameOutlineDisplayed = 'true';
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetLabelSetting: function() {
-				this.labelFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
+				this.labelFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0];
 				this.labelFontStyles = ['bold'];
 				this.labelFontColor = '#FFFFFF';
 				this.labelBackgroundDisplayed = 'true';
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.previewCard();
 			},
 			resetInputSetting: function() {
-				this.inputFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('Arial') !== -1 ? 'Arial' : this.fonts[0];
+				this.inputFont = this.fonts.indexOf('ＭＳ ゴシック') !== -1 ? 'ＭＳ ゴシック' : this.fonts.indexOf('monospace') !== -1 ? 'monospace' : this.fonts[0];
 				this.inputFontStyles = ['bold'];
 				this.inputFontColor = '#000000';
 				this.previewCard();
