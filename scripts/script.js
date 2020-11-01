@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					this.averageLevel = parseInt(localStorage.getItem('averageLevel'));
 				}
 			}
-			this.memberCount = localStorage.getItem('memberCount') === null ? this.memberCount : parseInt(localStorage.getItem('memberCount'));
+			this.memberNum = localStorage.getItem('memberNum') === null ? this.memberNum : parseInt(localStorage.getItem('memberNum'));
 			this.policy = localStorage.getItem('policy') === null ? this.policy : localStorage.getItem('policy');
 			this.condition = localStorage.getItem('condition') === null ? this.condition : localStorage.getItem('condition');
 			this.guideline = localStorage.getItem('guideline') === null ? this.guideline : localStorage.getItem('guideline');
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				backgroundImagePath: 'img/hatsunes_present_strategy0.webp',
 				clanName: 'おひるねくらぶ',
 				averageLevel: 175,
-				memberCount: 25,
+				memberNum: 25,
 				policy: 'わいわいプレイ',
 				condition: '誰でも加入',
 				guideline: '',
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				localStorage.setItem('backgroundImagePath', this.backgroundImagePath);
 				localStorage.setItem('clanName', this.clanName);
 				localStorage.setItem('averageLevel', this.averageLevel);
-				localStorage.setItem('memberCount', this.memberCount);
+				localStorage.setItem('memberNum', this.memberNum);
 				localStorage.setItem('policy', this.policy);
 				localStorage.setItem('condition', this.condition);
 				localStorage.setItem('guideline', this.guideline);
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
 				this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel, 40, 'start');
 				this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
-				this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberCount, 40, 'start');
+				this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberNum, 40, 'start');
 				this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
 				this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
 				this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
@@ -393,7 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				this.backgroundImagePath = 'img/hatsunes_present_strategy0.webp';
 				this.clanName = 'おひるねくらぶ';
 				this.averageLevel = 175;
-				this.memberCount = 25;
+				this.memberNum = 25;
 				this.policy = 'わいわいプレイ';
 				this.condition = '誰でも加入';
 				this.guideline = '';
@@ -545,9 +545,9 @@ document.addEventListener('DOMContentLoaded', () => {
 					<div class="uk-form-controls"><input id="clan-name" type="text" class="uk-input uk-form-small uk-form-width-medium" v-model="clanName" v-on:input="previewCard()"></div>
 					<label for="average-level" class="uk-form-label uk-margin-top">平均プレイヤーLv</label>
 					<div class="uk-form-controls"><input id="average-level" type="number" class="uk-input uk-form-small uk-form-width-small" v-model="averageLevel" v-on:input="previewCard()"></div>
-					<label for="member-count" class="uk-form-label uk-margin-top">メンバー数</label>
+					<label for="member-num" class="uk-form-label uk-margin-top">メンバー数</label>
 					<div class="uk-form-controls">
-						<select id="member-count" class="uk-select uk-form-small uk-form-width-xsmall" v-model="memberCount" v-on:change="previewCard()">
+						<select id="member-num" class="uk-select uk-form-small uk-form-width-xsmall" v-model="memberNum" v-on:change="previewCard()">
 							<option v-for="i in 30">{{ i }}</option>
 						</select>
 					</div>
