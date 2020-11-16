@@ -156,7 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					'present_panic1', 'present_panic2', 'landsol_guild_race0', 'landsol_guild_race1', 'landsol_guild_race2', 'landsol_guild_race3', 'magical_girl0', 'magical_girl1',
 					'angel_and_holy_schools_lyceenne0', 'angel_and_holy_schools_lyceenne1', 'angel_and_holy_schools_lyceenne2', 'ranch_four_farmers0', 'ranch_four_farmers1', 'rino_in_wonderland0',
 					'rino_in_wonderland1', 'tanabata_story0', 'tanabata_story1', 'tanabata_story2', 'misatos_summer_yell0', 'misatos_summer_yell1', 'misatos_summer_yell2', 'misatos_summer_yell3',
-					'misatos_summer_yell4', 'happy_change_angels0', 'happy_change_angels1', 'happy_change_angels2', 'halloween_ghost_festival0', 'halloween_ghost_festival1', 'halloween_ghost_festival2'
+					'misatos_summer_yell4', 'happy_change_angels0', 'happy_change_angels1', 'happy_change_angels2', 'halloween_ghost_festival0', 'halloween_ghost_festival1', 'halloween_ghost_festival2', 'lovely_monica0',
+					'lovely_monica1', 'lovely_monica2'
 				],
 				backgroundImagePath: 'img/hatsunes_present_strategy0.webp',
 				clanName: 'おひるねくらぶ',
