@@ -226,8 +226,9 @@ export default {
 	},
 	data: function() {
 		return {
+			loadingImagePath: require('./img/bundle/loading.webp'),
 			backgroundImageIndex: 0,
-			backgroundImagePaths: this.backgroundImageNames.map(e => require('./img/thumbnails/' + e)),
+			backgroundImagePaths: this.backgroundImageNames.map(e => require('./img/bundle/' + e)),
 			clanName: 'おひるねくらぶ',
 			averageLevel: 175,
 			memberNum: 25,
@@ -246,11 +247,11 @@ export default {
 			rankings: [1, 1, 1],
 			layout: 0,
 			layoutImages: [
-				require('./img/thumbnails/layout0.webp'),
-				require('./img/thumbnails/layout1.webp'),
-				require('./img/thumbnails/layout2.webp'),
-				require('./img/thumbnails/layout3.webp'),
-				require('./img/thumbnails/layout4.webp')
+				require('./img/bundle/layout0.webp'),
+				require('./img/bundle/layout1.webp'),
+				require('./img/bundle/layout2.webp'),
+				require('./img/bundle/layout3.webp'),
+				require('./img/bundle/layout4.webp')
 			],
 			clanNameFont: this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace',
 			clanNameFontSize: 100,
@@ -313,10 +314,15 @@ export default {
 		previewCard: function() {
 			const canvas = document.getElementById('preview');
 			const context = canvas.getContext('2d');
-			const image = document.createElement('img');
-			image.src = './img/background/' + this.backgroundImageNames[this.backgroundImageIndex];
-			image.addEventListener('load', () => {
-				context.drawImage(image, 0, 0);
+			const loadingImage = document.createElement('img');
+			loadingImage.src = this.loadingImagePath;
+			loadingImage.addEventListener('load', () => {
+				context.drawImage(loadingImage, 0, 0);
+			});
+			const backgroundImage = document.createElement('img');
+			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
+			backgroundImage.addEventListener('load', () => {
+				context.drawImage(backgroundImage, 0, 0);
 				// basicInfo, postscript, ranking
 				const positions = [
 					[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 11.65 / 15.0]],
