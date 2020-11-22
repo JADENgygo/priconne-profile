@@ -317,7 +317,9 @@ export default {
 			const loadingImage = document.createElement('img');
 			loadingImage.src = this.loadingImagePath;
 			loadingImage.addEventListener('load', () => {
+				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
+				context.globalAlpha = 1.0;
 			});
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
