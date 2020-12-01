@@ -301,16 +301,8 @@ export default {
 		}
 	},
 	mounted: function() {
-		if (window.orientation === 0 && window.matchMedia('(max-width:426px)').matches) {
-			this.$set(this.previewStyle, 'height', 'auto');
-			this.$set(this.previewStyle, 'width', 'auto');
-		}
-		else {
-			this.$set(this.previewStyle, 'height', 'auto');
-			this.$set(this.previewStyle, 'width', '66%');
-		}
-		window.addEventListener('resize', () => {
-			if (window.orientation === 0 && window.matchMedia('(max-width:426px)').matches) {
+		const f = style => {
+			if (window.orientation === 0 && window.matchMedia(`(${style}-width:426px)`).matches) {
 				this.$set(this.previewStyle, 'height', 'auto');
 				this.$set(this.previewStyle, 'width', 'auto');
 			}
@@ -318,18 +310,11 @@ export default {
 				this.$set(this.previewStyle, 'height', 'auto');
 				this.$set(this.previewStyle, 'width', '66%');
 			}
-		});
-		window.addEventListener('orientationchange', () => {
-			// matchMediaは回転前の幅を判定しているらしいのでminとmaxが逆になる
-			if (window.orientation === 0 && window.matchMedia('(min-width:426px)').matches) {
-				this.$set(this.previewStyle, 'height', 'auto');
-				this.$set(this.previewStyle, 'width', 'auto');
-			}
-			else {
-				this.$set(this.previewStyle, 'height', 'auto');
-				this.$set(this.previewStyle, 'width', '66%');
-			}
-		});
+		};
+		f('max');
+		window.addEventListener('resize', () => f('max'));
+		// matchMediaは回転前の幅を判定しているらしいのでminとmaxが逆になる？
+		window.addEventListener('orientationchange', () => f('min'));
 		document.getElementById('background-image').addEventListener('load', () => {
 			this.previewCard();
 		});
