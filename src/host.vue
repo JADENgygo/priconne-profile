@@ -217,7 +217,7 @@ export default {
 		return {
 			previewStyle: {},
 			loadingImagePath: require('./img/bundle/loading.webp'),
-			backgroundImageChanged: false,
+			backgroundImageChanged: true,
 			backgroundImageIndex: 0,
 			backgroundImagePaths: this.backgroundImageNames.map(e => require('./img/bundle/' + e)),
 			clanName: 'おひるねくらぶ',
