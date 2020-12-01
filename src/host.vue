@@ -8,9 +8,9 @@
 				<div class="uk-accordion-content">
 					<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
 						<div v-for="(e, i) in backgroundImagePaths">
-							<form class="uk-form-stacked">
+							<form class="uk-form-stacked uk-text-center">
 								<div class="uk-form-controls">
-									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImageIndex" v-bind:value="i">
+									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImageIndex" v-bind:value="i" v-on:change="changeBackgroundImageState()">
 								</div>
 								<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="e"></label>
 							</form>
@@ -209,11 +209,6 @@
 <script>
 import UIkit from 'uikit';
 export default {
-	mounted: function() {
-		document.getElementById('background-image').addEventListener('load', () => {
-			this.previewCard();
-		});
-	},
 	props: {
 		fonts: Array,
 		backgroundImageNames: Array
@@ -221,6 +216,7 @@ export default {
 	data: function() {
 		return {
 			loadingImagePath: require('./img/bundle/loading.webp'),
+			backgroundImageChanged: false,
 			backgroundImageIndex: 0,
 			backgroundImagePaths: this.backgroundImageNames.map(e => require('./img/bundle/' + e)),
 			clanName: 'おひるねくらぶ',
@@ -303,17 +299,28 @@ export default {
 			return this.labelFontStyles.join(' ');
 		}
 	},
+	mounted: function() {
+		document.getElementById('background-image').addEventListener('load', () => {
+			this.previewCard();
+		});
+	},
 	methods: {
+		changeBackgroundImageState: function() {
+			this.backgroundImageChanged = true;
+		},
 		previewCard: function() {
 			const canvas = document.getElementById('preview');
 			const context = canvas.getContext('2d');
-			const loadingImage = document.createElement('img');
-			loadingImage.src = this.loadingImagePath;
-			loadingImage.addEventListener('load', () => {
-				context.globalAlpha = 0.5;
-				context.drawImage(loadingImage, 0, 0);
-				context.globalAlpha = 1.0;
-			});
+			if (this.backgroundImageChanged) {
+				this.backgroundImageChanged = false;
+				const loadingImage = document.createElement('img');
+				loadingImage.src = this.loadingImagePath;
+				loadingImage.addEventListener('load', () => {
+					context.globalAlpha = 0.5;
+					context.drawImage(loadingImage, 0, 0);
+					context.globalAlpha = 1.0;
+				});
+			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
 			backgroundImage.addEventListener('load', () => {
