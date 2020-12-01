@@ -1,6 +1,6 @@
 <template>
 	<div class="uk-container">
-		<div class="uk-text-muted uk-margin-top uk-text-right">サイト作成者: <a class="uk-text-muted" href="https://twitter.com/JADENgygo">@JADENgygo</a></div>
+		<div class="uk-text-muted uk-margin-small-top uk-text-right">サイト作成者: <a class="uk-text-muted" href="https://twitter.com/JADENgygo">@JADENgygo</a></div>
 		<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカード<span class="title-break">ジェネレーター</span></div>
 		<ul uk-accordion>
 			<li>
@@ -202,11 +202,8 @@
 			</li>
 		</ul>
 		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
-		<div id="spacer" class="uk-margin-top"></div>
-		<div id="footer">
-			<div>プレビュー<label class="uk-margin-left"><input id="preview-fixing" type="checkbox" class="uk-checkbox" v-model="previewFixed" v-on:change="changePreviewFixing()"> 画面内に常に表示</label></div>
-			<canvas id="preview" width="1920" height="1080"></canvas>
-		</div>
+		<div class="uk-margin-top">プレビュー</div>
+		<canvas class="uk-margin-small-bottom" id="preview" width="1920" height="1080"></canvas>
 	</div>
 </template>
 <script>
@@ -215,9 +212,6 @@ export default {
 	mounted: function() {
 		document.getElementById('background-image').addEventListener('load', () => {
 			this.previewCard();
-			// ブラウザの進み戻りを行ったときにプレビュー固定のチェックが入っているのにプレビュー固定されない挙動の対処
-			this.previewFixed = document.getElementById('preview-fixing').checked;
-			this.changePreviewFixing();
 		});
 	},
 	props: {
@@ -274,7 +268,6 @@ export default {
 			paneFrameWidth: '3',
 			paneColor: '#FFFFFF',
 			paneTransparency: '0.6',
-			previewFixed: false
 		};
 	},
 	computed: {
@@ -412,14 +405,14 @@ export default {
 			for (let i = 1; i <= text.length; ++i) {
 				const w = context.measureText(text.substr(splitPosition, i - splitPosition)).width;
 				if (rectWidth * breakRatio <= w || text[i - 1] === '\n') {
-					y_ = y + (row - 1) * 50.0;
+					const y_ = y + (row - 1) * 50.0;
 					const s = text.substr(splitPosition, i - splitPosition);
 					context.fillText(s, x, y_);
 					row++;
 					splitPosition = i;
 				}
 				if (i === text.length) {
-					y_ = y + (row - 1) * 50.0;
+					const y_ = y + (row - 1) * 50.0;
 					const s = text.substr(splitPosition, i - splitPosition);
 					context.fillText(s, x, y_);
 				}
@@ -537,22 +530,6 @@ export default {
 			}
 			return rgb;
 		},
-		changePreviewFixing: function() {
-			if (this.previewFixed) {
-				const width = document.getElementById('spacer').getBoundingClientRect().width;
-				const height = document.getElementById('spacer').getBoundingClientRect().height;
-				const canvas = document.getElementById('preview');
-				canvas.style.width = width + 'px';
-				canvas.style.height = width * 9.0 / 16.0 + 'px';
-				document.getElementById('spacer').style.height = document.getElementById('footer').clientHeight + 'px';
-				document.getElementById('footer').style.position = 'fixed';
-				document.getElementById('footer').style.bottom = '0';
-			}
-			else {
-				document.getElementById('spacer').style.height = 0;
-				document.getElementById('footer').style.position = 'static';
-			}
-		},
 		saveCard: function() {
 			const canvas = document.getElementById('preview');
 			const a = document.createElement('a');
@@ -577,8 +554,8 @@ export default {
 	}
 }
 
-#footer {
-	background-color: white;
-	padding: 0 0 10px 0;
+#preview {
+	height: auto;
+	width: 66%;
 }
 </style>
