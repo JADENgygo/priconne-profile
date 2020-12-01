@@ -203,7 +203,7 @@
 		</ul>
 		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
 		<div class="uk-margin-top">プレビュー</div>
-		<canvas class="uk-margin-small-bottom" id="preview" width="1920" height="1080"></canvas>
+		<canvas class="uk-margin-small-bottom" id="preview" width="1920" height="1080" v-bind:style="previewStyle"></canvas>
 	</div>
 </template>
 <script>
@@ -215,6 +215,7 @@ export default {
 	},
 	data: function() {
 		return {
+			previewStyle: {},
 			loadingImagePath: require('./img/bundle/loading.webp'),
 			backgroundImageChanged: false,
 			backgroundImageIndex: 0,
@@ -300,6 +301,35 @@ export default {
 		}
 	},
 	mounted: function() {
+		if (window.orientation === 0 && window.matchMedia('(max-width:426px)').matches) {
+			this.$set(this.previewStyle, 'height', 'auto');
+			this.$set(this.previewStyle, 'width', 'auto');
+		}
+		else {
+			this.$set(this.previewStyle, 'height', 'auto');
+			this.$set(this.previewStyle, 'width', '66%');
+		}
+		window.addEventListener('resize', () => {
+			if (window.orientation === 0 && window.matchMedia('(max-width:426px)').matches) {
+				this.$set(this.previewStyle, 'height', 'auto');
+				this.$set(this.previewStyle, 'width', 'auto');
+			}
+			else {
+				this.$set(this.previewStyle, 'height', 'auto');
+				this.$set(this.previewStyle, 'width', '66%');
+			}
+		});
+		window.addEventListener('orientationchange', () => {
+			// matchMediaは回転前の幅を判定しているらしいのでminとmaxが逆になる
+			if (window.orientation === 0 && window.matchMedia('(min-width:426px)').matches) {
+				this.$set(this.previewStyle, 'height', 'auto');
+				this.$set(this.previewStyle, 'width', 'auto');
+			}
+			else {
+				this.$set(this.previewStyle, 'height', 'auto');
+				this.$set(this.previewStyle, 'width', '66%');
+			}
+		});
 		document.getElementById('background-image').addEventListener('load', () => {
 			this.previewCard();
 		});
@@ -559,10 +589,5 @@ export default {
 	.condition {
 		display: block;
 	}
-}
-
-#preview {
-	height: auto;
-	width: 66%;
 }
 </style>
