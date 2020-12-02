@@ -49,25 +49,25 @@ class FontDetector {
 
 const fontDetector = new FontDetector('mmmmmmmmmmlli12-', 'あぱプ字１－＾｜＿！＜％＄ｚＡ');
 const fonts = [
-	'AR BERKLEY', 'AR BLANCA', 'AR BONNIE', 'AR CARTER', 'AR CENA', 'AR CHRISTY', 'AR DARLING', 'AR DECODE', 'AR DELANEY', 'AR DESTINE', 'AR ESSENCE', 'AR HERMANN', 'AR JULIAN', 'Apple Braille Outline 6 Dot',
-	'Apple Braille Outline 8 Dot', 'Apple Braille Pinpoint 6 Dot', 'Apple Braille Pinpoint 8 Dot', 'Apple Braille', 'Apple Color Emoji', 'Apple Symbols', 'AppleSDGothicNeo', 'AquaKana', 'ArabicUIDisplay', 'ArabicUIText',
-	'Arial Black', 'Arial Unicod', 'Arial', 'ArialHB', 'Arimo', 'Avenir Next Condensed', 'Avenir Next', 'Avenir', 'BIZ UDPゴシック', 'BIZ UDP明朝 Medium', 'BIZ UDゴシック', 'BIZ UD明朝 Medium', 'Bahnschrift Condensed',
-	'Bahnschrift Light Condensed', 'Bahnschrift Light SemiCondensed', 'Bahnschrift Light', 'Bahnschrift SemiBold Condensed', 'Bahnschrift SemiBold SemiConden', 'Bahnschrift SemiBold', 'Bahnschrift SemiCondensed',
-	'Bahnschrift SemiLight Condensed', 'Bahnschrift SemiLight SemiConde', 'Bahnschrift SemiLight', 'Bahnschrift', 'Calibri Light', 'Calibri', 'Cambria Math', 'Cambria', 'Candara Light', 'Candara', 'Comic Sans MS', 'Consolas',
-	'Constantia', 'Corbel Light', 'Corbel', 'Courier New', 'Courier.dfont', 'DejaVu Sans Condensed', 'DejaVu Sans Light', 'DejaVu Sans Mono', 'DejaVu Sans', 'DejaVu Serif Condensed', 'DejaVu Serif', 'Ebrima',
-	'Franklin Gothic Medium', 'Gabriola', 'Gadugi', 'GeezaPro', 'Geneva.dfont', 'Gentium Basic', 'Gentium Book Basic', 'Georgia', 'HelveLTMM', 'Helvetica', 'HelveticaNeue', 'Hiragino Sans GB', 'HoloLens MDL2 Assets', 'Impact',
-	'Ink Free', 'Javanese Text', 'Keyboard', 'Kohinoor', 'KohinoorBangla', 'KohinoorGujarati', 'KohinoorTelugu', 'LastResort.otf', 'Leelawadee UI Semilight', 'Leelawadee UI', 'Lucida Bright', 'Lucida Console',
-	'Lucida Sans Typewriter', 'Lucida Sans Unicode', 'Lucida Sans', 'LucidaGrande', 'MS UI Gothic', 'MV Boli', 'Malgun Gothic Semilight', 'Malgun Gothic', 'MarkerFelt', 'Marlett', 'Meiryo UI', 'Menlo', 'Microsoft Himalaya',
-	'Microsoft JhengHei Light', 'Microsoft JhengHei UI Light', 'Microsoft JhengHei UI', 'Microsoft JhengHei', 'Microsoft New Tai Lue', 'Microsoft PhagsPa', 'Microsoft Sans Serif', 'Microsoft Tai Le', 'Microsoft YaHei Light',
-	'Microsoft YaHei UI Light', 'Microsoft YaHei UI', 'Microsoft YaHei', 'Microsoft Yi Baiti', 'MingLiU-ExtB', 'MingLiU_HKSCS-ExtB', 'Monaco.dfont', 'Mongolian Baiti', 'MuktaMahee', 'Myanmar Text', 'NSimSun', 'NewYork',
-	'NewYorkItalic', 'Nirmala UI Semilight', 'Nirmala UI', 'Noteworthy', 'Noto Sans CJK JP Medium', 'NotoNastaliq', 'NotoSansArmenian', 'NotoSansKannada', 'NotoSansMyanmar', 'NotoSansOriya', 'NotoSerifMyanmar', 'OpenSymbol',
-	'Optima', 'PMingLiU-ExtB', 'Palatino Linotype', 'Palatino', 'PingFang', 'SFCompact', 'SFCompactItalic', 'SFCompactRounded', 'SFNS', 'SFNSItalic', 'SFNSMono', 'SFNSMonoItalic', 'SFNSRounded', 'STHeiti Light', 'STHeiti Medium',
-	'Segoe MDL2 Assets', 'Segoe Print', 'Segoe Script', 'Segoe UI Black', 'Segoe UI Emoji', 'Segoe UI Historic', 'Segoe UI Light', 'Segoe UI Semibold', 'Segoe UI Semilight', 'Segoe UI Symbol', 'Segoe UI', 'SimSun', 'SimSun-ExtB',
-	'Sitka Banner', 'Sitka Display', 'Sitka Heading', 'Sitka Small', 'Sitka Subheading', 'Sitka Text', 'Supplemental', 'Sylfaen', 'Symbol', 'Tahoma', 'Tera Special', 'Thonburi', 'Times New Roman', 'Times', 'TimesLTMM',
-	'Trebuchet MS', 'UD デジタル 教科書体 N-B', 'UD デジタル 教科書体 N-R', 'UD デジタル 教科書体 NK-B', 'UD デジタル 教科書体 NK-R', 'UD デジタル 教科書体 NP-B', 'UD デジタル 教科書体 NP-R', 'Verdana', 'Webdings', 'Wingdings',
-	'Yu Gothic UI Light', 'Yu Gothic UI Semibold', 'Yu Gothic UI Semilight', 'Yu Gothic UI', 'ZapfDingbats', 'ＭＳ Ｐゴシック', 'ＭＳ Ｐ明朝', 'ＭＳ ゴシック', 'ＭＳ 明朝', 'ヒラギノ角ゴシック W0', 'ヒラギノ角ゴシック W1',
-	'ヒラギノ角ゴシック W2', 'ヒラギノ角ゴシック W3', 'ヒラギノ角ゴシック W4', 'ヒラギノ角ゴシック W5', 'ヒラギノ角ゴシック W6', 'ヒラギノ角ゴシック W7', 'ヒラギノ角ゴシック W8', 'ヒラギノ角ゴシック W9', 'ヒラギノ丸ゴ ProN W5',
-	'ヒラギノ明朝 ProN', 'メイリオ', '游ゴシック Light', '游ゴシック Medium', '游ゴシック', '游明朝 Demibold', '游明朝 Light', '游明朝', 'monospace', 'sans-serif', 'serif'
+	"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Apple Braille Outline 6 Dot",
+	"Apple Braille Outline 8 Dot", "Apple Braille Pinpoint 6 Dot", "Apple Braille Pinpoint 8 Dot", "Apple Braille", "Apple Color Emoji", "Apple Symbols", "AppleSDGothicNeo", "AquaKana", "ArabicUIDisplay", "ArabicUIText",
+	"Arial Black", "Arial Unicod", "Arial", "ArialHB", "Arimo", "Avenir Next Condensed", "Avenir Next", "Avenir", "BIZ UDPゴシック", "BIZ UDP明朝 Medium", "BIZ UDゴシック", "BIZ UD明朝 Medium", "Bahnschrift Condensed",
+	"Bahnschrift Light Condensed", "Bahnschrift Light SemiCondensed", "Bahnschrift Light", "Bahnschrift SemiBold Condensed", "Bahnschrift SemiBold SemiConden", "Bahnschrift SemiBold", "Bahnschrift SemiCondensed",
+	"Bahnschrift SemiLight Condensed", "Bahnschrift SemiLight SemiConde", "Bahnschrift SemiLight", "Bahnschrift", "Calibri Light", "Calibri", "Cambria Math", "Cambria", "Candara Light", "Candara", "Comic Sans MS", "Consolas",
+	"Constantia", "Corbel Light", "Corbel", "Courier New", "Courier", "DejaVu Sans Condensed", "DejaVu Sans Light", "DejaVu Sans Mono", "DejaVu Sans", "DejaVu Serif Condensed", "DejaVu Serif", "Ebrima", "Franklin Gothic Medium",
+	"Gabriola", "Gadugi", "GeezaPro", "Geneva", "Gentium Basic", "Gentium Book Basic", "Georgia", "HelveLTMM", "Helvetica", "HelveticaNeue", "Hiragino Sans GB", "HoloLens MDL2 Assets", "Impact", "Ink Free", "Javanese Text",
+	"Keyboard", "Kohinoor", "KohinoorBangla", "KohinoorGujarati", "KohinoorTelugu", "LastResort", "Leelawadee UI Semilight", "Leelawadee UI", "Lucida Bright", "Lucida Console", "Lucida Sans Typewriter", "Lucida Sans Unicode",
+	"Lucida Sans", "LucidaGrande", "MS UI Gothic", "MV Boli", "Malgun Gothic Semilight", "Malgun Gothic", "MarkerFelt", "Marlett", "Meiryo UI", "Menlo", "Microsoft Himalaya", "Microsoft JhengHei Light",
+	"Microsoft JhengHei UI Light", "Microsoft JhengHei UI", "Microsoft JhengHei", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei Light", "Microsoft YaHei UI Light",
+	"Microsoft YaHei UI", "Microsoft YaHei", "Microsoft Yi Baiti", "MingLiU-ExtB", "MingLiU_HKSCS-ExtB", "Monaco", "Mongolian Baiti", "MuktaMahee", "Myanmar Text", "NSimSun", "NewYork", "NewYorkItalic", "Nirmala UI Semilight",
+	"Nirmala UI", "Noteworthy", "Noto Sans CJK JP Medium", "NotoNastaliq", "NotoSansArmenian", "NotoSansKannada", "NotoSansMyanmar", "NotoSansOriya", "NotoSerifMyanmar", "OpenSymbol", "Optima", "PMingLiU-ExtB", "Palatino Linotype",
+	"Palatino", "PingFang", "SFCompact", "SFCompactItalic", "SFCompactRounded", "SFNS", "SFNSItalic", "SFNSMono", "SFNSMonoItalic", "SFNSRounded", "STHeiti Light", "STHeiti Medium", "Segoe MDL2 Assets", "Segoe Print",
+	"Segoe Script", "Segoe UI Black", "Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Light", "Segoe UI Semibold", "Segoe UI Semilight", "Segoe UI Symbol", "Segoe UI", "SimSun", "SimSun-ExtB", "Sitka Banner", "Sitka Display",
+	"Sitka Heading", "Sitka Small", "Sitka Subheading", "Sitka Text", "Supplemental", "Sylfaen", "Symbol", "Tahoma", "Tera Special", "Thonburi", "Times New Roman", "Times", "TimesLTMM", "Trebuchet MS", "UD デジタル 教科書体 N-B",
+	"UD デジタル 教科書体 N-R", "UD デジタル 教科書体 NK-B", "UD デジタル 教科書体 NK-R", "UD デジタル 教科書体 NP-B", "UD デジタル 教科書体 NP-R", "Verdana", "Webdings", "Wingdings", "Yu Gothic UI Light", "Yu Gothic UI Semibold",
+	"Yu Gothic UI Semilight", "Yu Gothic UI", "ZapfDingbats", "ＭＳ Ｐゴシック", "ＭＳ Ｐ明朝", "ＭＳ ゴシック", "ＭＳ 明朝", "ヒラギノ角ゴシック W0", "ヒラギノ角ゴシック W1", "ヒラギノ角ゴシック W2", "ヒラギノ角ゴシック W3",
+	"ヒラギノ角ゴシック W4", "ヒラギノ角ゴシック W5", "ヒラギノ角ゴシック W6", "ヒラギノ角ゴシック W7", "ヒラギノ角ゴシック W8", "ヒラギノ角ゴシック W9", "ヒラギノ丸ゴ ProN W5", "ヒラギノ明朝 ProN", "メイリオ", "游ゴシック Light",
+	"游ゴシック Medium", "游ゴシック", "游明朝 Demibold", "游明朝 Light", "游明朝", 'monospace', 'sans-serif', 'serif'
 ];
 
 Vue.config.productionTip = false;
