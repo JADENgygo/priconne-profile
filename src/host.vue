@@ -201,6 +201,7 @@
 				</div>
 			</li>
 		</ul>
+		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
 		<div class="uk-margin-top">プレビュー</div>
 		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
@@ -326,6 +327,13 @@ export default {
 	methods: {
 		changeBackgroundImageState: function() {
 			this.backgroundImageChanged = true;
+		},
+		saveCard: function() {
+			const canvas = document.getElementById('canvas');
+			const a = document.createElement('a');
+			a.href = canvas.toDataURL('image/png');
+			a.download = 'クランプロフカード.png';
+			a.click();
 		},
 		previewCard: function() {
 			const canvas = document.getElementById('canvas');
