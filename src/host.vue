@@ -202,6 +202,10 @@
 			</li>
 		</ul>
 		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
+		<div uk-alert class="uk-alert-primary">
+			<a class="uk-alert-close" uk-close></a>
+			<div>ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
+		</div>
 		<div class="uk-margin-top">プレビュー</div>
 		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
