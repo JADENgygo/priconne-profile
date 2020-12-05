@@ -305,6 +305,8 @@ export default {
 		}
 	},
 	mounted: function() {
+		// todo
+		document.getElementById('preview').crossOrigin = 'anonymous';
 		const f = style => {
 			if (window.orientation === 0 && window.matchMedia(`(${style}-width:426px)`).matches) {
 				this.$set(this.previewStyle, 'height', 'auto');
