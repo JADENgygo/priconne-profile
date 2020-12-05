@@ -206,7 +206,7 @@
 			<a class="uk-alert-close" uk-close></a>
 			<div>ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
 		</div>
-		<div class="uk-margin-top">プレビュー</div>
+		<div>プレビュー</div>
 		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
 			<canvas id="canvas" width="1920" height="1080"></canvas>
