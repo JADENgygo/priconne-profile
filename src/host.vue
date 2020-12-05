@@ -204,6 +204,9 @@
 		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
 		<div class="uk-margin-top">プレビュー</div>
 		<canvas class="uk-margin-small-bottom" id="preview" width="1920" height="1080" v-bind:style="previewStyle"></canvas>
+		<div class="resource">
+			<img id="loading-image" v-bind:src="loadingImagePath">
+		</div>
 	</div>
 </template>
 <script>
@@ -328,6 +331,11 @@ export default {
 			const context = canvas.getContext('2d');
 			if (this.backgroundImageChanged) {
 				this.backgroundImageChanged = false;
+				const loadingImage = document.getElementById('loading-image');
+				context.globalAlpha = 0.5;
+				context.drawImage(loadingImage, 0, 0);
+				context.globalAlpha = 1.0;
+				/*
 				const loadingImage = document.createElement('img');
 				loadingImage.src = this.loadingImagePath;
 				loadingImage.addEventListener('load', () => {
@@ -335,6 +343,7 @@ export default {
 					context.drawImage(loadingImage, 0, 0);
 					context.globalAlpha = 1.0;
 				});
+				*/
 			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
@@ -574,5 +583,9 @@ export default {
 	.condition {
 		display: block;
 	}
+}
+
+.resource {
+	display: none;
 }
 </style>
