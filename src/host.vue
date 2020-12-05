@@ -201,10 +201,10 @@
 				</div>
 			</li>
 		</ul>
-		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
 		<div class="uk-margin-top">プレビュー</div>
-		<canvas class="uk-margin-small-bottom" id="preview" width="1920" height="1080" v-bind:style="previewStyle"></canvas>
+		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
+			<canvas id="canvas" width="1920" height="1080"></canvas>
 			<img id="loading-image" v-bind:src="loadingImagePath">
 		</div>
 	</div>
@@ -328,7 +328,7 @@ export default {
 			this.backgroundImageChanged = true;
 		},
 		previewCard: function() {
-			const canvas = document.getElementById('preview');
+			const canvas = document.getElementById('canvas');
 			const context = canvas.getContext('2d');
 			if (this.backgroundImageChanged) {
 				this.backgroundImageChanged = false;
@@ -337,6 +337,7 @@ export default {
 				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
 				context.globalAlpha = 1.0;
+				document.getElementById('preview').src = canvas.toDataURL();
 			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
@@ -358,6 +359,7 @@ export default {
 				if (this.rankingDisplayed === 'true' && this.layout !== 4) {
 					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
 				}
+				document.getElementById('preview').src = canvas.toDataURL();
 			});
 		},
 		drawClanName: function(context, xPos, yPos) {
@@ -554,13 +556,6 @@ export default {
 			}
 			return rgb;
 		},
-		saveCard: function() {
-			const canvas = document.getElementById('preview');
-			const a = document.createElement('a');
-			a.href = canvas.toDataURL('image/png');
-			a.download = 'クランプロフカード.png';
-			a.click();
-		}
 	},
 }
 </script>
