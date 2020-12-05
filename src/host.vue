@@ -332,6 +332,7 @@ export default {
 			const context = canvas.getContext('2d');
 			if (this.backgroundImageChanged) {
 				this.backgroundImageChanged = false;
+				context.clearRect(0, 0, canvas.width, canvas.height);
 				const loadingImage = document.getElementById('loading-image');
 				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
