@@ -202,16 +202,13 @@
 			</li>
 		</ul>
 		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
-		<div uk-alert class="uk-alert-primary">
-			<a class="uk-alert-close" uk-close></a>
-			<div>ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
-		</div>
+		<div uk-alert class="uk-alert-primary">ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
 		<div>プレビュー</div>
 		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
-		</div>
 			<canvas id="canvas" width="1920" height="1080"></canvas>
 			<img id="loading-image" v-bind:src="loadingImagePath">
+		</div>
 	</div>
 </template>
 <script>
@@ -349,9 +346,7 @@ export default {
 				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
 				context.globalAlpha = 1.0;
-				console.log(1);
 				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
-				console.log(2);
 			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
@@ -373,9 +368,7 @@ export default {
 				if (this.rankingDisplayed === 'true' && this.layout !== 4) {
 					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
 				}
-				console.log(3);
 				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
-				console.log(4);
 			});
 		},
 		drawClanName: function(context, xPos, yPos) {
