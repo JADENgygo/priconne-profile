@@ -209,9 +209,9 @@
 		<div>プレビュー</div>
 		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
 		<div class="resource">
+		</div>
 			<canvas id="canvas" width="1920" height="1080"></canvas>
 			<img id="loading-image" v-bind:src="loadingImagePath">
-		</div>
 	</div>
 </template>
 <script>
