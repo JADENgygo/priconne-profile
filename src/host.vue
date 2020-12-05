@@ -349,7 +349,9 @@ export default {
 				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
 				context.globalAlpha = 1.0;
+				console.log(1);
 				document.getElementById('preview').src = canvas.toDataURL();
+				console.log(2);
 			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
@@ -371,7 +373,9 @@ export default {
 				if (this.rankingDisplayed === 'true' && this.layout !== 4) {
 					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
 				}
+				console.log(3);
 				document.getElementById('preview').src = canvas.toDataURL();
+				console.log(4);
 			});
 		},
 		drawClanName: function(context, xPos, yPos) {
