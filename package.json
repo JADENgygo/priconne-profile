@@ -1,5 +1,5 @@
 {
-  "name": "princess_connect_stickers",
+  "name": "princess_connect_clan_profile_card_generator",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -7,7 +7,7 @@
     "build:debug": "npm run copy && webpack --mode=development",
     "watch": "npm run copy && webpack --mode=development --watch",
     "start": "npm run copy && webpack serve --mode=development",
-    "copy": "rm -r dist & mkdir dist & cp -R public/* dist"
+    "copy": "rm -rf dist && mkdir dist && cp -R public/* dist"
   },
   "private": true,
   "repository": {
