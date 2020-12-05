@@ -350,7 +350,7 @@ export default {
 				context.drawImage(loadingImage, 0, 0);
 				context.globalAlpha = 1.0;
 				console.log(1);
-				document.getElementById('preview').src = canvas.toDataURL();
+				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
 				console.log(2);
 			}
 			const backgroundImage = document.createElement('img');
@@ -374,7 +374,7 @@ export default {
 					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
 				}
 				console.log(3);
-				document.getElementById('preview').src = canvas.toDataURL();
+				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
 				console.log(4);
 			});
 		},
