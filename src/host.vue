@@ -211,6 +211,7 @@
 </template>
 <script>
 import UIkit from 'uikit';
+import platform from 'platform';
 export default {
 	props: {
 		fonts: Array,
@@ -247,7 +248,7 @@ export default {
 				require('./img/bundle/layout3.webp'),
 				require('./img/bundle/layout4.webp')
 			],
-			clanNameFont: this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace',
+			clanNameFont: platform.name.indexOf('Safari') === -1 ? 'monospace' : 'ヒラギノ角ゴシック W3',
 			clanNameFontSize: 100,
 			clanNameFontStyles: ['bold'],
 			clanNameOutlineDisplayed: 'true',
@@ -255,12 +256,12 @@ export default {
 			clanNameOutlineWidth: '10',
 			clanNameFillColor: '#3264FF',
 			clanNameFillColorTransparency: '1.0',
-			labelFont: this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace',
+			labelFont: platform.name.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3',
 			labelFontStyles: ['bold'],
 			labelFontColor: '#FFFFFF',
 			labelBackgroundDisplayed: 'true',
 			labelBackgroundColor: '#6464FF',
-			inputFont: this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace',
+			inputFont: platform.name.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3',
 			inputFontStyles: ['bold'],
 			inputFontColor: '#000000',
 			paneFrameDisplayed: 'true',
@@ -335,15 +336,6 @@ export default {
 				context.globalAlpha = 0.5;
 				context.drawImage(loadingImage, 0, 0);
 				context.globalAlpha = 1.0;
-				/*
-				const loadingImage = document.createElement('img');
-				loadingImage.src = this.loadingImagePath;
-				loadingImage.addEventListener('load', () => {
-					context.globalAlpha = 0.5;
-					context.drawImage(loadingImage, 0, 0);
-					context.globalAlpha = 1.0;
-				});
-				*/
 			}
 			const backgroundImage = document.createElement('img');
 			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
