@@ -21,7 +21,7 @@
 		</ul>
 		<div class="uk-margin-top">背景画像</div>
 		<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-			<img id="background-image" width="1920" height="1080" v-bind:src="backgroundImagePaths[backgroundImageIndex]">
+			<div><img id="background-image" v-bind:src="backgroundImagePaths[backgroundImageIndex]"></div>
 		</div>
 
 		<form class="uk-form-stacked">
