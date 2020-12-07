@@ -4,27 +4,26 @@
 		<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカード<span class="title-break">ジェネレーター</span></div>
 		<ul uk-accordion>
 			<li>
-				<a class="uk-accordion-title" href="#">背景画像一覧</a>
+				<a class="uk-accordion-title uk-text-small" href="#">背景画像一覧</a>
 				<div class="uk-accordion-content">
 					<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
 						<div v-for="(e, i) in backgroundImagePaths">
-							<form class="uk-form-stacked uk-text-center">
+							<div class="uk-form-stacked uk-text-center">
 								<div class="uk-form-controls">
 									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImageIndex" v-bind:value="i" v-on:change="changeBackgroundImageState()">
 								</div>
 								<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="e"></label>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</li>
 		</ul>
-		<div class="uk-margin-top">背景画像</div>
-		<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-			<div><img id="background-image" v-bind:src="backgroundImagePaths[backgroundImageIndex]"></div>
-		</div>
-
-		<form class="uk-form-stacked">
+		<div class="uk-form-stacked">
+			<div class="uk-form-label">背景画像</div>
+			<div class="uk-form-controls uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
+				<div><img id="background-image" v-bind:src="backgroundImagePaths[backgroundImageIndex]"></div>
+			</div>
 			<label for="clan-name" class="uk-form-label uk-margin-top">クラン名</label>
 			<div class="uk-form-controls"><input id="clan-name" type="text" class="uk-input uk-form-small uk-form-width-medium" v-model="clanName" v-on:input="previewCard()"></div>
 			<label for="average-level" class="uk-form-label uk-margin-top">平均プレイヤーLv</label>
@@ -67,25 +66,21 @@
 					<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="rankings[i - 1]" v-on:input="previewCard()"> 位
 				</div>
 			</div>
-		</form>
-
-		<ul uk-accordion>
-			<li>
-				<a class="uk-accordion-title" href="#">詳細設定</a>
-				<div class="uk-accordion-content">
-					<div class="uk-form-label">レイアウト</div>
-					<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-						<div v-for="i in 5">
-							<label>
-								<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()">
-								<img v-bind:src="layoutImages[i - 1]">
-							</label>
+			<ul uk-accordion>
+				<li>
+					<a class="uk-accordion-title uk-text-small" href="#">詳細設定</a>
+					<div class="uk-accordion-content">
+						<div class="uk-form-label">レイアウト</div>
+						<div class="uk-form-controls uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
+							<div v-for="i in 5">
+								<label>
+									<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()">
+									<img v-bind:src="layoutImages[i - 1]">
+								</label>
+							</div>
 						</div>
-					</div>
-
-					<form class="uk-form-stacked">
 						<hr class="uk-margin-top">
-						<legend class="uk-legend">クラン名</legend>
+						<div>クラン名</div>
 						<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント (使用可能フォントは端末に依存)</label>
 						<div class="uk-form-controls">
 							<select id="clan-name-font" class="uk-select uk-form-small uk-form-width-large" v-model="clanNameFont" v-on:change="previewCard()">
@@ -122,9 +117,8 @@
 							<label for="clan-name-fill-color-transparency">{{ formattedClanNameFillColorTransparency }}</label>
 						</div>
 						<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetClanNameSetting()">リセット</button>
-
 						<hr>
-						<legend class="uk-legend">ラベル</legend>
+						<div>ラベル</div>
 						<label for="label-font" class="uk-margin-top uk-form-label">フォント (使用可能フォントは端末に依存)</label>
 						<div class="uk-form-controls">
 							<select id="label-font" class="uk-select uk-form-small uk-form-width-large" v-model="labelFont" v-on:change="previewCard()">
@@ -146,9 +140,8 @@
 						<label for="label-background-color" class="uk-margin-top uk-form-label">背景色</label>
 						<div class="uk-form-controls"><input id="label-background-color" type="color" value="#6464FF" v-model="labelBackgroundColor" v-on:input="previewCard()"></div>
 						<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetLabelSetting()">リセット</button>
-
 						<hr>
-						<legend class="uk-legend">入力値 (クラン名以外)</legend>
+						<div>入力値 (クラン名以外)</div>
 						<label for="input-font" class="uk-form-label uk-margin-top">フォント (使用可能フォントは端末に依存)</label>
 						<div class="uk-form-controls">
 							<select id="input-font" class="uk-select uk-form-small uk-form-width-large" v-model="inputFont" v-on:change="previewCard()">
@@ -163,9 +156,8 @@
 						<label for="input-font-color" class="uk-margin-top uk-form-label">文字色</label>
 						<div class="uk-form-controls"><input id="input-font-color" type="color" value="#000000" v-model="inputFontColor" v-on:input="previewCard()"></div>
 						<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetInputSetting()">リセット</button>
-
 						<hr>
-						<legend class="uk-legend">ペイン</legend>
+						<div>ペイン</div>
 						<div class="uk-margin-top uk-form-label">フレームの有無</div>
 						<div class="uk-form-controls">
 							<label class="uk-margin-small-right"><input class="uk-radio" type="radio" value="true" v-model="paneFrameDisplayed" v-on:change="previewCard()" checked> 有り</label>
@@ -197,14 +189,16 @@
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
-		<div><button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button></div>
-		<div uk-alert class="uk-alert-primary">ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
-		<div>プレビュー</div>
-		<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
+					</div>
+				</li>
+			</ul>
+			<button class="uk-button uk-button-default uk-button-small" v-on:click="saveCard()">カードを保存</button>
+			<div uk-alert class="uk-alert-primary">ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
+			<div class="uk-form-label">プレビュー</div>
+			<div class="uk-form-controls">
+				<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
+			</div>
+		</div>
 		<div class="resource">
 			<canvas id="canvas" width="1920" height="1080"></canvas>
 			<img id="loading-image" v-bind:src="loadingImagePath">
