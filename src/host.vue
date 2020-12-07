@@ -2,13 +2,13 @@
 	<div class="uk-container">
 		<div class="uk-text-muted uk-margin-small-top uk-text-right">サイト作成者: <a class="uk-text-muted" href="https://twitter.com/JADENgygo">@JADENgygo</a></div>
 		<div class="uk-text-lead uk-text-center uk-margin-top">クランプロフカード<span class="title-break">ジェネレーター</span></div>
-		<ul uk-accordion>
-			<li>
-				<a class="uk-accordion-title uk-text-small" href="#">背景画像一覧</a>
-				<div class="uk-accordion-content">
-					<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-						<div v-for="(e, i) in backgroundImagePaths">
-							<div class="uk-form-stacked uk-text-center">
+		<div class="uk-form-stacked uk-margin-top">
+			<ul uk-accordion>
+				<li>
+					<a class="uk-accordion-title uk-text-small" href="#">背景画像一覧</a>
+					<div class="uk-accordion-content">
+						<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
+							<div v-for="(e, i) in backgroundImagePaths" class="uk-text-center">
 								<div class="uk-form-controls">
 									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImageIndex" v-bind:value="i" v-on:change="changeBackgroundImageState()">
 								</div>
@@ -16,10 +16,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</li>
-		</ul>
-		<div class="uk-form-stacked">
+				</li>
+			</ul>
 			<div class="uk-form-label">背景画像</div>
 			<div class="uk-form-controls uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
 				<div><img id="background-image" v-bind:src="backgroundImagePaths[backgroundImageIndex]"></div>
