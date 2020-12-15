@@ -95,7 +95,7 @@ new Vue({
 				'angel_and_holy_schools_lyceenne0.webp', 'angel_and_holy_schools_lyceenne1.webp', 'angel_and_holy_schools_lyceenne2.webp', 'ranch_four_farmers0.webp', 'ranch_four_farmers1.webp', 'rino_in_wonderland0.webp',
 				'rino_in_wonderland1.webp', 'tanabata_story0.webp', 'tanabata_story1.webp', 'tanabata_story2.webp', 'misatos_summer_yell0.webp', 'misatos_summer_yell1.webp', 'misatos_summer_yell2.webp', 'misatos_summer_yell3.webp',
 				'misatos_summer_yell4.webp', 'happy_change_angels0.webp', 'happy_change_angels1.webp', 'happy_change_angels2.webp', 'halloween_ghost_festival0.webp', 'halloween_ghost_festival1.webp', 'halloween_ghost_festival2.webp', 'lovely_monica0.webp',
-				'lovely_monica1.webp', 'lovely_monica2.webp'
+				'lovely_monica1.webp', 'lovely_monica2.webp', 'debutante_shangri_la0.webp', 'debutante_shangri_la1.webp', 'debutante_shangri_la2.webp'
 			],
 		};
 	},
