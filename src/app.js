@@ -96,7 +96,7 @@ new Vue({
 				'rino_in_wonderland1.webp', 'tanabata_story0.webp', 'tanabata_story1.webp', 'tanabata_story2.webp', 'misatos_summer_yell0.webp', 'misatos_summer_yell1.webp', 'misatos_summer_yell2.webp', 'misatos_summer_yell3.webp',
 				'misatos_summer_yell4.webp', 'happy_change_angels0.webp', 'happy_change_angels1.webp', 'happy_change_angels2.webp', 'halloween_ghost_festival0.webp', 'halloween_ghost_festival1.webp', 'halloween_ghost_festival2.webp', 'lovely_monica0.webp',
 				'lovely_monica1.webp', 'lovely_monica2.webp', 'debutante_shangri_la0.webp', 'debutante_shangri_la1.webp', 'debutante_shangri_la2.webp', 'gourmet_princess0.webp', 'gourmet_princess1.webp', 'gourmet_princess2.webp',
-				'connect_bond0.webp', 'connect_bond1.webp', 'connect_bond2.webp'
+				'connect_bond0.webp', 'connect_bond1.webp', 'connect_bond2.webp', 'cinderella_lesson0.webp', 'cinderella_lesson1.webp', 'cinderella_lesson2.webp', 'cinderella_lesson3.webp'
 			],
 		};
 	},
