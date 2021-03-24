@@ -1,42 +1,48 @@
 import UIkit from 'uikit';
 import './uikit.min.css';
 import Vue from 'vue';
-import host from './host';
+import Host from './Host';
 
 class FontDetector {
-	constructor(testAlphabet, testJapanese) {
+	baseFonts: string[];
+	testStrings: string[];
+	defaultWidths: {[key: string]: number}[];
+	defaultHeights: {[key: string]: number}[];
+
+	constructor(testAlphabet: string, testJapanese: string) {
 		this.baseFonts = ['monospace', 'sans-serif', 'serif'];
 		this.testStrings = [testAlphabet, testJapanese];
-		this.defaultWidth = [{}, {}];
-		this.defaultHeight = [{}, {}];
-		const body = document.getElementsByTagName("body")[0];
-		const span = document.createElement("span");
+		this.defaultWidths = [{}, {}];
+		this.defaultHeights = [{}, {}];
+		const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+		const span: HTMLSpanElement = document.createElement("span");
 		span.style.visibility = 'hidden';
 		span.style.fontSize = '72px';
-		for (let i = 0; i < 2; ++i) {
+		for (let i: number = 0; i < 2; ++i) {
 			span.textContent = this.testStrings[i];
 			for (let e of this.baseFonts) {
 				span.style.fontFamily = e;
 				body.appendChild(span);
-				this.defaultWidth[i][e] = span.offsetWidth;
-				this.defaultHeight[i][e] = span.offsetHeight;
+				this.defaultWidths[i][e] = span.offsetWidth;
+				this.defaultHeights[i][e] = span.offsetHeight;
 				body.removeChild(span);
 			}
 		}
 	}
-	detect(font) {
-		let detected = false;
-		const body = document.getElementsByTagName("body")[0];
-		const span = document.createElement("span");
+
+	detect(font: string): boolean {
+		let detected: boolean = false;
+		const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
+		const span: HTMLSpanElement = document.createElement("span");
 		span.style.visibility = 'hidden';
 		span.style.fontSize = '72px';
 		outerFor:
-		for (let i = 0; i < 2; ++i) {
+		for (let i: number = 0; i < 2; ++i) {
 			span.textContent = this.testStrings[i];
 			for (let e of this.baseFonts) {
 				span.style.fontFamily = font + ',' + e;
 				body.appendChild(span);
-				detected = (span.offsetWidth != this.defaultWidth[i][e]) || (span.offsetHeight != this.defaultHeight[i][e]);
+				detected = (span.offsetWidth != this.defaultWidths[i][e]) || (span.offsetHeight != this.defaultHeights[i][e]);
 				body.removeChild(span);
 				if (detected) {
 					break outerFor;
@@ -47,8 +53,8 @@ class FontDetector {
 	}
 }
 
-const fontDetector = new FontDetector('mmmmmmmmmmlli12-', 'あぱプ字１－＾｜＿！＜％＄ｚＡ');
-const fonts = [
+const fontDetector: FontDetector = new FontDetector('mmmmmmmmmmlli12-', 'あぱプ字１－＾｜＿！＜％＄ｚＡ');
+const fonts: string[] = [
 	"AR BERKLEY", "AR BLANCA", "AR BONNIE", "AR CARTER", "AR CENA", "AR CHRISTY", "AR DARLING", "AR DECODE", "AR DELANEY", "AR DESTINE", "AR ESSENCE", "AR HERMANN", "AR JULIAN", "Apple Braille Outline 6 Dot",
 	"Apple Braille Outline 8 Dot", "Apple Braille Pinpoint 6 Dot", "Apple Braille Pinpoint 8 Dot", "Apple Braille", "Apple Color Emoji", "Apple Symbols", "AppleSDGothicNeo", "AquaKana", "ArabicUIDisplay", "ArabicUIText",
 	"Arial Black", "Arial Unicod", "Arial", "ArialHB", "Arimo", "Avenir Next Condensed", "Avenir Next", "Avenir", "BIZ UDPゴシック", "BIZ UDP明朝 Medium", "BIZ UDゴシック", "BIZ UD明朝 Medium", "Bahnschrift Condensed",
@@ -75,11 +81,11 @@ Vue.config.productionTip = false;
 new Vue({
 	el: '#app',
 	components: {
-		host: host
+		Host
 	},
 	data: function() {
 		return {
-			fonts: fonts.filter(e => fontDetector.detect(e)),
+			fonts: fonts.filter((e: string) => fontDetector.detect(e)),
 			backgroundImageNames: [
 				'hatsunes_present_strategy0.webp', 'hatsunes_present_strategy1.webp', 'hatsunes_present_strategy2.webp', 'little_lyrical_adventure0.webp', 'little_lyrical_adventure1.webp', 'little_lyrical_adventure2.webp',
 				'vampire_hunter_with_ilya0.webp', 'dangerous_vacance_beach_gourmet_princess0.webp', 'dangerous_vacance_beach_gourmet_princess1.webp', 'dangerous_vacance_beach_gourmet_princess2.webp',
@@ -101,6 +107,6 @@ new Vue({
 		};
 	},
 	template: `
-		<host v-bind:fonts="fonts" v-bind:backgroundImageNames="backgroundImageNames"></host>
+		<Host v-bind:fonts="fonts" v-bind:backgroundImageNames="backgroundImageNames"/>
 	`
 });

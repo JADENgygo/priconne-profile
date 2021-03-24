@@ -8,9 +8,9 @@
 					<a class="uk-accordion-title uk-text-small" href="#">背景画像一覧</a>
 					<div class="uk-accordion-content">
 						<div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-							<div v-for="(e, i) in backgroundImagePaths" class="uk-text-center">
+							<div v-for="(e, i) in thumbnailPaths" class="uk-text-center">
 								<div class="uk-form-controls">
-									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="backgroundImageIndex" v-bind:value="i" v-on:change="changeBackgroundImageState()">
+									<input v-bind:id="'image' + i" class="uk-radio" type="radio" v-model="thumbnailIndex" v-bind:value="i" v-on:change="drawBackgroundImage()">
 								</div>
 								<label class="uk-form-label" v-bind:for="'image' + i"><img v-bind:src="e"></label>
 							</div>
@@ -20,7 +20,7 @@
 			</ul>
 			<div class="uk-form-label">背景画像</div>
 			<div class="uk-form-controls uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-				<div><img id="background-image" v-bind:src="backgroundImagePaths[backgroundImageIndex]"></div>
+				<div><img v-bind:src="thumbnailPaths[thumbnailIndex]"></div>
 			</div>
 			<label for="clan-name" class="uk-form-label uk-margin-top">クラン名</label>
 			<div class="uk-form-controls"><input id="clan-name" type="text" class="uk-input uk-form-small uk-form-width-medium" v-model="clanName" v-on:input="previewCard()"></div>
@@ -194,112 +194,165 @@
 			<div uk-alert class="uk-alert-primary">ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください</div>
 			<div class="uk-form-label">プレビュー</div>
 			<div class="uk-form-controls">
-				<img id="preview" class="uk-margin-small-bottom" v-bind:style="previewStyle">
+				<canvas id="canvas" class="uk-margin-small-bottom" width="1920" height="1080" v-bind:style="previewStyle"></canvas>
 			</div>
 		</div>
 		<div class="resource">
-			<canvas id="canvas" width="1920" height="1080"></canvas>
 			<img id="loading-image" v-bind:src="loadingImagePath">
+			<canvas id="background-canvas" width="1920" height="1080"></canvas>
 		</div>
 	</div>
 </template>
-<script>
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
 import UIkit from 'uikit';
 import platform from 'platform';
-export default {
+
+type StringBoolean = 'true' | 'false';
+
+const Props = Vue.extend({
 	props: {
 		fonts: Array,
 		backgroundImageNames: Array
 	},
-	data: function() {
-		return {
-			previewStyle: {},
-			loadingImagePath: require('./img/bundle/loading.webp'),
-			backgroundImageChanged: true,
-			backgroundImageIndex: 0,
-			backgroundImagePaths: this.backgroundImageNames.map(e => require('./img/bundle/' + e)),
-			clanName: 'おひるねくらぶ',
-			averageLevel: 175,
-			memberNum: 25,
-			policy: 'わいわいプレイ',
-			condition: '誰でも加入',
-			guideline: '',
-			postscriptDisplayed: 'true',
-			postscript: '',
-			rankingDisplayed: 'true',
-			rankingsAvailable: [true, true, true],
-			rankingMonths: [
-				new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
-				new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
-				new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
-			],
-			rankings: [1, 1, 1],
-			layout: 0,
-			layoutImages: [
-				require('./img/bundle/layout0.webp'),
-				require('./img/bundle/layout1.webp'),
-				require('./img/bundle/layout2.webp'),
-				require('./img/bundle/layout3.webp'),
-				require('./img/bundle/layout4.webp')
-			],
-			clanNameFont: platform.name.indexOf('Safari') === -1 ? 'monospace' : 'ヒラギノ角ゴシック W3',
-			clanNameFontSize: 100,
-			clanNameFontStyles: ['bold'],
-			clanNameOutlineDisplayed: 'true',
-			clanNameStrokeColor: '#000000',
-			clanNameOutlineWidth: '10',
-			clanNameFillColor: '#3264FF',
-			clanNameFillColorTransparency: '1.0',
-			labelFont: platform.name.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3',
-			labelFontStyles: ['bold'],
-			labelFontColor: '#FFFFFF',
-			labelBackgroundDisplayed: 'true',
-			labelBackgroundColor: '#6464FF',
-			inputFont: platform.name.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3',
-			inputFontStyles: ['bold'],
-			inputFontColor: '#000000',
-			paneFrameDisplayed: 'true',
-			paneFrameColor: '#000000',
-			paneFrameWidth: '3',
-			paneColor: '#FFFFFF',
-			paneTransparency: '0.6',
-		};
-	},
-	computed: {
-		formattedClanNameFillColorTransparency: function() {
-			if (this.clanNameFillColorTransparency === '0') {
-				return '0.0';
-			}	
-			else if (this.clanNameFillColorTransparency === '1') {
-				return '1.0';
-			}
-			else {
-				return this.clanNameFillColorTransparency;
-			}
-		},
-		formattedPaneTransparency: function() {
-			if (this.paneTransparency === '0') {
-				return '0.0';
-			}	
-			else if (this.paneTransparency === '1') {
-				return '1.0';
-			}
-			else {
-				return this.paneTransparency;
-			}
-		},
-		inputFontStyle: function() {
-			return this.inputFontStyles.join(' ');
-		},
-		clanNameFontStyle: function() {
-			return this.clanNameFontStyles.join(' ');
-		},
-		labelFontStyle: function() {
-			return this.labelFontStyles.join(' ');
+});
+
+
+@Component
+export default class Host extends Props {
+	previewStyle: {[key: string]: string};
+	loadingImagePath: string;
+	thumbnailIndex: number;
+	thumbnailPaths: string[];
+	clanName: string;
+	averageLevel: number;
+	memberNum: number;
+	policy: string;
+	condition: string;
+	guideline: string;
+	postscriptDisplayed: StringBoolean;
+	postscript: string;
+	rankingDisplayed: StringBoolean;
+	rankingsAvailable: boolean[];
+	rankingMonths: string[];
+	rankings: number[];
+	layout: number;
+	layoutImages: string[];
+	clanNameFont: string;
+	clanNameFontSize: number;
+	clanNameFontStyles: string[];
+	clanNameOutlineDisplayed: StringBoolean;
+	clanNameStrokeColor: string;
+	clanNameOutlineWidth: string;
+	clanNameFillColor: string;
+	clanNameFillColorTransparency :string;
+	labelFont: string;
+	labelFontStyles: string[];
+	labelFontColor: string;
+	labelBackgroundDisplayed: StringBoolean;
+	labelBackgroundColor: string;
+	inputFont: string;
+	inputFontStyles: string[];
+	inputFontColor: string;
+	paneFrameDisplayed: StringBoolean;
+	paneFrameColor: string;
+	paneFrameWidth: string;
+	paneColor: string;
+	paneTransparency: string;
+
+	constructor() {
+		super();
+		this.previewStyle = {};
+		this.loadingImagePath = require('./img/bundle/loading.webp');
+		this.thumbnailIndex = 0;
+		this.thumbnailPaths = this.backgroundImageNames.map(e => require('./img/bundle/' + e));
+		this.clanName = 'おひるねくらぶ';
+		this.averageLevel = 175;
+		this.memberNum = 25;
+		this.policy = 'わいわいプレイ';
+		this.condition = '誰でも加入';
+		this.guideline = '';
+		this.postscriptDisplayed = 'true';
+		this.postscript = '';
+		this.rankingDisplayed = 'true';
+		this.rankingsAvailable = [true, true, true];
+		this.rankingMonths = [
+			new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
+			new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
+			new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
+		];
+		this.rankings = [1, 1, 1];
+		this.layout = 0;
+		this.layoutImages = [
+			require('./img/bundle/layout0.webp'),
+			require('./img/bundle/layout1.webp'),
+			require('./img/bundle/layout2.webp'),
+			require('./img/bundle/layout3.webp'),
+			require('./img/bundle/layout4.webp')
+		];
+		const platformName = platform.name ?? 'unknown';
+		this.clanNameFont = platformName.indexOf('Safari') === -1 ? 'monospace' : 'ヒラギノ角ゴシック W3';
+		this.clanNameFontSize = 100;
+		this.clanNameFontStyles = ['bold'];
+		this.clanNameOutlineDisplayed = 'true';
+		this.clanNameStrokeColor = '#000000';
+		this.clanNameOutlineWidth = '10';
+		this.clanNameFillColor = '#3264FF';
+		this.clanNameFillColorTransparency = '1.0';
+		this.labelFont = platformName.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3';
+		this.labelFontStyles = ['bold'];
+		this.labelFontColor = '#FFFFFF';
+		this.labelBackgroundDisplayed = 'true';
+		this.labelBackgroundColor = '#6464FF';
+		this.inputFont = platformName.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3';
+		this.inputFontStyles = ['bold'];
+		this.inputFontColor = '#000000';
+		this.paneFrameDisplayed = 'true';
+		this.paneFrameColor = '#000000';
+		this.paneFrameWidth = '3';
+		this.paneColor = '#FFFFFF';
+		this.paneTransparency = '0.6';
+	}
+
+	get formattedClanNameFillColorTransparency(): string {
+		if (this.clanNameFillColorTransparency === '0') {
+			return '0.0';
+		}	
+		else if (this.clanNameFillColorTransparency === '1') {
+			return '1.0';
 		}
-	},
-	mounted: function() {
-		const f = style => {
+		else {
+			return this.clanNameFillColorTransparency;
+		}
+	}
+
+	get formattedPaneTransparency(): string {
+		if (this.paneTransparency === '0') {
+			return '0.0';
+		}	
+		else if (this.paneTransparency === '1') {
+			return '1.0';
+		}
+		else {
+			return this.paneTransparency;
+		}
+	}
+
+	get inputFontStyle(): string {
+		return this.inputFontStyles.join(' ');
+	}
+
+	get clanNameFontStyle(): string {
+		return this.clanNameFontStyles.join(' ');
+	}
+
+	get labelFontStyle(): string {
+		return this.labelFontStyles.join(' ');
+	}
+
+	mounted(): void {
+		const f = (style: 'min' | 'max'): void => {
 			if (window.orientation === 0 && window.matchMedia(`(${style}-width:426px)`).matches) {
 				this.$set(this.previewStyle, 'height', 'auto');
 				this.$set(this.previewStyle, 'width', 'auto');
@@ -313,251 +366,269 @@ export default {
 		window.addEventListener('resize', () => f('max'));
 		// matchMediaは回転前の幅を判定しているらしいのでminとmaxが逆になる？
 		window.addEventListener('orientationchange', () => f('min'));
-		document.getElementById('background-image').addEventListener('load', () => {
+		this.drawBackgroundImage();
+	}
+
+	saveCard(): void {
+		const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+		const a = document.createElement('a');
+		a.href = canvas.toDataURL('image/png');
+		a.download = 'クランプロフカード.png';
+		a.click();
+	}
+
+	previewCard(): void {
+		const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+		const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		const backgroundCanvas = document.getElementById('background-canvas') as HTMLCanvasElement;
+		context.drawImage(backgroundCanvas, 0, 0);
+		// basicInfo, postscript, ranking
+		const positions = [
+			[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 11.65 / 15.0]],
+			[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 8.29 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0]],
+			[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 11.65 / 15.0]],
+			[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 8.29 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0]],
+			[[canvas.width * 1.0 / 5.0, canvas.height * 4.0 / 15.0], [0, 0], [0, 0]]
+		];
+		this.drawClanName(context, canvas.width / 2.0, canvas.height * 1.7 / 15.0);
+		this.drawBasicInfo(context, positions[this.layout][0][0], positions[this.layout][0][1], canvas.width, canvas.height);
+		if (this.postscriptDisplayed === 'true' && this.layout !== 4) {
+			this.drawPostscript(context, positions[this.layout][1][0], positions[this.layout][1][1], canvas.width, canvas.height);
+		}
+		if (this.rankingDisplayed === 'true' && this.layout !== 4) {
+			this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
+		}
+	}
+
+	drawBackgroundImage(): void {
+		const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+		const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		const loadingImage = document.getElementById('loading-image') as CanvasImageSource;
+		context.globalAlpha = 0.5;
+		context.drawImage(loadingImage, 0, 0);
+		context.globalAlpha = 1.0;
+
+		const backgroundImage = document.createElement('img');
+		backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.thumbnailIndex];
+		backgroundImage.addEventListener('load', () => {
+			const canvas = document.getElementById('background-canvas') as HTMLCanvasElement;
+			const context = canvas.getContext('2d') as CanvasRenderingContext2D;
+			context.drawImage(backgroundImage, 0, 0);
 			this.previewCard();
 		});
-	},
-	methods: {
-		changeBackgroundImageState: function() {
-			this.backgroundImageChanged = true;
-		},
-		saveCard: function() {
-			const canvas = document.getElementById('canvas');
-			const a = document.createElement('a');
-			a.href = canvas.toDataURL('image/png');
-			a.download = 'クランプロフカード.png';
-			a.click();
-		},
-		previewCard: function() {
-			const canvas = document.getElementById('canvas');
-			const context = canvas.getContext('2d');
-			if (this.backgroundImageChanged) {
-				this.backgroundImageChanged = false;
-				context.clearRect(0, 0, canvas.width, canvas.height);
-				const loadingImage = document.getElementById('loading-image');
-				context.globalAlpha = 0.5;
-				context.drawImage(loadingImage, 0, 0);
-				context.globalAlpha = 1.0;
-				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
-			}
-			const backgroundImage = document.createElement('img');
-			backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.backgroundImageIndex];
-			backgroundImage.addEventListener('load', () => {
-				context.drawImage(backgroundImage, 0, 0);
-				// basicInfo, postscript, ranking
-				const positions = [
-					[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 11.65 / 15.0]],
-					[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 8.29 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0]],
-					[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 11.65 / 15.0]],
-					[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 8.29 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0]],
-					[[canvas.width * 1.0 / 5.0, canvas.height * 4.0 / 15.0], [null, null], [null, null]]
-				];
-				this.drawClanName(context, canvas.width / 2.0, canvas.height * 1.7 / 15.0);
-				this.drawBasicInfo(context, positions[this.layout][0][0], positions[this.layout][0][1], canvas.width, canvas.height);
-				if (this.postscriptDisplayed === 'true' && this.layout !== 4) {
-					this.drawPostscript(context, positions[this.layout][1][0], positions[this.layout][1][1], canvas.width, canvas.height);
-				}
-				if (this.rankingDisplayed === 'true' && this.layout !== 4) {
-					this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
-				}
-				document.getElementById('preview').src = canvas.toDataURL('image/webp', 1.0);
-			});
-		},
-		drawClanName: function(context, xPos, yPos) {
-			context.font = this.clanNameFontStyle + ' ' + this.clanNameFontSize + `px '${this.clanNameFont}'`;
-			context.textBaseline = 'middle';
-			context.textAlign = 'center';
-			if (this.clanNameOutlineDisplayed === 'true') {
-				context.lineWidth = this.clanNameOutlineWidth;
-				context.strokeStyle = this.clanNameStrokeColor;
-				context.strokeText(this.clanName, xPos, yPos);
-			}
-			const rgb = this.convertHexToRgb(this.clanNameFillColor);
-			context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.clanNameFillColorTransparency})`;
-			context.fillText(this.clanName, xPos, yPos);
-		},
-		drawBasicInfo: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-			const rectWidth = canvasWidth * 3.0 / 5.0;
-			this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
-			this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
-			this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel, 40, 'start');
-			this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
-			this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberNum, 40, 'start');
-			this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
-			this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
-			this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
-			this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
-			this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
-			this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
-		},
-		drawPostscript: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-			const rectWidth = canvasWidth * 1.60 / 5.0;
-			this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
-			this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
-			this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
-		},
-		drawRanking: function(context, xPos, yPos, canvasWidth, canvasHeight) {
-			this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
-			for (let i = 0; i < 3; ++i) {
-				this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
-				this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
-			}
-		},
-		drawLabel: function(context, x, y, text, fontSize) {
-			context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
-			if (this.labelBackgroundDisplayed === 'true') {
-				context.fillStyle = this.labelBackgroundColor;
-				context.beginPath();
-				context.fillRect(x - 10.0, y - fontSize, context.measureText(text).width + 23.0, fontSize * 1.3);
-			}
-			context.fillStyle = this.labelFontColor;
-			context.textAlign = 'start';
-			context.textBaseline = 'alphabetic';
-			context.fillText(text, x, y);
-		},
-		drawInput: function(context, x, y, text, fontSize, textAlign) {
-			context.textAlign = textAlign;
-			context.textBaseline = 'alphabetic';
-			context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-			context.fillStyle = this.inputFontColor;
-			context.fillText(text, x, y);
-		},
-		drawSentence: function(context, x, y, text, fontSize, rectWidth, breakRatio) {
-			context.textAlign = 'start';
-			context.textBaseline = 'alphabetic';
-			context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
-			context.fillStyle = this.inputFontColor;
-			let row = 1;
-			let splitPosition = 0;
-			for (let i = 1; i <= text.length; ++i) {
-				const w = context.measureText(text.substr(splitPosition, i - splitPosition)).width;
-				if (rectWidth * breakRatio <= w || text[i - 1] === '\n') {
-					const y_ = y + (row - 1) * 50.0;
-					const s = text.substr(splitPosition, i - splitPosition);
-					context.fillText(s, x, y_);
-					row++;
-					splitPosition = i;
-				}
-				if (i === text.length) {
-					const y_ = y + (row - 1) * 50.0;
-					const s = text.substr(splitPosition, i - splitPosition);
-					context.fillText(s, x, y_);
-				}
-			}
-		},
-		drawPane: function(context, x, y, width, height) {
-			const rgb = this.convertHexToRgb(this.paneColor);
+	}
+
+	drawClanName(context: CanvasRenderingContext2D, xPos: number, yPos: number): void {
+		context.font = this.clanNameFontStyle + ' ' + this.clanNameFontSize + `px '${this.clanNameFont}'`;
+		context.textBaseline = 'middle';
+		context.textAlign = 'center';
+		if (this.clanNameOutlineDisplayed === 'true') {
+			context.lineWidth = parseInt(this.clanNameOutlineWidth);
+			context.strokeStyle = this.clanNameStrokeColor;
+			context.strokeText(this.clanName, xPos, yPos);
+		}
+		const rgb = this.convertHexToRgb(this.clanNameFillColor);
+		context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.clanNameFillColorTransparency})`;
+		context.fillText(this.clanName, xPos, yPos);
+	}
+
+	drawBasicInfo(context: CanvasRenderingContext2D, xPos: number, yPos: number, canvasWidth: number, canvasHeight: number): void {
+		const rectWidth = canvasWidth * 3.0 / 5.0;
+		// drawPaneで設定されたcontextをdrawLabelの引数で使用するため、この順番で呼び出す必要がある
+		this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
+		this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
+		this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel.toString(), 40, 'start');
+		this.drawLabel(context, xPos + 700, yPos + 15, 'メンバー数', 40);
+		this.drawInput(context, xPos + 700 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberNum.toString(), 40, 'start');
+		this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
+		this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
+		this.drawLabel(context, xPos + 700, yPos + 90, '加入条件', 40);
+		this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
+		this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
+		this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
+	}
+
+	drawPostscript(context: CanvasRenderingContext2D, xPos: number, yPos: number, canvasWidth: number, canvasHeight: number): void {
+		const rectWidth = canvasWidth * 1.60 / 5.0;
+		this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
+		this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
+		this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
+	}
+
+	drawRanking(context: CanvasRenderingContext2D, xPos: number, yPos: number, canvasWidth: number, canvasHeight: number): void {
+		this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
+		for (let i = 0; i < 3; ++i) {
+			this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
+			this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
+		}
+	}
+
+	drawLabel(context: CanvasRenderingContext2D, x: number, y: number, text: string, fontSize: number): void {
+		context.font = this.labelFontStyle + ' ' + fontSize + `px '${this.labelFont}'`;
+		if (this.labelBackgroundDisplayed === 'true') {
+			context.fillStyle = this.labelBackgroundColor;
 			context.beginPath();
-			context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
-			context.fillRect(x, y, width, height);
-			if (this.paneFrameDisplayed === 'true') {
-				context.strokeStyle = this.paneFrameColor;
-				context.lineWidth = this.paneFrameWidth;
-				context.strokeRect(x, y, width, height);
+			context.fillRect(x - 10, y - fontSize, context.measureText(text).width + 23, fontSize * 1.3);
+		}
+		context.fillStyle = this.labelFontColor;
+		context.textAlign = 'start';
+		context.textBaseline = 'alphabetic';
+		context.fillText(text, x, y);
+	}
+
+	drawInput(context: CanvasRenderingContext2D, x: number, y: number, text: string, fontSize: number, textAlign: CanvasTextAlign): void {
+		context.textAlign = textAlign as CanvasTextAlign;
+		context.textBaseline = 'alphabetic';
+		context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
+		context.fillStyle = this.inputFontColor;
+		context.fillText(text, x, y);
+	}
+
+	drawSentence(context: CanvasRenderingContext2D, x: number, y: number, text: string, fontSize: number, rectWidth: number, breakRatio: number): void {
+		context.textAlign = 'start';
+		context.textBaseline = 'alphabetic';
+		context.font = this.inputFontStyle + ' ' + fontSize + `px '${this.inputFont}'`;
+		context.fillStyle = this.inputFontColor;
+		let row = 1;
+		let splitPosition = 0;
+		for (let i = 1; i <= text.length; ++i) {
+			const w = context.measureText(text.substr(splitPosition, i - splitPosition)).width;
+			if (rectWidth * breakRatio <= w || text[i - 1] === '\n') {
+				const y_ = y + (row - 1) * 50.0;
+				const s = text.substr(splitPosition, i - splitPosition);
+				context.fillText(s, x, y_);
+				row++;
+				splitPosition = i;
 			}
-		},
-		resetBasicSetting: function() {
-			this.backgroundImageIndex = 0;
-			this.clanName = 'おひるねくらぶ';
-			this.averageLevel = 175;
-			this.memberNum = 25;
-			this.policy = 'わいわいプレイ';
-			this.condition = '誰でも加入';
-			this.guideline = '';
-			this.postscriptDisplayed = 'true';
-			this.postscript = '';
-			this.rankingDisplayed = 'true';
-			this.rankingsAvailable =  [true, true, true];
-			this.rankingMonths = [
-				new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
-				new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
-				new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
-			];
-			this.rankings = [1, 1, 1];
-			this.layout = 0;
-			this.previewCard();
-		},
-		resetClanNameSetting: function() {
-			this.clanNameFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace';
-			this.clanNameFontSize = 100;
-			this.clanNameFontStyles = ['bold'];
-			this.clanNameOutlineDisplayed = 'true';
-			this.clanNameStrokeColor = '#000000';
-			this.clanNameOutlineWidth = '10';
-			this.clanNameFillColor = '#3264FF';
-			this.clanNameFillColorTransparency = '1.0';
-			this.previewCard();
-		},
-		resetLabelSetting: function() {
-			this.labelFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace';
-			this.labelFontStyles = ['bold'];
-			this.labelFontColor = '#FFFFFF';
-			this.labelBackgroundDisplayed = 'true';
-			this.labelBackgroundColor = '#6464FF';
-			this.previewCard();
-		},
-		resetInputSetting: function() {
-			this.inputFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] : 'monospace';
-			this.inputFontStyles = ['bold'];
-			this.inputFontColor = '#000000';
-			this.previewCard();
-		},
-		resetPaneSetting: function() {
-			this.paneFrameDisplayed = 'true';
-			this.paneFrameColor = '#000000'
-			this.paneFrameWidth = '3';
-			this.paneColor = '#FFFFFF';
-			this.paneTransparency = '0.6';
-			this.previewCard();
-		},
-		resetAllSettings: function() {
-			this.resetBasicSetting();
-			this.resetClanNameSetting();
-			this.resetLabelSetting();
-			this.resetInputSetting();
-			this.resetPaneSetting();
-			UIkit.notification({
-				message: '全設定をリセットしました',
-				pos: 'top-center',
-				timeout: 3000
-			});
-		},
-		convertHexToRgb: function(hex) {
-			const c = [hex.substr(1, 2), hex.substr(3, 2), hex.substr(5, 2)];
-			let rgb = [];
-			for (let e of c) {
-				let buf = 0;
-				const weight = [16, 1];
-				for (let i = 0; i < 2; ++i) {
-					switch (e[i].toUpperCase()) {
-						case 'A':
-							buf += 10 * weight[i];
-							break;
-						case 'B':
-							buf += 11 * weight[i];
-							break;
-						case 'C':
-							buf += 12 * weight[i];
-							break;
-						case 'D':
-							buf += 13 * weight[i];
-							break;
-						case 'E':
-							buf += 14 * weight[i];
-							break;
-						case 'F':
-							buf += 15 * weight[i];
-							break;
-						default:
-							buf += parseInt(e[i]) * weight[i];
-							break;
-					}
+			if (i === text.length) {
+				const y_ = y + (row - 1) * 50.0;
+				const s = text.substr(splitPosition, i - splitPosition);
+				context.fillText(s, x, y_);
+			}
+		}
+	}
+
+	drawPane(context: CanvasRenderingContext2D, x: number, y: number, width: number, height: number): void {
+		const rgb = this.convertHexToRgb(this.paneColor);
+		context.beginPath();
+		context.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${this.paneTransparency})`;
+		context.fillRect(x, y, width, height);
+		if (this.paneFrameDisplayed === 'true') {
+			context.strokeStyle = this.paneFrameColor;
+			context.lineWidth = parseInt(this.paneFrameWidth);
+			context.strokeRect(x, y, width, height);
+		}
+	}
+
+	resetBasicSetting(): void {
+		this.thumbnailIndex = 0;
+		this.clanName = 'おひるねくらぶ';
+		this.averageLevel = 175;
+		this.memberNum = 25;
+		this.policy = 'わいわいプレイ';
+		this.condition = '誰でも加入';
+		this.guideline = '';
+		this.postscriptDisplayed = 'true';
+		this.postscript = '';
+		this.rankingDisplayed = 'true';
+		this.rankingsAvailable =  [true, true, true];
+		this.rankingMonths = [
+			new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
+			new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
+			new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
+		];
+		this.rankings = [1, 1, 1];
+		this.layout = 0;
+		this.previewCard();
+	}
+
+	resetClanNameSetting(): void {
+		this.clanNameFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.clanNameFontSize = 100;
+		this.clanNameFontStyles = ['bold'];
+		this.clanNameOutlineDisplayed = 'true';
+		this.clanNameStrokeColor = '#000000';
+		this.clanNameOutlineWidth = '10';
+		this.clanNameFillColor = '#3264FF';
+		this.clanNameFillColorTransparency = '1.0';
+		this.previewCard();
+	}
+
+	resetLabelSetting(): void {
+		this.labelFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.labelFontStyles = ['bold'];
+		this.labelFontColor = '#FFFFFF';
+		this.labelBackgroundDisplayed = 'true';
+		this.labelBackgroundColor = '#6464FF';
+		this.previewCard();
+	}
+
+	resetInputSetting(): void {
+		this.inputFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.inputFontStyles = ['bold'];
+		this.inputFontColor = '#000000';
+		this.previewCard();
+	}
+
+	resetPaneSetting(): void {
+		this.paneFrameDisplayed = 'true';
+		this.paneFrameColor = '#000000'
+		this.paneFrameWidth = '3';
+		this.paneColor = '#FFFFFF';
+		this.paneTransparency = '0.6';
+		this.previewCard();
+	}
+
+	resetAllSettings(): void {
+		this.resetBasicSetting();
+		this.resetClanNameSetting();
+		this.resetLabelSetting();
+		this.resetInputSetting();
+		this.resetPaneSetting();
+		UIkit.notification({
+			message: '全設定をリセットしました',
+			pos: 'top-center',
+			timeout: 3000
+		});
+	}
+
+	convertHexToRgb(hex: string): number[] {
+		const c = [hex.substr(1, 2), hex.substr(3, 2), hex.substr(5, 2)];
+		let rgb = [];
+		for (let e of c) {
+			let buf = 0;
+			const weight = [16, 1];
+			for (let i = 0; i < 2; ++i) {
+				switch (e[i].toUpperCase()) {
+					case 'A':
+						buf += 10 * weight[i];
+						break;
+					case 'B':
+						buf += 11 * weight[i];
+						break;
+					case 'C':
+						buf += 12 * weight[i];
+						break;
+					case 'D':
+						buf += 13 * weight[i];
+						break;
+					case 'E':
+						buf += 14 * weight[i];
+						break;
+					case 'F':
+						buf += 15 * weight[i];
+						break;
+					default:
+						buf += parseInt(e[i]) * weight[i];
+						break;
 				}
-				rgb.push(buf);
 			}
-			return rgb;
-		},
-	},
+			rgb.push(buf);
+		}
+		return rgb;
+	}
 }
 </script>
 <style scoped>
