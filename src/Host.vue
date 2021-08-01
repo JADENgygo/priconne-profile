@@ -268,7 +268,7 @@ export default class Host extends Props {
 		this.thumbnailIndex = 0;
 		this.thumbnailPaths = this.backgroundImageNames.map(e => require('./img/bundle/' + e));
 		this.clanName = 'おひるねくらぶ';
-		this.averageLevel = 175;
+		this.averageLevel = 200;
 		this.memberNum = 25;
 		this.policy = 'わいわいプレイ';
 		this.condition = '誰でも加入';
@@ -308,7 +308,7 @@ export default class Host extends Props {
 		this.inputFont = platformName.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3';
 		this.inputFontStyles = ['bold'];
 		this.inputFontColor = '#000000';
-		this.paneFrameDisplayed = 'true';
+		this.paneFrameDisplayed = 'false';
 		this.paneFrameColor = '#000000';
 		this.paneFrameWidth = '3';
 		this.paneColor = '#FFFFFF';
@@ -525,7 +525,7 @@ export default class Host extends Props {
 	resetBasicSetting(): void {
 		this.thumbnailIndex = 0;
 		this.clanName = 'おひるねくらぶ';
-		this.averageLevel = 175;
+		this.averageLevel = 200;
 		this.memberNum = 25;
 		this.policy = 'わいわいプレイ';
 		this.condition = '誰でも加入';
@@ -573,7 +573,7 @@ export default class Host extends Props {
 	}
 
 	resetPaneSetting(): void {
-		this.paneFrameDisplayed = 'true';
+		this.paneFrameDisplayed = 'false';
 		this.paneFrameColor = '#000000'
 		this.paneFrameWidth = '3';
 		this.paneColor = '#FFFFFF';
