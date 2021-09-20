@@ -104,7 +104,8 @@ new Vue({
 				'lovely_monica1.webp', 'lovely_monica2.webp', 'debutante_shangri_la0.webp', 'debutante_shangri_la1.webp', 'debutante_shangri_la2.webp', 'gourmet_princess0.webp', 'gourmet_princess1.webp', 'gourmet_princess2.webp',
 				'connect_bond0.webp', 'connect_bond1.webp', 'connect_bond2.webp', 'cinderella_lesson0.webp', 'cinderella_lesson1.webp', 'cinderella_lesson2.webp', 'cinderella_lesson3.webp', 'saint_of_steel0.webp',
 				'saint_of_steel1.webp', 'saint_of_steel2.webp', 'inori_sos0.webp', 'inori_sos1.webp', 'inori_sos2.webp', 'inori_sos3.webp', 'aoi_toy_friends0.webp', 'aoi_toy_friends1.webp', 'aoi_toy_friends2.webp',
-				'endless_summer_produce0.webp', 'endless_summer_produce1.webp', 'endless_summer_produce2.webp', 'just_a_moment0.webp', 'just_a_moment1.webp', 'just_a_moment2.webp', 'just_a_moment3.webp'
+				'endless_summer_produce0.webp', 'endless_summer_produce1.webp', 'endless_summer_produce2.webp', 'just_a_moment0.webp', 'just_a_moment1.webp', 'just_a_moment2.webp', 'just_a_moment3.webp',
+				'illegal_oedo_karte0.webp', 'illegal_oedo_karte1.webp', 'illegal_oedo_karte2.webp', 'illegal_oedo_karte3.webp'
 			],
 		};
 	},
