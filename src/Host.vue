@@ -221,6 +221,7 @@ const Props = Vue.extend({
 
 @Component
 export default class Host extends Props {
+	readonly initialFont: string;
 	previewStyle: {[key: string]: string};
 	loadingImagePath: string;
 	thumbnailIndex: number;
@@ -292,20 +293,21 @@ export default class Host extends Props {
 			require('./img/bundle/layout4.webp')
 		];
 		const platformName = platform.name ?? 'unknown';
-		this.clanNameFont = platformName.indexOf('Safari') === -1 ? 'monospace' : 'ヒラギノ角ゴシック W3';
+		this.initialFont = platformName.indexOf('Safari') === -1 ? (this.fonts.includes('ＭＳ Ｐゴシック') ? 'ＭＳ Ｐゴシック' : 'monospace') : 'ヒラギノ角ゴシック W3';
+		this.clanNameFont = this.initialFont;
 		this.clanNameFontSize = 100;
 		this.clanNameFontStyles = ['bold'];
 		this.clanNameOutlineDisplayed = 'true';
-		this.clanNameStrokeColor = '#000000';
+		this.clanNameStrokeColor = '#FFFFFF';
 		this.clanNameOutlineWidth = '10';
-		this.clanNameFillColor = '#3264FF';
+		this.clanNameFillColor = '#000000';
 		this.clanNameFillColorTransparency = '1.0';
-		this.labelFont = platformName.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3';
+		this.labelFont = this.initialFont;
 		this.labelFontStyles = ['bold'];
 		this.labelFontColor = '#FFFFFF';
 		this.labelBackgroundDisplayed = 'true';
-		this.labelBackgroundColor = '#6464FF';
-		this.inputFont = platformName.indexOf('Safari') === -1 ? 'monospace' :  'ヒラギノ角ゴシック W3';
+		this.labelBackgroundColor = '#000000';
+		this.inputFont = this.initialFont;
 		this.inputFontStyles = ['bold'];
 		this.inputFontColor = '#000000';
 		this.paneFrameDisplayed = 'false';
@@ -545,28 +547,28 @@ export default class Host extends Props {
 	}
 
 	resetClanNameSetting(): void {
-		this.clanNameFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.clanNameFont = this.initialFont;
 		this.clanNameFontSize = 100;
 		this.clanNameFontStyles = ['bold'];
 		this.clanNameOutlineDisplayed = 'true';
-		this.clanNameStrokeColor = '#000000';
+		this.clanNameStrokeColor = '#FFFFFF';
 		this.clanNameOutlineWidth = '10';
-		this.clanNameFillColor = '#3264FF';
+		this.clanNameFillColor = '#000000';
 		this.clanNameFillColorTransparency = '1.0';
 		this.previewCard();
 	}
 
 	resetLabelSetting(): void {
-		this.labelFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.labelFont = this.initialFont;
 		this.labelFontStyles = ['bold'];
 		this.labelFontColor = '#FFFFFF';
 		this.labelBackgroundDisplayed = 'true';
-		this.labelBackgroundColor = '#6464FF';
+		this.labelBackgroundColor = '#000000';
 		this.previewCard();
 	}
 
 	resetInputSetting(): void {
-		this.inputFont = this.fonts.indexOf('monospace') === -1 ? this.fonts[0] as string : 'monospace';
+		this.inputFont = this.initialFont;
 		this.inputFontStyles = ['bold'];
 		this.inputFontColor = '#000000';
 		this.previewCard();
