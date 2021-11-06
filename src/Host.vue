@@ -42,42 +42,15 @@
 			</div>
 			<label for="guideline" class="uk-form-label uk-margin-top">募集要項</label>
 			<div class="uk-form-controls"><textarea id="guideline" class="uk-textarea" rows="5" v-model="guideline" v-on:input="previewCard()"></textarea></div>
-			<div class="uk-margin-top uk-form-label">追加情報の表示</div>
-			<div class="uk-form-controls">
-				<label class="uk-margin-small-right"><input class="uk-radio" type="radio" value="true" v-model="postscriptDisplayed" v-on:change="previewCard()" checked> 表示する</label>
-				<label><input class="uk-radio" type="radio" value="false" v-model="postscriptDisplayed" v-on:change="previewCard()"> 表示しない</label>
-			</div>
-			<label for="postscript" class="uk-margin-top uk-form-label">追加情報</label>
-			<div class="uk-form-controls"><textarea  id="postscript" class="uk-textarea" rows="5" v-model="postscript" v-on:input="previewCard()"></textarea></div>
-			<div class="uk-margin-top uk-form-label">クラバト順位の表示</div>
-			<div class="uk-form-controls">
-				<label class="uk-margin-small-right"><input class="uk-radio" type="radio" value="true" v-model="rankingDisplayed" v-on:change="previewCard()" checked> 表示する</label>
-				<label><input class="uk-radio" type="radio" value="false" v-model="rankingDisplayed" v-on:change="previewCard()"> 表示しない</label>
-			</div>
 			<div class="uk-margin-top uk-form-label">クラバト順位</div>
 			<div class="uk-form-controls">
-				<div v-for="i in 3" class="uk-margin-small-bottom">
-					<input class="uk-checkbox" type="checkbox" v-model="rankingsAvailable[i - 1]" v-on:change="previewCard()" checked>
-					<select class="uk-select uk-form-small uk-form-width-xsmall" v-model="rankingMonths[i - 1]" v-on:change="previewCard()">
-						<option v-for="e in 12">{{ e + '月' }}</option>
-					</select>
-					<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="rankings[i - 1]" v-on:input="previewCard()"> 位
-				</div>
+				<input class="uk-checkbox" type="checkbox" v-model="rankingAvailable" v-on:change="previewCard()" checked>
+				<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="ranking" v-on:input="previewCard()"> 位
 			</div>
 			<ul uk-accordion>
 				<li>
 					<a class="uk-accordion-title uk-text-small" href="#">詳細設定</a>
 					<div class="uk-accordion-content">
-						<div class="uk-form-label">レイアウト</div>
-						<div class="uk-form-controls uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
-							<div v-for="i in 5">
-								<label>
-									<input class="uk-radio" type="radio" v-model="layout" v-bind:value="i - 1" v-on:change="previewCard()">
-									<img v-bind:src="layoutImages[i - 1]">
-								</label>
-							</div>
-						</div>
-						<hr class="uk-margin-top">
 						<div>クラン名</div>
 						<label for="clan-name-font" class="uk-margin-top uk-form-label">フォント (使用可能フォントは端末に依存)</label>
 						<div class="uk-form-controls">
@@ -232,14 +205,8 @@ export default class Host extends Props {
 	policy: string;
 	condition: string;
 	guideline: string;
-	postscriptDisplayed: StringBoolean;
-	postscript: string;
-	rankingDisplayed: StringBoolean;
-	rankingsAvailable: boolean[];
-	rankingMonths: string[];
-	rankings: number[];
-	layout: number;
-	layoutImages: string[];
+	rankingAvailable: boolean;
+	ranking: number;
 	clanNameFont: string;
 	clanNameFontSize: number;
 	clanNameFontStyles: string[];
@@ -266,34 +233,17 @@ export default class Host extends Props {
 		super();
 		this.previewStyle = {};
 		this.loadingImagePath = require('./img/bundle/loading.webp');
-		this.thumbnailIndex = 0;
+		this.thumbnailIndex = 62;
 		this.thumbnailPaths = this.backgroundImageNames.map(e => require('./img/bundle/' + e));
-		this.clanName = 'おひるねくらぶ';
+		this.clanName = 'もっと美食殿';
 		this.averageLevel = 200;
 		this.memberNum = 25;
 		this.policy = 'わいわいプレイ';
 		this.condition = '誰でも加入';
-		this.guideline = '';
-		this.postscriptDisplayed = 'true';
-		this.postscript = '';
-		this.rankingDisplayed = 'true';
-		this.rankingsAvailable = [true, true, true];
-		this.rankingMonths = [
-			new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
-			new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
-			new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
-		];
-		this.rankings = [1, 1, 1];
-		this.layout = 0;
-		this.layoutImages = [
-			require('./img/bundle/layout0.webp'),
-			require('./img/bundle/layout1.webp'),
-			require('./img/bundle/layout2.webp'),
-			require('./img/bundle/layout3.webp'),
-			require('./img/bundle/layout4.webp')
-		];
-		const platformName = platform.name ?? 'unknown';
-		this.initialFont = platformName.indexOf('Safari') === -1 ? (this.fonts.includes('ＭＳ Ｐゴシック') ? 'ＭＳ Ｐゴシック' : 'monospace') : 'ヒラギノ角ゴシック W3';
+		this.guideline = '美食殿の活動目的は、この世の美味しい物の探求です！';
+		this.rankingAvailable = true;
+		this.ranking = 3000;
+		this.initialFont = (platform.name ?? 'unknown').indexOf('Safari') === -1 ? (this.fonts.includes('ＭＳ Ｐゴシック') ? 'ＭＳ Ｐゴシック' : 'monospace') : 'ヒラギノ角ゴシック W3';
 		this.clanNameFont = this.initialFont;
 		this.clanNameFontSize = 100;
 		this.clanNameFontStyles = ['bold'];
@@ -385,22 +335,8 @@ export default class Host extends Props {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		const backgroundCanvas = document.getElementById('background-canvas') as HTMLCanvasElement;
 		context.drawImage(backgroundCanvas, 0, 0);
-		// basicInfo, postscript, ranking
-		const positions = [
-			[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 11.65 / 15.0]],
-			[[canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 8.29 / 15.0], [canvas.width * 1.97 / 3.0, canvas.height * 4.0 / 15.0]],
-			[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 11.65 / 15.0]],
-			[[canvas.width * 1.135 / 3.0, canvas.height * 4.0 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 8.29 / 15.0], [canvas.width * 2.0 / 90.0, canvas.height * 4.0 / 15.0]],
-			[[canvas.width * 1.0 / 5.0, canvas.height * 4.0 / 15.0], [0, 0], [0, 0]]
-		];
 		this.drawClanName(context, canvas.width / 2.0, canvas.height * 1.7 / 15.0);
-		this.drawBasicInfo(context, positions[this.layout][0][0], positions[this.layout][0][1], canvas.width, canvas.height);
-		if (this.postscriptDisplayed === 'true' && this.layout !== 4) {
-			this.drawPostscript(context, positions[this.layout][1][0], positions[this.layout][1][1], canvas.width, canvas.height);
-		}
-		if (this.rankingDisplayed === 'true' && this.layout !== 4) {
-			this.drawRanking(context, positions[this.layout][2][0], positions[this.layout][2][1], canvas.width, canvas.height);
-		}
+		this.drawBasicInfo(context, canvas.width * 1.0 / 5.0, canvas.height * 4.0 / 15.0, canvas.width, canvas.height);
 	}
 
 	drawBackgroundImage(): void {
@@ -450,20 +386,12 @@ export default class Host extends Props {
 		this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
 		this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
 		this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
-	}
-
-	drawPostscript(context: CanvasRenderingContext2D, xPos: number, yPos: number, canvasWidth: number, canvasHeight: number): void {
-		const rectWidth = canvasWidth * 1.60 / 5.0;
-		this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.3 / 5.0);
-		this.drawLabel(context, xPos + 30, yPos + 15, '追加情報', 40);
-		this.drawSentence(context, xPos + 20, yPos + 80, this.postscript, 40, rectWidth, 0.88);
-	}
-
-	drawRanking(context: CanvasRenderingContext2D, xPos: number, yPos: number, canvasWidth: number, canvasHeight: number): void {
-		this.drawPane(context, xPos, yPos - 50, canvasWidth * 1.60 / 5.0, canvasHeight * 1.17 / 5.0);
-		for (let i = 0; i < 3; ++i) {
-			this.drawLabel(context, xPos + 30, yPos + 15 + 75 * i, this.rankingMonths[i] + 'のクラバト順位', 40);
-			this.drawInput(context, xPos + 595, yPos + 15 + 75 * i, this.rankingsAvailable[i] ? this.rankings[i] + '位' : '- 位', 40, 'end');
+		this.drawLabel(context, xPos + 700, yPos + 165, '前クラバト順位', 40);
+		if (this.rankingAvailable) {
+			this.drawInput(context, xPos + 700 + context.measureText('前クラバト順位').width + 40, yPos + 165, this.ranking + '位', 40, 'start');
+		}
+		else {
+			this.drawInput(context, xPos + 700 + context.measureText('前クラバト順位').width + 40, yPos + 165, '- 位', 40, 'start');
 		}
 	}
 
@@ -525,24 +453,15 @@ export default class Host extends Props {
 	}
 
 	resetBasicSetting(): void {
-		this.thumbnailIndex = 0;
-		this.clanName = 'おひるねくらぶ';
+		this.thumbnailIndex = 62;
+		this.clanName = 'もっと美食殿';
 		this.averageLevel = 200;
 		this.memberNum = 25;
 		this.policy = 'わいわいプレイ';
 		this.condition = '誰でも加入';
-		this.guideline = '';
-		this.postscriptDisplayed = 'true';
-		this.postscript = '';
-		this.rankingDisplayed = 'true';
-		this.rankingsAvailable =  [true, true, true];
-		this.rankingMonths = [
-			new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1).getMonth() + 1 + '月',
-			new Date(new Date().getFullYear(), new Date().getMonth() - 2, 1).getMonth() + 1 + '月',
-			new Date(new Date().getFullYear(), new Date().getMonth() - 3, 1).getMonth() + 1 + '月'
-		];
-		this.rankings = [1, 1, 1];
-		this.layout = 0;
+		this.guideline = '美食殿の活動目的は、この世の美味しい物の探求です！';
+		this.rankingAvailable =  true;
+		this.ranking = 3000;
 		this.previewCard();
 	}
 
