@@ -415,20 +415,20 @@ export default class Host extends Props {
 		this.drawPane(context, xPos, yPos - 50, rectWidth, canvasHeight * 2.98 / 4.0);
 		this.drawLabel(context, xPos + 30, yPos + 15, '平均プレイヤーLv', 40);
 		this.drawInput(context, xPos + 30 + context.measureText('平均プレイヤーLv').width + 40, yPos + 15, this.averageLevel.toString(), 40, 'start');
-		this.drawLabel(context, xPos + 670, yPos + 15, 'メンバー数', 40);
-		this.drawInput(context, xPos + 670 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberNum.toString(), 40, 'start');
+		this.drawLabel(context, xPos + 680, yPos + 15, 'メンバー数', 40);
+		this.drawInput(context, xPos + 680 + context.measureText('メンバー数').width + 40, yPos + 15, this.memberNum.toString(), 40, 'start');
 		this.drawLabel(context, xPos + 30, yPos + 90, '活動方針', 40);
 		this.drawInput(context, xPos + 30 + context.measureText('活動方針').width + 40, yPos + 90, this.policy, 40, 'start');
-		this.drawLabel(context, xPos + 670, yPos + 90, '加入条件', 40);
-		this.drawInput(context, xPos + 670 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
+		this.drawLabel(context, xPos + 680, yPos + 90, '加入条件', 40);
+		this.drawInput(context, xPos + 680 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
 		this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
 		this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
-		this.drawLabel(context, xPos + 670, yPos + 165, '前クラバト順位', 40);
+		this.drawLabel(context, xPos + 680, yPos + 165, '前クラバト順位', 40);
 		if (this.rankingAvailable) {
-			this.drawInput(context, xPos + 670 + context.measureText('前クラバト順位').width + 40, yPos + 165, this.ranking + '位', 40, 'start');
+			this.drawInput(context, xPos + 680 + context.measureText('前クラバト順位').width + 40, yPos + 165, this.ranking + '位', 40, 'start');
 		}
 		else {
-			this.drawInput(context, xPos + 670 + context.measureText('前クラバト順位').width + 40, yPos + 165, '- 位', 40, 'start');
+			this.drawInput(context, xPos + 680 + context.measureText('前クラバト順位').width + 40, yPos + 165, '- 位', 40, 'start');
 		}
 	}
 
