@@ -36,7 +36,7 @@
 			<div class="uk-form-controls"><input id="policy" type="text" class="uk-input uk-form-small uk-form-width-medium" v-model="policy" v-on:input="previewCard()"></div>
 			<div class="uk-margin-top uk-form-label">加入条件</div>
 			<div class="uk-form-controls">
-				<label class="condition uk-margin-small-right"><input class="uk-radio" type="radio" value="誰でも加入" v-model="condition" v-on:change="previewCard()" checked> 誰でも加入</label>
+				<label class="condition uk-margin-small-right"><input class="uk-radio" type="radio" value="誰でも加入" v-model="condition" v-on:change="previewCard()"> 誰でも加入</label>
 				<label class="condition uk-margin-small-right"><input class="uk-radio" type="radio" value="承認あり" v-model="condition" v-on:change="previewCard()"> 承認あり</label>
 				<label class="condition"><input class="uk-radio" type="radio" value="勧誘のみ" v-model="condition" v-on:change="previewCard()"> 勧誘のみ</label>
 			</div>
@@ -46,6 +46,12 @@
 			<div class="uk-form-controls">
 				<input class="uk-checkbox" type="checkbox" v-model="rankingAvailable" v-on:change="previewCard()" checked>
 				<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="ranking" v-on:input="previewCard()"> 位
+			</div>
+			<div class="uk-margin-top uk-form-label">表示位置</div>
+			<div class="uk-form-controls">
+				<label class="condition uk-margin-small-right"><input class="uk-radio" type="radio" v-bind:value=0 v-model="position" v-on:change="previewCard()"> 左</label>
+				<label class="condition uk-margin-small-right"><input class="uk-radio" type="radio" v-bind:value=1 v-model="position" v-on:change="previewCard()"> 中央</label>
+				<label class="condition"><input class="uk-radio" type="radio" v-bind:value=2 v-model="position" v-on:change="previewCard()"> 右</label>
 			</div>
 			<ul uk-accordion>
 				<li>
@@ -150,6 +156,14 @@
 						</div>
 						<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetPaneSetting()">リセット</button>
 						<hr>
+						<div>背景画像</div>
+						<label for="pane-transparency" class="uk-margin-top uk-form-label">透明度</label>
+						<div class="uk-form-controls">
+							<input id="background-image-transparency" type="range" min="0.0" max="1.0" step="0.1" value="0.6" class="uk-range uk-form-small uk-form-width-small" v-model="backgroundImageTransparency" v-on:input="previewCard()">
+							<label for="background-image-transparency">{{ formattedBackgroundImageTransparency }}</label>
+						</div>
+						<button type="button" class="uk-button uk-button-default uk-button-small uk-margin-top" v-on:click="resetBackgroundImage()">リセット</button>
+						<hr>
 						<div class="uk-text-right"><button type="button" class="uk-button uk-button-default uk-button-small" uk-toggle="target: #all-settings-reset">全設定リセット</button></div>
 						<div id="all-settings-reset" uk-modal>
 							<div class="uk-modal-dialog uk-modal-body">
@@ -207,6 +221,7 @@ export default class Host extends Props {
 	guideline: string;
 	rankingAvailable: boolean;
 	ranking: number;
+	position: number;
 	clanNameFont: string;
 	clanNameFontSize: number;
 	clanNameFontStyles: string[];
@@ -228,6 +243,7 @@ export default class Host extends Props {
 	paneFrameWidth: string;
 	paneColor: string;
 	paneTransparency: string;
+	backgroundImageTransparency: string;
 
 	constructor() {
 		super();
@@ -243,6 +259,7 @@ export default class Host extends Props {
 		this.guideline = '美食殿の活動目的は、この世の美味しい物の探求です！';
 		this.rankingAvailable = true;
 		this.ranking = 3000;
+		this.position = 1;
 		this.initialFont = (platform.name ?? 'unknown').indexOf('Safari') === -1 ? (this.fonts.includes('ＭＳ Ｐゴシック') ? 'ＭＳ Ｐゴシック' : 'monospace') : 'ヒラギノ角ゴシック W3';
 		this.clanNameFont = this.initialFont;
 		this.clanNameFontSize = 100;
@@ -265,12 +282,13 @@ export default class Host extends Props {
 		this.paneFrameWidth = '3';
 		this.paneColor = '#FFFFFF';
 		this.paneTransparency = '0.6';
+		this.backgroundImageTransparency = '1.0';
 	}
 
 	get formattedClanNameFillColorTransparency(): string {
 		if (this.clanNameFillColorTransparency === '0') {
 			return '0.0';
-		}	
+		}
 		else if (this.clanNameFillColorTransparency === '1') {
 			return '1.0';
 		}
@@ -282,12 +300,24 @@ export default class Host extends Props {
 	get formattedPaneTransparency(): string {
 		if (this.paneTransparency === '0') {
 			return '0.0';
-		}	
+		}
 		else if (this.paneTransparency === '1') {
 			return '1.0';
 		}
 		else {
 			return this.paneTransparency;
+		}
+	}
+
+	get formattedBackgroundImageTransparency(): string {
+		if (this.backgroundImageTransparency === '0') {
+			return '0.0';
+		}
+		else if (this.backgroundImageTransparency === '1') {
+			return '1.0';
+		}
+		else {
+			return this.backgroundImageTransparency;
 		}
 	}
 
@@ -334,9 +364,17 @@ export default class Host extends Props {
 		const context = canvas.getContext('2d') as CanvasRenderingContext2D;
 		context.clearRect(0, 0, canvas.width, canvas.height);
 		const backgroundCanvas = document.getElementById('background-canvas') as HTMLCanvasElement;
+		context.globalAlpha = parseFloat(this.backgroundImageTransparency);
 		context.drawImage(backgroundCanvas, 0, 0);
-		this.drawClanName(context, canvas.width / 2.0, canvas.height * 1.7 / 15.0);
-		this.drawBasicInfo(context, canvas.width * 1.0 / 5.0, canvas.height * 4.0 / 15.0, canvas.width, canvas.height);
+		context.globalAlpha = 1.0;
+		{
+			const xs = [40.0 + (canvas.width * 3.0 / 5.0) / 2.0, canvas.width / 2.0, canvas.width - (canvas.width * 3.0 / 5.0) + (canvas.width * 3.0 / 5.0) / 2.0 - 40.0];
+			this.drawClanName(context, xs[this.position], canvas.height * 1.7 / 15.0);
+		}
+		{
+			const xs = [40.0, canvas.width * 1.0 / 5.0, canvas.width - (canvas.width * 3.0 / 5.0) - 40.0];
+			this.drawBasicInfo(context, xs[this.position], canvas.height * 4.0 / 15.0, canvas.width, canvas.height);
+		}
 	}
 
 	drawBackgroundImage(): void {
@@ -347,7 +385,6 @@ export default class Host extends Props {
 		context.globalAlpha = 0.5;
 		context.drawImage(loadingImage, 0, 0);
 		context.globalAlpha = 1.0;
-
 		const backgroundImage = document.createElement('img');
 		backgroundImage.src = './img/no_bundle/' + this.backgroundImageNames[this.thumbnailIndex];
 		backgroundImage.addEventListener('load', () => {
@@ -462,6 +499,7 @@ export default class Host extends Props {
 		this.guideline = '美食殿の活動目的は、この世の美味しい物の探求です！';
 		this.rankingAvailable =  true;
 		this.ranking = 3000;
+		this.position = 1;
 		this.previewCard();
 	}
 
@@ -502,12 +540,18 @@ export default class Host extends Props {
 		this.previewCard();
 	}
 
+	resetBackgroundImage(): void {
+		this.backgroundImageTransparency = '1.0';
+		this.previewCard();
+	}
+
 	resetAllSettings(): void {
 		this.resetBasicSetting();
 		this.resetClanNameSetting();
 		this.resetLabelSetting();
 		this.resetInputSetting();
 		this.resetPaneSetting();
+		this.resetBackgroundImage();
 		UIkit.notification({
 			message: '全設定をリセットしました',
 			pos: 'top-center',
