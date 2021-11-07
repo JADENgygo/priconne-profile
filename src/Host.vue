@@ -42,7 +42,7 @@
 			</div>
 			<label for="guideline" class="uk-form-label uk-margin-top">募集要項</label>
 			<div class="uk-form-controls"><textarea id="guideline" class="uk-textarea" rows="5" v-model="guideline" v-on:input="previewCard()"></textarea></div>
-			<div class="uk-margin-top uk-form-label">クラバト順位</div>
+			<div class="uk-margin-top uk-form-label">クランランキング</div>
 			<div class="uk-form-controls">
 				<input class="uk-checkbox" type="checkbox" v-model="rankingAvailable" v-on:change="previewCard()" checked>
 				<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="ranking" v-on:input="previewCard()"> 位
@@ -423,12 +423,12 @@ export default class Host extends Props {
 		this.drawInput(context, xPos + 700 + context.measureText('加入条件').width + 40, yPos + 90, this.condition, 40, 'start');
 		this.drawLabel(context, xPos + 30, yPos + 165, '募集要項', 40);
 		this.drawSentence(context, xPos + 25, yPos + 230, this.guideline, 40, rectWidth, 0.93);
-		this.drawLabel(context, xPos + 700, yPos + 165, 'クラバト順位', 40);
+		this.drawLabel(context, xPos + 700, yPos + 165, 'ランキング', 40);
 		if (this.rankingAvailable) {
-			this.drawInput(context, xPos + 700 + context.measureText('クラバト順位').width + 40, yPos + 165, this.ranking + '位', 40, 'start');
+			this.drawInput(context, xPos + 700 + context.measureText('ランキング').width + 40, yPos + 165, this.ranking + '位', 40, 'start');
 		}
 		else {
-			this.drawInput(context, xPos + 700 + context.measureText('クラバト順位').width + 40, yPos + 165, '- 位', 40, 'start');
+			this.drawInput(context, xPos + 700 + context.measureText('ランキング').width + 40, yPos + 165, '- 位', 40, 'start');
 		}
 	}
 
