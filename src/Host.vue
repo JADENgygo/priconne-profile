@@ -42,7 +42,7 @@
 			</div>
 			<label for="guideline" class="uk-form-label uk-margin-top">募集要項</label>
 			<div class="uk-form-controls"><textarea id="guideline" class="uk-textarea" rows="5" v-model="guideline" v-on:input="previewCard()"></textarea></div>
-			<div class="uk-margin-top uk-form-label">クランランキング</div>
+			<div class="uk-margin-top uk-form-label">ランキング</div>
 			<div class="uk-form-controls">
 				<input class="uk-checkbox" type="checkbox" v-model="rankingAvailable" v-on:change="previewCard()" checked>
 				<input type="number" class="uk-input uk-form-small uk-form-width-small" v-model="ranking" v-on:input="previewCard()"> 位
