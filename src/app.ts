@@ -107,6 +107,7 @@ new Vue({
 				'endless_summer_produce0.webp', 'endless_summer_produce1.webp', 'endless_summer_produce2.webp', 'just_a_moment0.webp', 'just_a_moment1.webp', 'just_a_moment2.webp', 'just_a_moment3.webp',
 				'illegal_oedo_karte0.webp', 'illegal_oedo_karte1.webp', 'illegal_oedo_karte2.webp', 'illegal_oedo_karte3.webp', 'halloween_savers_scramble0.webp', 'halloween_savers_scramble1.webp', 'halloween_savers_scramble2.webp',
 				'magical_noirs0.webp', 'magical_noirs1.webp', 'magical_noirs2.webp', 'magical_noirs3.webp', 'magical_noirs4.webp', 'magical_noirs5.webp',
+        'merry_pudding_christmas0.webp', 'merry_pudding_christmas1.webp', 'merry_pudding_christmas2.webp', 'merry_pudding_christmas3.webp',
 			],
 		};
 	},
