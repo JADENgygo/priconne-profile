@@ -1,6 +1,6 @@
-import { Form } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import React from 'react'
-import style from "../styles/NormalSettings.module.css"
+import style from "../styles/ClanNormalSettings.module.css"
 
 type Props = {
   className?: string,
@@ -12,12 +12,22 @@ type Props = {
     condition: string,
     guideline: string,
     ranking: string,
-    position: string,
+    rankingDate: string,
   },
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange: (event: React.ChangeEvent<any>) => void,
 };
 
-export const NormalSettings = (props: Props) => {
+export const ClanNormalSettings = (props: Props) => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const lastMonth = new Date(year, month - 1);
+  const monthBeforeLast = new Date(year, month - 2);
+  const dates = [
+    now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
+    lastMonth.getFullYear() + "年" + (lastMonth.getMonth() + 1) + "月",
+    monthBeforeLast.getFullYear() + "年" + (monthBeforeLast.getMonth() + 1) + "月",
+  ];
   return (
     <div className={ props.className }>
       <Form>
@@ -37,7 +47,7 @@ export const NormalSettings = (props: Props) => {
           <Form.Label>活動方針</Form.Label>
           <Form.Control type="text" value={ props.state.policy } onChange={ props.onChange } name="policy" />
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group controlId="condition" className="mb-3">
           <Form.Label>加入条件</Form.Label>
           {
             ["誰でも加入", "承認あり", "勧誘のみ"].map((value, index) => 
@@ -49,18 +59,20 @@ export const NormalSettings = (props: Props) => {
           <Form.Label>募集要項</Form.Label>
           <Form.Control as="textarea" className={style.guideline} value={ props.state.guideline } onChange={ props.onChange } name="guideline" />
         </Form.Group>
-        <Form.Group controlId="ranking" className="mb-3">
-          <Form.Label>ランキング</Form.Label>
-          <Form.Control type="text" value={ props.state.ranking } onChange={ props.onChange } name="ranking" />
-        </Form.Group>
-        <Form.Group controlId="position" className="mb-3">
-          <Form.Label>表示位置</Form.Label>
-          {
-            ["左", "中央", "右"].map((value, index) =>
-              <Form.Check key={"position" + index} id={"position" + index} type="radio" label={value} value={index} onChange={ props.onChange } name="position" checked={props.state.position === index.toString()} />
-            )
-          }
-        </Form.Group>
+        <Row>
+          <Form.Group as={Col} controlId="ranking" className="mb-3">
+            <Form.Label>ランキング</Form.Label>
+            <Form.Control type="text" value={ props.state.ranking } onChange={ props.onChange } name="ranking" />
+          </Form.Group>
+          <Form.Group as={Col} controlId="rankingDate" className="mb-3">
+            <Form.Label>年月</Form.Label>
+            <Form.Select name="rankingDate" value={props.state.rankingDate} onChange={props.onChange}>
+              {
+                [...Array(3)].map((_, index) => <option key={index} value={ dates[index] }>{ dates[index] }</option>)
+              }
+            </Form.Select>
+          </Form.Group>
+        </Row>
       </Form>
     </div>
   );
