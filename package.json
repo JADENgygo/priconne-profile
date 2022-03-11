@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint:check": "prettier -c . & next lint",
+    "lint:fix": "prettier -w . && next lint --fix"
   },
   "dependencies": {
     "bootstrap": "^5.1.3",
@@ -23,7 +24,9 @@
     "@types/react-bootstrap": "^0.32.29",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.7",
+    "eslint-config-prettier": "^8.5.0",
     "jest": "^27.4.5",
+    "prettier": "^2.5.1",
     "ts-jest": "^27.1.2",
     "typescript": "4.5.4"
   }

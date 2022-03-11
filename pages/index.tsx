@@ -1,40 +1,39 @@
-import React, { useState, useEffect, ChangeEvent } from 'react'
-import { backgroundImageNames } from '../components/background-images'
-import type { NextPage } from 'next'
-import { BackgroundImages } from '../components/background-images'
-import { ClanNormalSettings } from '../components/clan-normal-settings'
-import { DetailSettings } from '../components/detail-settings'
-import { Canvas } from "../components/canvas"
-import { ModeChanger } from '../components/mode-changer'
-import { MyNormalSettings } from '../components/my-normal-settings'
-import { PositionChanger } from '../components/position-changer'
+import React, { useState, useEffect, ChangeEvent } from "react";
+import { backgroundImageNames } from "../components/background-images";
+import type { NextPage } from "next";
+import { BackgroundImages } from "../components/background-images";
+import { ClanSettings } from "../components/clan-settings";
+import { DetailSettings } from "../components/detail-settings";
+import { Canvas } from "../components/canvas";
+import { ModeChanger } from "../components/mode-changer";
+import { MySettings } from "../components/my-settings";
+import { PositionChanger } from "../components/position-changer";
 
 const Home: NextPage = () => {
   const now = new Date();
   const [state, setState] = useState({
-    mode: 'clanProfileCard' as 'myProfileCard' | 'clanProfileCard',
-    // マイ
-    // 通常設定
+    mode: "clanProfileCard" as "myProfileCard" | "clanProfileCard",
+    // マイプロフカード
     playerName: "ユウキ",
     playerLevel: 200,
     strength: 5000000,
     playerId: "123456789",
-    scoreDate:now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
+    scoreDate: now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
     score: 600000000,
     battleArena: 10,
     princessArena: 20,
     runa: 600,
     runaEx: 40,
-    comment: "",
-    // クラン
-    // 通常設定
+    comment: "お金、大切、覚えた！",
+    // クランプロフカード
     backgroundImageName: backgroundImageNames[62],
-    clanName: 'もっと美食殿',
+    clanName: "もっと美食殿",
     averageLevel: 200,
     memberCount: 28,
-    policy: 'わいわいプレイ',
-    condition: '勧誘のみ' as '誰でも加入' | '承認あり' | '勧誘のみ',
-    guideline: '私達の目的は、この世界のありとあらゆる料理や食材を追求・探求し、みんなで楽しく食事をするギルド。その名も、美食殿！',
+    policy: "わいわいプレイ",
+    condition: "勧誘のみ" as "誰でも加入" | "承認あり" | "勧誘のみ",
+    guideline:
+      "私達の目的は、この世界のありとあらゆる料理や食材を追求・探求し、みんなで楽しく食事をするギルド。その名も、美食殿！",
     ranking: "1000",
     rankingDate: now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
     position: "1" as "0" | "1" | "2",
@@ -51,65 +50,79 @@ const Home: NextPage = () => {
   });
 
   const onChange = (event: React.ChangeEvent<any>): void => {
-    if (event.target.type === 'checkbox') {
-      setState(state => ({ ...state, [event.target.name]: event.target.checked }))
+    if (event.target.type === "checkbox") {
+      setState((state) => ({
+        ...state,
+        [event.target.name]: event.target.checked,
+      }));
       return;
     }
-    setState(state => ({ ...state, [event.target.name]: event.target.value }))
+    setState((state) => ({
+      ...state,
+      [event.target.name]: event.target.value,
+    }));
   };
 
   const resetClanNameSetting = (): void => {
-    setState(state => ({ ...state, clanNameColor: "#000000", clanNameOutlineColor: "#FFFFFF", clanNameOutlineVisible: true }))
+    setState((state) => ({
+      ...state,
+      clanNameColor: "#000000",
+      clanNameOutlineColor: "#FFFFFF",
+      clanNameOutlineVisible: true,
+    }));
   };
 
   const resetLabelSetting = (): void => {
-    setState(state => ({ ...state, labelColor: "#FFFFFF", labelBackgroundVisible: true, labelBackgroundColor: "#000000" }))
+    setState((state) => ({
+      ...state,
+      labelColor: "#FFFFFF",
+      labelBackgroundVisible: true,
+      labelBackgroundColor: "#000000",
+    }));
   };
 
   const resetInputSetting = (): void => {
-    setState(state => ({ ...state, inputColor: "#000000" }))
+    setState((state) => ({ ...state, inputColor: "#000000" }));
   };
 
   const resetPaneSetting = (): void => {
-    setState(state => ({ ...state, paneBackgroundColor: "#FFFFFF", paneFrameVisible: false, paneFrameColor: "#000000", paneTransparency: "0.6" }))
+    setState((state) => ({
+      ...state,
+      paneBackgroundColor: "#FFFFFF",
+      paneFrameVisible: false,
+      paneFrameColor: "#000000",
+      paneTransparency: "0.6",
+    }));
   };
 
   return (
     <div className="container">
       <ModeChanger state={state} onChange={onChange} />
-      <BackgroundImages className="mt-3" state={ state } onChange={onChange} />
-      {
-        state.mode === 'myProfileCard' && (
-          <>
-            <MyNormalSettings state={state} onChange={onChange} className="mt-3" />
-            <PositionChanger state={state} onChange={onChange} className="mt-3" />
-          </>
-        )
-      }
-      {
-        state.mode === 'clanProfileCard' && (
-          <>
-            <ClanNormalSettings
-              className="mt-3"
-              state={ state }
-              onChange={onChange}
-            />
-            <PositionChanger state={state} onChange={onChange} className="mt-3" />
-          </>
-        )
-      }
+      <BackgroundImages className="mt-3" state={state} onChange={onChange} />
+      {state.mode === "myProfileCard" && (
+        <>
+          <MySettings state={state} onChange={onChange} className="mt-3" />
+          <PositionChanger state={state} onChange={onChange} />
+        </>
+      )}
+      {state.mode === "clanProfileCard" && (
+        <>
+          <ClanSettings className="mt-3" state={state} onChange={onChange} />
+          <PositionChanger state={state} onChange={onChange} />
+        </>
+      )}
       <DetailSettings
         className="mt-3"
-        state={ state }
+        state={state}
         onChange={onChange}
         resetClanNameSetting={resetClanNameSetting}
-        resetLabelSetting={ resetLabelSetting}
-        resetInputSetting={ resetInputSetting}
-        resetPaneSetting={ resetPaneSetting}
+        resetLabelSetting={resetLabelSetting}
+        resetInputSetting={resetInputSetting}
+        resetPaneSetting={resetPaneSetting}
       />
       <Canvas state={state} className="mt-3" />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
