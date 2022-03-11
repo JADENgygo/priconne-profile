@@ -41,6 +41,7 @@ export const ClanSettings = (props: Props) => {
             value={props.state.clanName}
             onChange={props.onChange}
             name="clanName"
+            id="clanName"
           />
         </Form.Group>
         <Form.Group controlId="averageLevel" className="mb-3">
@@ -50,6 +51,7 @@ export const ClanSettings = (props: Props) => {
             value={props.state.averageLevel}
             onChange={props.onChange}
             name="averageLevel"
+            id="averageLevel"
           />
         </Form.Group>
         <Form.Group controlId="memberCount" className="mb-3">
@@ -59,6 +61,7 @@ export const ClanSettings = (props: Props) => {
             value={props.state.memberCount}
             onChange={props.onChange}
             name="memberCount"
+            id="memberCount"
           />
         </Form.Group>
         <Form.Group controlId="policy" className="mb-3">
@@ -68,6 +71,7 @@ export const ClanSettings = (props: Props) => {
             value={props.state.policy}
             onChange={props.onChange}
             name="policy"
+            id="policy"
           />
         </Form.Group>
         <Form.Group controlId="condition" className="mb-3">
@@ -93,6 +97,7 @@ export const ClanSettings = (props: Props) => {
             value={props.state.guideline}
             onChange={props.onChange}
             name="guideline"
+            id="guideline"
           />
         </Form.Group>
         <Row>
@@ -103,6 +108,7 @@ export const ClanSettings = (props: Props) => {
               value={props.state.ranking}
               onChange={props.onChange}
               name="ranking"
+              id="ranking"
             />
           </Form.Group>
           <Form.Group as={Col} controlId="rankingDate" className="mb-3">
@@ -111,6 +117,7 @@ export const ClanSettings = (props: Props) => {
               name="rankingDate"
               value={props.state.rankingDate}
               onChange={props.onChange}
+              id="rankingDate"
             >
               {[...Array(3)].map((_, index) => (
                 <option key={index} value={dates[index]}>

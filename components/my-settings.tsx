@@ -44,6 +44,7 @@ export const MySettings = (props: Props) => {
             value={props.state.playerName}
             onChange={props.onChange}
             name="playerName"
+            id="playerName"
           />
         </Form.Group>
         <Form.Group controlId="playerLevel" className="mb-3">
@@ -53,6 +54,7 @@ export const MySettings = (props: Props) => {
             value={props.state.playerLevel}
             onChange={props.onChange}
             name="playerLevel"
+            id="playerLevel"
           />
         </Form.Group>
         <Form.Group controlId="strength" className="mb-3">
@@ -62,6 +64,7 @@ export const MySettings = (props: Props) => {
             value={props.state.strength}
             onChange={props.onChange}
             name="strength"
+            id="strength"
           />
         </Form.Group>
         <Form.Group controlId="playerId" className="mb-3">
@@ -71,6 +74,7 @@ export const MySettings = (props: Props) => {
             value={props.state.playerId}
             onChange={props.onChange}
             name="playerId"
+            id="playerId"
           />
         </Form.Group>
         <Row>
@@ -81,6 +85,7 @@ export const MySettings = (props: Props) => {
               value={props.state.score}
               onChange={props.onChange}
               name="score"
+              id="score"
             />
           </Form.Group>
           <Form.Group as={Col} controlId="scoreDate" className="mb-3">
@@ -89,6 +94,7 @@ export const MySettings = (props: Props) => {
               name="scoreDate"
               value={props.state.scoreDate}
               onChange={props.onChange}
+              id="scoreDate"
             >
               {[...Array(3)].map((_, index) => (
                 <option key={index} value={dates[index]}>
@@ -105,6 +111,7 @@ export const MySettings = (props: Props) => {
             value={props.state.battleArena}
             onChange={props.onChange}
             name="battleArena"
+            id="battleArena"
           />
         </Form.Group>
         <Form.Group controlId="princessArena" className="mb-3">
@@ -114,6 +121,7 @@ export const MySettings = (props: Props) => {
             value={props.state.princessArena}
             onChange={props.onChange}
             name="princessArena"
+            id="princessArena"
           />
         </Form.Group>
         <Row>
@@ -124,6 +132,7 @@ export const MySettings = (props: Props) => {
               value={props.state.runa}
               onChange={props.onChange}
               name="runa"
+              id="runa"
             />
           </Form.Group>
           <Form.Group as={Col} controlId="runaEx" className="mb-3">
@@ -133,6 +142,7 @@ export const MySettings = (props: Props) => {
               value={props.state.runaEx}
               onChange={props.onChange}
               name="runaEx"
+              id="runaEx"
             />
           </Form.Group>
         </Row>
@@ -144,6 +154,7 @@ export const MySettings = (props: Props) => {
             value={props.state.comment}
             onChange={props.onChange}
             name="comment"
+            id="comment"
           />
         </Form.Group>
       </Form>
