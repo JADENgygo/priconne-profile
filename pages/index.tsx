@@ -2,21 +2,41 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import { backgroundImageNames } from '../components/background-images'
 import type { NextPage } from 'next'
 import { BackgroundImages } from '../components/background-images'
-import { NormalSettings } from '../components/normal-settings'
+import { ClanNormalSettings } from '../components/clan-normal-settings'
 import { DetailSettings } from '../components/detail-settings'
 import { Canvas } from "../components/canvas"
+import { ModeChanger } from '../components/mode-changer'
+import { MyNormalSettings } from '../components/my-normal-settings'
+import { PositionChanger } from '../components/position-changer'
 
 const Home: NextPage = () => {
+  const now = new Date();
   const [state, setState] = useState({
+    mode: 'clanProfileCard' as 'myProfileCard' | 'clanProfileCard',
+    // マイ
+    // 通常設定
+    playerName: "ユウキ",
+    playerLevel: 200,
+    strength: 5000000,
+    playerId: "123456789",
+    scoreDate:now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
+    score: 600000000,
+    battleArena: 10,
+    princessArena: 20,
+    runa: 600,
+    runaEx: 40,
+    comment: "",
+    // クラン
     // 通常設定
     backgroundImageName: backgroundImageNames[62],
     clanName: 'もっと美食殿',
     averageLevel: 200,
     memberCount: 28,
     policy: 'わいわいプレイ',
-    condition: '承認あり' as '誰でも加入' | '承認あり' | '勧誘のみ',
-    guideline: 'ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ',
+    condition: '勧誘のみ' as '誰でも加入' | '承認あり' | '勧誘のみ',
+    guideline: '私達の目的は、この世界のありとあらゆる料理や食材を追求・探求し、みんなで楽しく食事をするギルド。その名も、美食殿！',
     ranking: "1000",
+    rankingDate: now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
     position: "1" as "0" | "1" | "2",
     // 詳細設定
     clanNameOutlineVisible: true,
@@ -33,11 +53,9 @@ const Home: NextPage = () => {
   const onChange = (event: React.ChangeEvent<any>): void => {
     if (event.target.type === 'checkbox') {
       setState(state => ({ ...state, [event.target.name]: event.target.checked }))
-      console.log('here0', state, event.target.name, event.target.checked)
       return;
     }
     setState(state => ({ ...state, [event.target.name]: event.target.value }))
-    console.log('here1', state, event.target.name, event.target.value)
   };
 
   const resetClanNameSetting = (): void => {
@@ -58,12 +76,28 @@ const Home: NextPage = () => {
 
   return (
     <div className="container">
+      <ModeChanger state={state} onChange={onChange} />
       <BackgroundImages className="mt-3" state={ state } onChange={onChange} />
-      <NormalSettings
-        className="mt-3"
-        state={ state }
-        onChange={onChange}
-      />
+      {
+        state.mode === 'myProfileCard' && (
+          <>
+            <MyNormalSettings state={state} onChange={onChange} className="mt-3" />
+            <PositionChanger state={state} onChange={onChange} className="mt-3" />
+          </>
+        )
+      }
+      {
+        state.mode === 'clanProfileCard' && (
+          <>
+            <ClanNormalSettings
+              className="mt-3"
+              state={ state }
+              onChange={onChange}
+            />
+            <PositionChanger state={state} onChange={onChange} className="mt-3" />
+          </>
+        )
+      }
       <DetailSettings
         className="mt-3"
         state={ state }
@@ -73,7 +107,7 @@ const Home: NextPage = () => {
         resetInputSetting={ resetInputSetting}
         resetPaneSetting={ resetPaneSetting}
       />
-      <Canvas state={state} className="mt-5" />
+      <Canvas state={state} className="mt-3" />
     </div>
   )
 }
