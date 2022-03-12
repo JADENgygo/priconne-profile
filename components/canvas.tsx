@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   state: {
     mode: "myProfileCard" | "clanProfileCard";
+    backgroundImageName: string;
     // マイプロフカード
     playerName: string;
     playerLevel: number;
@@ -19,7 +20,6 @@ type Props = {
     runaEx: number;
     comment: string;
     // クランプロフカード
-    backgroundImageName: string;
     clanName: string;
     averageLevel: number;
     memberCount: number;
