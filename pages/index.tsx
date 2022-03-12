@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { backgroundImageNames } from "../components/background-images";
 import type { NextPage } from "next";
 import { BackgroundImages } from "../components/background-images";
@@ -13,6 +13,7 @@ const Home: NextPage = () => {
   const now = new Date();
   const [state, setState] = useState({
     mode: "clanProfileCard" as "myProfileCard" | "clanProfileCard",
+    backgroundImageName: backgroundImageNames[142],
     // マイプロフカード
     playerName: "ユウキ",
     playerLevel: 200,
@@ -26,7 +27,6 @@ const Home: NextPage = () => {
     runaEx: 40,
     comment: "お金、大切、覚えた！",
     // クランプロフカード
-    backgroundImageName: backgroundImageNames[62],
     clanName: "もっと美食殿",
     averageLevel: 200,
     memberCount: 28,

@@ -191,4 +191,12 @@ export const backgroundImageNames = [
   "merry_pudding_christmas1.webp",
   "merry_pudding_christmas2.webp",
   "merry_pudding_christmas3.webp",
+  "memories0.webp",
+  "memories1.webp",
+  "memories2.webp",
+  "memories3.webp",
+  "remember0.webp",
+  "remember1.webp",
+  "remember2.webp",
+  "remember3.webp",
 ];

@@ -1,6 +1,6 @@
 import { Form, Row, Col } from "react-bootstrap";
 import React from "react";
-import style from "../styles/ClanNormalSettings.module.css";
+import style from "../styles/ClanSettings.module.css";
 
 type Props = {
   className?: string;
