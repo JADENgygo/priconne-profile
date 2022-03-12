@@ -14,7 +14,7 @@ export const ModeChanger = (props: Props) => {
   return (
     <div className={props.className}>
       <Form>
-        <Form.Group controlId="mode" className="mb-3">
+        <Form.Group className="mb-3">
           <Form.Label>モード</Form.Label>
           {["マイプロフカード", "クランプロフカード"].map((value, index) => (
             <Form.Check
