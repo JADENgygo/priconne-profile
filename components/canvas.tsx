@@ -26,7 +26,7 @@ type Props = {
     policy: string;
     condition: "誰でも加入" | "承認あり" | "勧誘のみ";
     guideline: string;
-    ranking: string;
+    ranking: number;
     rankingDate: string;
     position: string;
     // 詳細設定
