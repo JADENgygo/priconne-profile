@@ -197,10 +197,19 @@ test("DetailSettings component", () => {
     }
     state = { ...state, [event.target.name]: event.target.value };
   };
-  const resetClanNameSetting = () => {};
-  const resetLabelSetting = () => {};
-  const resetInputSetting = () => {};
-  const resetPaneSetting = () => {};
+  const clicked = [false, false, false, false];
+  const resetClanNameSetting = () => {
+    clicked[0] = true;
+  };
+  const resetLabelSetting = () => {
+    clicked[1] = true;
+  };
+  const resetInputSetting = () => {
+    clicked[2] = true;
+  };
+  const resetPaneSetting = () => {
+    clicked[3] = true;
+  };
   render(
     <DetailSettings
       state={state}
@@ -253,6 +262,23 @@ test("DetailSettings component", () => {
   paneTransparency.value = "1";
   ReactTestUtils.Simulate.change(paneTransparency as Element);
 
+  const clanNameSettingResetButton = document.getElementById(
+    "clanNameSettingResetButton",
+  );
+  ReactTestUtils.Simulate.click(clanNameSettingResetButton as Element);
+  const labelSettingResetButton = document.getElementById(
+    "labelSettingResetButton",
+  );
+  ReactTestUtils.Simulate.click(labelSettingResetButton as Element);
+  const inputSettingResetButton = document.getElementById(
+    "inputSettingResetButton",
+  );
+  ReactTestUtils.Simulate.click(inputSettingResetButton as Element);
+  const paneSettingResetButton = document.getElementById(
+    "paneSettingResetButton",
+  );
+  ReactTestUtils.Simulate.click(paneSettingResetButton as Element);
+
   expect(state.clanNameOutlineVisible).toBe(true);
   expect(state.clanNameOutlineColor).toBe("#ffffff");
   expect(state.clanNameColor).toBe("#ffffff");
@@ -262,4 +288,9 @@ test("DetailSettings component", () => {
   expect(state.inputColor).toBe("#ffffff");
   expect(state.paneBackgroundColor).toBe("#ffffff");
   expect(state.paneTransparency).toBe("1");
+
+  expect(clicked[0]).toBeTruthy();
+  expect(clicked[1]).toBeTruthy();
+  expect(clicked[2]).toBeTruthy();
+  expect(clicked[3]).toBeTruthy();
 });
