@@ -21,7 +21,3 @@ jobs:
           message=$(git log --oneline -n 1 | sed -E 's/^\S+ (.+)/\1/')
           gh pr create --title "${message}" --body "自動生成プルリクエスト" --base master
           gh pr merge --merge
-      - if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          path: jest
