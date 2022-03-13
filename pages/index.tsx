@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     condition: "勧誘のみ" as "誰でも加入" | "承認あり" | "勧誘のみ",
     guideline:
       "私達の目的は、この世界のありとあらゆる料理や食材を追求・探求し、みんなで楽しく食事をするギルド。その名も、美食殿！",
-    ranking: "1000",
+    ranking: 1000,
     rankingDate: now.getFullYear() + "年" + (now.getMonth() + 1) + "月",
     position: "1" as "0" | "1" | "2",
     // 詳細設定

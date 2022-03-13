@@ -11,7 +11,7 @@ type Props = {
     policy: string;
     condition: string;
     guideline: string;
-    ranking: string;
+    ranking: number;
     rankingDate: string;
   };
   onChange: (event: React.ChangeEvent<any>) => void;
@@ -99,7 +99,7 @@ export const ClanSettings = (props: Props) => {
           <Form.Group as={Col} controlId="ranking" className="mb-3">
             <Form.Label>ランキング</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               value={props.state.ranking}
               onChange={props.onChange}
               name="ranking"
