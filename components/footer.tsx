@@ -8,7 +8,7 @@ export const Footer = (props: { className?: string }) => {
           <i className="bi bi-twitter"></i>
         </a>
         <a
-          href="https://priconne-portfolio.netlify.com"
+          href="https://priconne-portfolio.vercel.com"
           className={`ms-3 link-dark link`}
         >
           プリコネツール
