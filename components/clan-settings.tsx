@@ -1,6 +1,5 @@
 import { Form, Row, Col } from "react-bootstrap";
 import React from "react";
-import style from "../styles/ClanSettings.module.css";
 
 type Props = {
   className?: string;
@@ -89,7 +88,7 @@ export const ClanSettings = (props: Props) => {
           <Form.Label>募集要項</Form.Label>
           <Form.Control
             as="textarea"
-            className={style.guideline}
+            rows={3}
             value={props.state.guideline}
             onChange={props.onChange}
             name="guideline"

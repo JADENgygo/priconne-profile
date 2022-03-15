@@ -1,6 +1,5 @@
 import { Form, Row, Col } from "react-bootstrap";
 import React from "react";
-import style from "../styles/MySettings.module.css";
 
 type Props = {
   className?: string;
@@ -140,7 +139,7 @@ export const MySettings = (props: Props) => {
           <Form.Label>コメント</Form.Label>
           <Form.Control
             as="textarea"
-            className={style.comment}
+            rows={3}
             value={props.state.comment}
             onChange={props.onChange}
             name="comment"
