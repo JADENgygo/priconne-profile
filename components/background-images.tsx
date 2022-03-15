@@ -199,4 +199,7 @@ export const backgroundImageNames = [
   "remember1.webp",
   "remember2.webp",
   "remember3.webp",
+  "sweet_tiny_stage0.webp",
+  "sweet_tiny_stage1.webp",
+  "sweet_tiny_stage2.webp",
 ];
