@@ -14,7 +14,7 @@ export const Footer = (props: { className?: string }) => {
           プリコネツール
         </a>
       </div>
-      <div>画像: (C) Cygames, Inc.</div>
+      <div>画像: &copy; Cygames, Inc.</div>
     </div>
   );
 };
