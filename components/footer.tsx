@@ -11,10 +11,10 @@ export const Footer = (props: { className?: string }) => {
           href="https://priconne-portfolio.vercel.app"
           className={`ms-3 link-dark link`}
         >
-          プリコネツール
+          闇プリン開発室
         </a>
       </div>
-      <div>画像: &copy; Cygames, Inc.</div>
+      <div>画像 &copy; Cygames, Inc.</div>
     </div>
   );
 };
