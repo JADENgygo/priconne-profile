@@ -427,7 +427,8 @@ export const Canvas = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <button className="btn btn-dark" onClick={saveImage}>
+      <hr />
+      <button className="btn btn-secondary" onClick={saveImage}>
         カードを保存
       </button>
       <div className="alert alert-info mt-3">

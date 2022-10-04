@@ -36,6 +36,7 @@ export const ClanSettings = (props: Props) => {
         <Form.Group controlId="clanName" className="mb-3">
           <Form.Label>クラン名</Form.Label>
           <Form.Control
+            className="text-light bg-secondary"
             type="text"
             value={props.state.clanName}
             onChange={props.onChange}
@@ -45,6 +46,7 @@ export const ClanSettings = (props: Props) => {
         <Form.Group controlId="averageLevel" className="mb-3">
           <Form.Label>平均プレイヤーLv</Form.Label>
           <Form.Control
+            className="text-light bg-secondary"
             type="number"
             value={props.state.averageLevel}
             onChange={props.onChange}
@@ -54,6 +56,7 @@ export const ClanSettings = (props: Props) => {
         <Form.Group controlId="memberCount" className="mb-3">
           <Form.Label>メンバー数</Form.Label>
           <Form.Control
+            className="text-light bg-secondary"
             type="number"
             value={props.state.memberCount}
             onChange={props.onChange}
@@ -63,6 +66,7 @@ export const ClanSettings = (props: Props) => {
         <Form.Group controlId="policy" className="mb-3">
           <Form.Label>活動方針</Form.Label>
           <Form.Control
+            className="text-light bg-secondary"
             type="text"
             value={props.state.policy}
             onChange={props.onChange}
@@ -87,6 +91,7 @@ export const ClanSettings = (props: Props) => {
         <Form.Group controlId="guideline" className="mb-3">
           <Form.Label>募集要項</Form.Label>
           <Form.Control
+            className="text-light bg-secondary"
             as="textarea"
             rows={3}
             value={props.state.guideline}
@@ -98,6 +103,7 @@ export const ClanSettings = (props: Props) => {
           <Form.Group as={Col} controlId="ranking" className="mb-3">
             <Form.Label>ランキング</Form.Label>
             <Form.Control
+              className="text-light bg-secondary"
               type="number"
               value={props.state.ranking}
               onChange={props.onChange}
@@ -107,6 +113,7 @@ export const ClanSettings = (props: Props) => {
           <Form.Group as={Col} controlId="rankingDate" className="mb-3">
             <Form.Label>年月</Form.Label>
             <Form.Select
+              className="text-light bg-secondary"
               name="rankingDate"
               value={props.state.rankingDate}
               onChange={props.onChange}
