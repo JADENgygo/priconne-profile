@@ -16,7 +16,7 @@ export const BackgroundImages = (props: Props) => {
       <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>背景画像</Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="bg-secondary">
             <Form>
               {/* Form.LabelにhtmlForを指定しているのでForm.GroupのcontrolIdの指定は不要 */}
               <Form.Group>

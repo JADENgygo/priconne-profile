@@ -28,7 +28,7 @@ export const DetailSettings = (props: Props) => {
       <Accordion>
         <Accordion.Item eventKey="0" id="detailSettings">
           <Accordion.Header>詳細設定</Accordion.Header>
-          <Accordion.Body>
+          <Accordion.Body className="bg-secondary">
             <Form>
               {props.state.mode === "clanProfileCard" && (
                 <>
