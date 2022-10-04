@@ -430,7 +430,7 @@ export const Canvas = (props: Props) => {
       <button className="btn btn-dark" onClick={saveImage}>
         カードを保存
       </button>
-      <div className="alert alert-dark mt-3">
+      <div className="alert alert-info mt-3">
         ボタンが動作しない時はプレビューを保存するか別ブラウザを使用してください
       </div>
       <div>プレビュー</div>
