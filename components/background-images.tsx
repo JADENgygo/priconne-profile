@@ -1,6 +1,5 @@
 import { Form, Accordion } from "react-bootstrap";
 import React from "react";
-import Image from "next/image";
 
 type Props = {
   className?: string;
@@ -16,7 +15,7 @@ export const BackgroundImages = (props: Props) => {
       <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>背景画像</Accordion.Header>
-          <Accordion.Body className="bg-secondary">
+          <Accordion.Body>
             <Form>
               {/* Form.LabelにhtmlForを指定しているのでForm.GroupのcontrolIdの指定は不要 */}
               <Form.Group>
@@ -32,7 +31,8 @@ export const BackgroundImages = (props: Props) => {
                           onChange={props.onChange}
                           checked={props.state.backgroundImageName === value}
                         />
-                        <Image
+                        <img
+                          className="img-fluid"
                           src={"/img/thumbnails/" + value}
                           width={240}
                           height={135}

@@ -1,0 +1,31 @@
+.content {
+  position: relative;
+  min-height: 100vh;
+  padding: 0 0 150px 0;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$accordion-bg: map-get($theme-colors, "secondary");
+$accordion-button-bg: $accordion-bg;
+$accordion-button-active-bg: $accordion-bg;
+$accordion-button-color: map-get($theme-colors, "light");
+$accordion-button-active-color: $accordion-button-color;
+
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/accordion";

@@ -20,7 +20,7 @@ export default function Document() {
         />
         <link rel="icon" href="/img/peko.png" />
       </Head>
-      <body className="bg-secondary text-light">
+      <body className="bg-dark text-light">
         <Main />
         <NextScript />
       </body>
