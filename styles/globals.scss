@@ -16,16 +16,24 @@
 
 .link:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 
-$accordion-bg: map-get($theme-colors, "secondary");
-$accordion-button-bg: $accordion-bg;
-$accordion-button-active-bg: $accordion-bg;
-$accordion-button-color: map-get($theme-colors, "light");
-$accordion-button-active-color: $accordion-button-color;
+a, a:hover {
+  color: $dark;
+}
 
-@import "../node_modules/bootstrap/scss/mixins";
-@import "../node_modules/bootstrap/scss/accordion";
+.dark {
+  filter: invert(1) hue-rotate(180deg);
+
+  body {
+    background-color: $gray-300;
+  }
+
+  img, canvas, .keep {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}

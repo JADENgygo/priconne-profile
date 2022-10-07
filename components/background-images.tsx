@@ -1,5 +1,6 @@
 import { Form, Accordion } from "react-bootstrap";
 import React from "react";
+import Image from "next/future/image";
 
 type Props = {
   className?: string;
@@ -31,7 +32,7 @@ export const BackgroundImages = (props: Props) => {
                           onChange={props.onChange}
                           checked={props.state.backgroundImageName === value}
                         />
-                        <img
+                        <Image
                           className="img-fluid"
                           src={"/img/thumbnails/" + value}
                           width={240}

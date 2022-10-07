@@ -39,7 +39,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="playerName" className="mb-3">
           <Form.Label>プレイヤー名</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="text"
             value={props.state.playerName}
             onChange={props.onChange}
@@ -49,7 +48,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="playerLevel" className="mb-3">
           <Form.Label>プレイヤーLv</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="number"
             value={props.state.playerLevel}
             onChange={props.onChange}
@@ -59,7 +57,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="strength" className="mb-3">
           <Form.Label>全キャラ戦力</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="number"
             value={props.state.strength}
             onChange={props.onChange}
@@ -69,7 +66,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="playerId" className="mb-3">
           <Form.Label>プレイヤーID</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="text"
             value={props.state.playerId}
             onChange={props.onChange}
@@ -80,7 +76,6 @@ export const MySettings = (props: Props) => {
           <Form.Group as={Col} controlId="score" className="mb-3">
             <Form.Label>クラバトスコア</Form.Label>
             <Form.Control
-              className="text-light bg-secondary"
               type="number"
               value={props.state.score}
               onChange={props.onChange}
@@ -90,7 +85,6 @@ export const MySettings = (props: Props) => {
           <Form.Group as={Col} controlId="scoreDate" className="mb-3">
             <Form.Label>年月</Form.Label>
             <Form.Select
-              className="text-light bg-secondary"
               name="scoreDate"
               value={props.state.scoreDate}
               onChange={props.onChange}
@@ -106,7 +100,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="battleArena" className="mb-3">
           <Form.Label>バトルアリーナ</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="number"
             value={props.state.battleArena}
             onChange={props.onChange}
@@ -116,7 +109,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="princessArena" className="mb-3">
           <Form.Label>プリンセスアリーナ</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             type="number"
             value={props.state.princessArena}
             onChange={props.onChange}
@@ -127,7 +119,6 @@ export const MySettings = (props: Props) => {
           <Form.Group as={Col} controlId="runa" className="mb-3">
             <Form.Label>ルナの塔 到達階</Form.Label>
             <Form.Control
-              className="text-light bg-secondary"
               type="number"
               value={props.state.runa}
               onChange={props.onChange}
@@ -137,7 +128,6 @@ export const MySettings = (props: Props) => {
           <Form.Group as={Col} controlId="runaEx" className="mb-3">
             <Form.Label>EXクエスト</Form.Label>
             <Form.Control
-              className="text-light bg-secondary"
               type="number"
               value={props.state.runaEx}
               onChange={props.onChange}
@@ -148,7 +138,6 @@ export const MySettings = (props: Props) => {
         <Form.Group controlId="comment" className="mb-3">
           <Form.Label>コメント</Form.Label>
           <Form.Control
-            className="text-light bg-secondary"
             as="textarea"
             rows={3}
             value={props.state.comment}

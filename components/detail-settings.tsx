@@ -28,7 +28,7 @@ export const DetailSettings = (props: Props) => {
       <Accordion>
         <Accordion.Item eventKey="0" id="detailSettings">
           <Accordion.Header>詳細設定</Accordion.Header>
-          <Accordion.Body className="bg-secondary">
+          <Accordion.Body>
             <Form>
               {props.state.mode === "clanProfileCard" && (
                 <>
@@ -36,7 +36,6 @@ export const DetailSettings = (props: Props) => {
                   <Form.Group controlId="clanNameColor" className="mt-3">
                     <Form.Label>文字色</Form.Label>
                     <Form.Control
-                      className="bg-secondary"
                       type="color"
                       value={props.state.clanNameColor}
                       onChange={props.onChange}
@@ -58,7 +57,6 @@ export const DetailSettings = (props: Props) => {
                   <Form.Group controlId="clanNameOutlineColor" className="mt-3">
                     <Form.Label>輪郭色</Form.Label>
                     <Form.Control
-                      className="bg-secondary"
                       type="color"
                       value={props.state.clanNameOutlineColor}
                       onChange={props.onChange}
@@ -67,7 +65,7 @@ export const DetailSettings = (props: Props) => {
                   </Form.Group>
                   <button
                     type="button"
-                    className="btn btn-dark mt-3"
+                    className="btn btn-outline-danger mt-3"
                     onClick={props.resetClanNameSetting}
                     id="clanNameSettingResetButton"
                   >
@@ -80,7 +78,6 @@ export const DetailSettings = (props: Props) => {
               <Form.Group controlId="labelColor" className="mt-3">
                 <Form.Label>文字色</Form.Label>
                 <Form.Control
-                  className="bg-secondary"
                   type="color"
                   value={props.state.labelColor}
                   onChange={props.onChange}
@@ -99,7 +96,6 @@ export const DetailSettings = (props: Props) => {
               <Form.Group controlId="labelBackgroundColor" className="mt-3">
                 <Form.Label>背景色</Form.Label>
                 <Form.Control
-                  className="bg-secondary"
                   type="color"
                   value={props.state.labelBackgroundColor}
                   onChange={props.onChange}
@@ -108,7 +104,7 @@ export const DetailSettings = (props: Props) => {
               </Form.Group>
               <button
                 type="button"
-                className="btn btn-dark mt-3"
+                className="btn btn-outline-danger mt-3"
                 onClick={props.resetLabelSetting}
                 id="labelSettingResetButton"
               >
@@ -123,7 +119,6 @@ export const DetailSettings = (props: Props) => {
               <Form.Group controlId="inputColor" className="mt-3">
                 <Form.Label>文字色</Form.Label>
                 <Form.Control
-                  className="bg-secondary"
                   type="color"
                   value={props.state.inputColor}
                   onChange={props.onChange}
@@ -132,7 +127,7 @@ export const DetailSettings = (props: Props) => {
               </Form.Group>
               <button
                 type="button"
-                className="btn btn-dark mt-3"
+                className="btn btn-outline-danger mt-3"
                 onClick={props.resetInputSetting}
                 id="inputSettingResetButton"
               >
@@ -143,7 +138,6 @@ export const DetailSettings = (props: Props) => {
               <Form.Group controlId="paneBackgroundColor" className="mt-3">
                 <Form.Label>背景色</Form.Label>
                 <Form.Control
-                  className="bg-secondary"
                   type="color"
                   value={props.state.paneBackgroundColor}
                   onChange={props.onChange}
@@ -153,7 +147,6 @@ export const DetailSettings = (props: Props) => {
               <Form.Group controlId="paneTransparency" className="mt-3">
                 <Form.Label>透明度</Form.Label>
                 <Form.Select
-                  className="bg-secondary text-light"
                   name="paneTransparency"
                   value={props.state.paneTransparency}
                   onChange={props.onChange}
@@ -167,7 +160,7 @@ export const DetailSettings = (props: Props) => {
               </Form.Group>
               <button
                 type="button"
-                className="btn btn-dark mt-3"
+                className="btn btn-outline-danger mt-3"
                 onClick={props.resetPaneSetting}
                 id="paneSettingResetButton"
               >

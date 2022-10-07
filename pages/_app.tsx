@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>プリコネプロフ</title>
       </Head>
-      <Header className="pt-3" />
+      <Header />
       <Component {...pageProps} />
       <Footer className="footer" />
     </div>
