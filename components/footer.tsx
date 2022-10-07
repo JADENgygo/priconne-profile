@@ -1,15 +1,15 @@
 export const Footer = (props: { className?: string }) => {
   return (
     <div
-      className={`bg-black text-center pt-3 pb-3 ${props.className}`}
+      className={`text-center pt-3 pb-3 ${props.className}`}
     >
       <div className="container">
-        <a href="https://twitter.com/JADENgygo" className={`link-dark link`}>
-          <i className="bi bi-twitter text-light"></i>
+        <a href="https://twitter.com/JADENgygo">
+          <i className="bi bi-twitter"></i>
         </a>
         <a
           href="https://priconne-portfolio.vercel.app"
-          className={`ms-3 link-light link`}
+          className={`ms-3 link`}
         >
           闇プリン開発室
         </a>
