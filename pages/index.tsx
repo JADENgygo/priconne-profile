@@ -8,6 +8,7 @@ import { Canvas } from "../components/canvas";
 import { ModeChanger } from "../components/mode-changer";
 import { MySettings } from "../components/my-settings";
 import { PositionChanger } from "../components/position-changer";
+import { GetServerSideProps } from "next";
 
 const Home: NextPage = () => {
   const now = new Date();
@@ -126,3 +127,7 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {}};
+}
