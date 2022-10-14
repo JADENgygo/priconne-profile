@@ -7,8 +7,8 @@ export const Header = () => {
   const [theme, setTheme] = useState<"" | "light" | "dark">("");
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    setTheme(theme === "dark" ? "dark" : "light");
+    const cookie = parseCookies();
+    setTheme(cookie.theme === "dark" ? "dark" : "light");
   }, []);
 
   const changeTheme = () => {
